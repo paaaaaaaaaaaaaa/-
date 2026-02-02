@@ -7,6 +7,141 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>" />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
+        /* МОДЕРНИЗИРОВАННЫЕ КУРСОРЫ В СТИЛЕ CYBERPUNK 2077 */
+/* Улучшенные: оптимизированные SVG, добавлены анимации, исправлены проблемы с производительностью */
+
+/* Основной курсор - УЛУЧШЕННЫЙ */
+* {
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="cyber-glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="cyber-main"><stop offset="0%" stop-color="%2300f3ff"/><stop offset="70%" stop-color="%23ff00c8"/><stop offset="100%" stop-color="%239d00ff"/></radialGradient></defs><g filter="url(%23cyber-glow)"><path d="M16 4 L28 16 L16 28 L4 16 Z" fill="none" stroke="url(%23cyber-main)" stroke-width="1.8" stroke-linejoin="round"/><circle cx="16" cy="16" r="3" fill="%2300f3ff"><animate attributeName="r" values="3;2.5;3" dur="2s" repeatCount="indefinite"/></circle><circle cx="16" cy="16" r="1" fill="%23ffffff"/></g></svg>') 16 16, auto;
+}
+
+/* Курсор для кликабельных элементов - УЛУЧШЕННЫЙ */
+a, button, .btn, .auth-btn, .register-btn, .buy-btn, .nav-link, 
+.grid-item, .service-card, .product-card, .tournament-item,
+.gallery-item, .review-card, .contact-item, .stat, .payment-method,
+.zone-option, .admin-tab, .social-link, .settings-btn,
+.user-avatar-with-balance, .admin-vk-button,
+input[type="submit"], input[type="button"], .modal-close,
+.burger-menu, .switch, .slider, .checkbox-group input,
+[role="button"], [onclick], [data-page], .clickable {
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="cyber-hover-glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="cyber-hover"><stop offset="0%" stop-color="%23ff00c8"/><stop offset="60%" stop-color="%2300f3ff"/><stop offset="100%" stop-color="%239d00ff"/></radialGradient></defs><g filter="url(%23cyber-hover-glow)"><rect x="8" y="8" width="16" height="16" rx="3" fill="none" stroke="url(%23cyber-hover)" stroke-width="1.8"/><circle cx="16" cy="16" r="3.5" fill="%23ffffff"><animate attributeName="r" values="3.5;4;3.5" dur="1.5s" repeatCount="indefinite"/></circle><path d="M12 12 L20 20 M20 12 L12 20" stroke="%23ffffff" stroke-width="1.5" stroke-linecap="round"/></g></svg>') 16 16, pointer;
+}
+
+/* Курсор для текстовых полей - УЛУЧШЕННЫЙ */
+input[type="text"], input[type="email"], input[type="password"], 
+input[type="tel"], input[type="number"], input[type="date"], 
+input[type="time"], input[type="datetime-local"], input[type="url"],
+textarea, [contenteditable="true"], [contenteditable] {
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="cyber-text-glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="cyber-text"><stop offset="0%" stop-color="%2300ff88"/><stop offset="60%" stop-color="%2300f3ff"/><stop offset="100%" stop-color="%23ff00c8"/></radialGradient></defs><g filter="url(%23cyber-text-glow)"><rect x="10" y="8" width="12" height="18" rx="2" fill="none" stroke="url(%23cyber-text)" stroke-width="1.8"/><rect x="12" y="12" width="8" height="1.5" fill="%23ffffff"><animate attributeName="height" values="1.5;4;1.5" dur="1s" repeatCount="indefinite"/></rect><rect x="12" y="17" width="8" height="1.5" fill="%23ffffff"/><rect x="12" y="22" width="8" height="1.5" fill="%23ffffff"/></g></svg>') 16 16, text;
+}
+
+/* Курсор загрузки - УЛУЧШЕННЫЙ */
+.preloader, .loading-bar, .loading-progress, [aria-busy="true"], 
+.waiting, .loading, .progress {
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="cyber-load-glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="cyber-load"><stop offset="0%" stop-color="%23ffee00"/><stop offset="50%" stop-color="%23ff7700"/><stop offset="100%" stop-color="%23ff00c8"/></radialGradient></defs><g filter="url(%23cyber-load-glow)"><circle cx="16" cy="16" r="13" fill="none" stroke="url(%23cyber-load)" stroke-width="2" stroke-dasharray="60 20"><animateTransform attributeName="transform" type="rotate" from="0 16 16" to="360 16 16" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="16" cy="16" r="4" fill="%23ffffff"><animate attributeName="fill" values="%23ffffff;%23ffee00;%23ffffff" dur="2s" repeatCount="indefinite"/></circle></g></svg>') 16 16, wait;
+}
+
+/* Курсор запрета - УЛУЧШЕННЫЙ */
+.btn:disabled, input:disabled, button:disabled, .auth-btn:disabled,
+.disabled, [aria-disabled="true"], .not-allowed {
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="cyber-disabled-glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="cyber-disabled"><stop offset="0%" stop-color="%23ff0000"/><stop offset="60%" stop-color="%23ff7700"/><stop offset="100%" stop-color="%23ffee00"/></radialGradient></defs><g filter="url(%23cyber-disabled-glow)"><circle cx="16" cy="16" r="11" fill="none" stroke="url(%23cyber-disabled)" stroke-width="1.8"/><path d="M10 10 L22 22 M22 10 L10 22" stroke="%23ffffff" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="16" r="2.5" fill="%23ffffff"><animate attributeName="fill" values="%23ffffff;%23ff0000;%23ffffff" dur="1.5s" repeatCount="indefinite"/></circle></g></svg>') 16 16, not-allowed;
+}
+
+/* Курсор перемещения - НОВЫЙ */
+[data-draggable], .draggable, .sortable, .move-cursor {
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="cyber-move-glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="cyber-move"><stop offset="0%" stop-color="%2300f3ff"/><stop offset="60%" stop-color="%239d00ff"/><stop offset="100%" stop-color="%2300ff88"/></radialGradient></defs><g filter="url(%23cyber-move-glow)"><circle cx="16" cy="16" r="10" fill="none" stroke="url(%23cyber-move)" stroke-width="1.8"/><path d="M16 8 L16 24 M8 16 L24 16" stroke="%23ffffff" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="16" r="3" fill="%2300ff88"><animate attributeName="cx" values="16;17;16;15;16" dur="2s" repeatCount="indefinite"/><animate attributeName="cy" values="16;17;16;15;16" dur="2.5s" repeatCount="indefinite"/></circle></g></svg>') 16 16, move;
+}
+
+/* Курсор изменения размера - НОВЫЙ */
+.resize, .resizable, [data-resizable] {
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="cyber-resize-glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="cyber-resize"><stop offset="0%" stop-color="%23ff00c8"/><stop offset="60%" stop-color="%23ff7700"/><stop offset="100%" stop-color="%23ffee00"/></radialGradient></defs><g filter="url(%23cyber-resize-glow)"><path d="M8 8 L24 24 M24 8 L8 24" stroke="url(%23cyber-resize)" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="16" r="3" fill="%23ffffff"><animate attributeName="r" values="3;4;3" dur="1s" repeatCount="indefinite"/></circle><path d="M10 22 L14 18 L18 22 L22 18" stroke="%23ffffff" stroke-width="1" fill="none"/></g></svg>') 16 16, nwse-resize;
+}
+
+/* Курсор помощи/справки - НОВЫЙ */
+[title]:not([title=""]), [data-tooltip], .help-cursor {
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="cyber-help-glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="cyber-help"><stop offset="0%" stop-color="%2300f3ff"/><stop offset="60%" stop-color="%2300ff88"/><stop offset="100%" stop-color="%239d00ff"/></radialGradient></defs><g filter="url(%23cyber-help-glow)"><circle cx="16" cy="16" r="11" fill="none" stroke="url(%23cyber-help)" stroke-width="1.8"/><circle cx="16" cy="12" r="1.5" fill="%23ffffff"/><path d="M16 16 L16 22" stroke="%23ffffff" stroke-width="1.5" stroke-linecap="round"><animate attributeName="y2" values="22;24;22" dur="1.5s" repeatCount="indefinite"/></path><circle cx="16" cy="16" r="2.5" fill="%2300ff88" opacity="0.5"/></g></svg>') 16 16, help;
+}
+
+/* Курсор для ссылок на внешние ресурсы - НОВЫЙ */
+a[href^="http"]:not([href*="kibersfera"]), a[target="_blank"], .external-link {
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="cyber-external-glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="cyber-external"><stop offset="0%" stop-color="%2300ff88"/><stop offset="60%" stop-color="%2300f3ff"/><stop offset="100%" stop-color="%239d00ff"/></radialGradient></defs><g filter="url(%23cyber-external-glow)"><path d="M12 12 L20 12 L20 20 M12 12 L20 20" stroke="url(%23cyber-external)" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="20" cy="12" r="2" fill="%23ffffff"><animate attributeName="r" values="2;2.5;2" dur="1s" repeatCount="indefinite"/></circle><circle cx="12" cy="20" r="2" fill="%23ffffff"/><path d="M20 8 L24 8 L24 12" stroke="%23ffffff" stroke-width="1" stroke-linecap="round"/></g></svg>') 16 16, alias;
+}
+
+/* Анимация пульсации для всех курсоров при наведении */
+a:hover, button:hover, .btn:hover, .nav-link:hover, 
+.grid-item:hover, .service-card:hover, .product-card:hover,
+.gallery-item:hover, .review-card:hover, .social-link:hover {
+    animation: cursorPulse 0.5s ease-in-out;
+}
+
+@keyframes cursorPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(0.98); }
+}
+
+/* Улучшенная производительность курсоров */
+* {
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+    image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+/* Оптимизация для устройств с сенсорным экраном */
+@media (hover: none) and (pointer: coarse) {
+    /* На мобильных устройствах используем стандартные курсоры для лучшей производительности */
+    * {
+        cursor: auto !important;
+    }
+    
+    a, button, .btn, .nav-link {
+        cursor: pointer !important;
+    }
+    
+    input, textarea {
+        cursor: text !important;
+    }
+}
+
+/* Улучшенная поддержка для браузеров с ограниченной поддержкой SVG курсоров */
+@supports not (cursor: url('data:image/svg+xml,<svg/>'), pointer) {
+    a, button, .btn, .nav-link {
+        cursor: pointer;
+    }
+    
+    input, textarea {
+        cursor: text;
+    }
+    
+    .preloader, .loading-bar {
+        cursor: wait;
+    }
+    
+    .btn:disabled, input:disabled {
+        cursor: not-allowed;
+    }
+}
+
+/* Оптимизация для темной/светлой темы */
+.light-theme {
+    /* Для светлой темы уменьшаем интенсивность свечения */
+    * {
+        cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="cyber-glow-light"><feGaussianBlur stdDeviation="1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="cyber-main-light"><stop offset="0%" stop-color="%23008cff"/><stop offset="70%" stop-color="%23d400a6"/><stop offset="100%" stop-color="%237a00cc"/></radialGradient></defs><g filter="url(%23cyber-glow-light)"><path d="M16 4 L28 16 L16 28 L4 16 Z" fill="none" stroke="url(%23cyber-main-light)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="16" cy="16" r="2.5" fill="%23008cff"/><circle cx="16" cy="16" r="1" fill="%231a1a2e"/></g></svg>') 16 16, auto;
+    }
+}
+
+/* Исправление для элементов, которые должны иметь стандартный курсор */
+select, .no-cyber-cursor {
+    cursor: default !important;
+}
+
+/* Оптимизация для элементов с динамическим контентом */
+.dynamic-content, .ajax-content, .lazy-load {
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="cyber-dynamic-glow"><feGaussianBlur stdDeviation="1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="cyber-dynamic"><stop offset="0%" stop-color="%2300f3ff"/><stop offset="60%" stop-color="%239d00ff"/><stop offset="100%" stop-color="%2300ff88"/></radialGradient></defs><g filter="url(%23cyber-dynamic-glow)"><circle cx="16" cy="16" r="10" fill="none" stroke="url(%23cyber-dynamic)" stroke-width="1.5" stroke-dasharray="3,3"/><circle cx="16" cy="16" r="4" fill="%23ffffff"><animateTransform attributeName="transform" type="rotate" from="0 16 16" to="360 16 16" dur="3s" repeatCount="indefinite"/></circle></g></svg>') 16 16, progress;
+}
+
         :root {
             --neon-cyan: #00f3ff;
             --neon-pink: #ff00c8;
@@ -3692,53 +3827,856 @@
         }
 
         /* Адаптивность для мобильных устройств */
-        @media (max-width: 768px) {
-            .admin-vk-section {
-                padding: 1.5rem 1rem;
-                margin: 1.5rem 0;
-            }
+        /* ==================== */
+/* ТЕЛЕФОННАЯ ВЕРСИЯ - УЛУЧШЕННАЯ */
+/* ==================== */
 
-            .admin-vk-button {
-                padding: 1rem 2rem;
-                min-height: 55px;
-                font-size: 0.9rem;
-            }
+@media (max-width: 768px) {
+    /* Улучшенная навигация для телефонов */
+    .header-container {
+        padding: 0.5rem 1rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .logo {
+        order: 1;
+        margin-right: 0;
+    }
+    
+    .burger-menu {
+        order: 2;
+        display: flex;
+        z-index: 101;
+    }
+    
+    .settings-container {
+        order: 3;
+        margin-left: auto;
+    }
+    
+    .auth-buttons {
+        order: 4;
+        display: none; /* Скрываем на телефоне, показываем в мобильном меню */
+    }
+    
+    /* Улучшенный логотип для телефонов */
+    .logo-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .logo-icon::before {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .logo-text {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+    
+    /* Улучшенное мобильное меню */
+    .mobile-nav {
+        width: 85%;
+        max-width: 320px;
+        padding: 80px 1.5rem 1.5rem;
+    }
+    
+    .mobile-nav a {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .mobile-nav .user-avatar-with-balance {
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Улучшенный главный баннер для телефонов */
+    .welcome-banner {
+        padding: 2.5rem 1.5rem;
+        margin: 1rem 0.5rem;
+    }
+    
+    .welcome-banner h1 {
+        font-size: 2.2rem;
+        letter-spacing: 3px;
+        line-height: 1.2;
+    }
+    
+    .welcome-banner p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 2rem;
+    }
+    
+    /* Улучшенные интерактивные элементы */
+    .interactive-grid {
+        gap: 1.2rem;
+        margin: 2.5rem auto;
+    }
+    
+    .grid-item {
+        padding: 1.8rem 1.2rem;
+    }
+    
+    .grid-item h3 {
+        font-size: 1.2rem;
+    }
+    
+    .grid-icon {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Улучшенная статистика */
+    .interactive-stats {
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+    
+    .stat {
+        min-width: 110px;
+        padding: 1rem;
+    }
+    
+    .stat-value {
+        font-size: 1.6rem;
+    }
+    
+    .stat-label {
+        font-size: 0.75rem;
+    }
+    
+    /* Улучшенные кнопки для сенсорных устройств */
+    .btn, .register-btn, .buy-btn, .auth-btn {
+        min-height: 48px;
+        padding: 0.8rem 1.8rem;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+    
+    /* Увеличиваем область клика для кнопок на сенсорных устройствах */
+    .nav-link, .btn, .buy-btn, .register-btn {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Улучшенные баннеры страниц */
+    .page-banner {
+        padding: 2.5rem 1.5rem;
+        margin: 1.5rem 0.5rem;
+    }
+    
+    .page-banner h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .page-banner p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    
+    /* Улучшенные карточки услуг */
+    .services {
+        gap: 1.5rem;
+    }
+    
+    .service-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .service-icon {
+        font-size: 2.8rem;
+    }
+    
+    .service-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    /* Улучшенные карточки товаров */
+    .products {
+        gap: 1.5rem;
+    }
+    
+    .product-card {
+        padding: 1.8rem 1.2rem;
+    }
+    
+    .product-icon {
+        font-size: 2.5rem;
+    }
+    
+    .product-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .product-price {
+        font-size: 1.6rem;
+    }
+    
+    /* Улучшенные турниры */
+    .tournament-item {
+        padding: 1.5rem;
+        text-align: left;
+        align-items: flex-start;
+    }
+    
+    .tournament-game {
+        font-size: 1.1rem;
+    }
+    
+    /* Улучшенная форма бронирования */
+    .booking-form {
+        padding: 1.8rem 1.2rem;
+        margin: 0.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-control {
+        padding: 0.9rem;
+        font-size: 1rem;
+    }
+    
+    /* Улучшенные отзывы */
+    .reviews {
+        gap: 1.5rem;
+    }
+    
+    .review-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    /* Улучшенные контакты */
+    .contact-item {
+        padding: 1.8rem 1.2rem;
+    }
+    
+    /* Улучшенный футер */
+    footer {
+        padding: 2rem 1rem;
+        margin-top: 3rem;
+    }
+    
+    /* Улучшенные модальные окна для телефонов */
+    .modal-content {
+        width: 95%;
+        max-width: 95%;
+        margin: 0.5rem;
+        padding: 1.5rem;
+    }
+    
+    .modal-header {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+    }
+    
+    .modal-title {
+        font-size: 1.4rem;
+    }
+    
+    /* Специальные улучшения для purchase-modal на телефонах */
+    .purchase-modal .modal-content {
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 1.2rem;
+    }
+    
+    .purchase-modal .zone-selection {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+    
+    .zone-option {
+        padding: 0.8rem;
+    }
+    
+    .zone-icon {
+        font-size: 1.3rem;
+    }
+    
+    .zone-name {
+        font-size: 0.85rem;
+    }
+    
+    .zone-description {
+        font-size: 0.7rem;
+    }
+    
+    /* Улучшенный профиль */
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+    }
+    
+    .profile-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .stat-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    /* Улучшенная админ-панель */
+    .admin-panel {
+        padding: 1.5rem 1rem;
+    }
+    
+    .admin-tabs {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .admin-tab {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Улучшенные формы ввода */
+    input, textarea, select {
+        font-size: 16px !important; /* Предотвращает масштабирование в iOS */
+    }
+    
+    /* Улучшенные социальные иконки */
+    .social-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .social-link {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+    }
+    
+    /* Улучшенный баланс */
+    .balance-amount {
+        font-size: 2.8rem;
+        margin: 1.5rem 0;
+    }
+    
+    .payment-methods {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    
+    .payment-method {
+        padding: 1.5rem 1rem;
+    }
+    
+    .payment-icon {
+        font-size: 2.5rem;
+    }
+    
+    .payment-title {
+        font-size: 1.3rem;
+    }
+    
+    /* Улучшенные новости */
+    .news-post {
+        padding: 1.5rem;
+    }
+    
+    .news-post-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .news-post-stats {
+        font-size: 0.9rem;
+    }
+    
+    /* Улучшенная кнопка VK */
+    .admin-vk-section {
+        padding: 1.5rem 1rem;
+    }
+    
+    .admin-vk-button {
+        padding: 1rem 1.8rem;
+        font-size: 0.9rem;
+        min-height: 54px;
+    }
+    
+    .admin-vk-icon {
+        font-size: 1.3rem;
+        margin-right: 0.6rem;
+    }
+    
+    .admin-vk-badge {
+        padding: 0.2rem 0.6rem;
+        font-size: 0.7rem;
+        margin-left: 0.6rem;
+    }
+}
 
-            .admin-vk-icon {
-                font-size: 1.3rem;
-                margin-right: 0.6rem;
-            }
+/* ==================== */
+/* ОЧЕНЬ МАЛЕНЬКИЕ ТЕЛЕФОНЫ (до 480px) */
+/* ==================== */
 
-            .admin-vk-badge {
-                padding: 0.2rem 0.6rem;
-                font-size: 0.7rem;
-                margin-left: 0.6rem;
-            }
-        }
+@media (max-width: 480px) {
+    /* Еще более компактная версия */
+    .header-container {
+        padding: 0.5rem;
+    }
+    
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .logo-icon::before {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .logo-text {
+        font-size: 1.3rem;
+    }
+    
+    .welcome-banner {
+        padding: 2rem 1rem;
+    }
+    
+    .welcome-banner h1 {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+    }
+    
+    .welcome-banner p {
+        font-size: 0.95rem;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* Компактная сетка */
+    .interactive-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .grid-item {
+        padding: 1.5rem 1rem;
+    }
+    
+    /* Компактная статистика */
+    .interactive-stats {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .stat {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    /* Компактные кнопки */
+    .btn, .register-btn, .buy-btn {
+        width: 100%;
+        padding: 0.9rem;
+    }
+    
+    /* Компактные формы */
+    .booking-form {
+        padding: 1.5rem 1rem;
+    }
+    
+    .form-control {
+        padding: 0.8rem;
+    }
+    
+    /* Компактные карточки */
+    .service-card, .product-card, .review-card, .contact-item {
+        padding: 1.5rem 1rem;
+    }
+    
+    /* Компактные модальные окна */
+    .modal-content {
+        padding: 1.2rem 1rem;
+    }
+    
+    .purchase-modal .zone-selection {
+        grid-template-columns: 1fr;
+    }
+    
+    .zone-option {
+        padding: 0.7rem;
+    }
+    
+    /* Компактный профиль */
+    .profile-avatar {
+        width: 90px;
+        height: 90px;
+        font-size: 2.2rem;
+    }
+    
+    .profile-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Компактный баланс */
+    .balance-amount {
+        font-size: 2.2rem;
+    }
+    
+    /* Компактные новости */
+    .news-post {
+        padding: 1.2rem 1rem;
+    }
+    
+    /* Компактный VK блок */
+    .admin-vk-section {
+        padding: 1.2rem 0.8rem;
+    }
+    
+    .admin-vk-button {
+        padding: 0.9rem 1.2rem;
+        font-size: 0.85rem;
+        min-height: 50px;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    
+    .admin-vk-icon {
+        margin-right: 0;
+        font-size: 1.1rem;
+    }
+    
+    .admin-vk-badge {
+        margin-left: 0;
+    }
+}
 
-        @media (max-width: 480px) {
-            .admin-vk-section p {
-                font-size: 1rem;
-            }
+/* ==================== */
+/* ГОРИЗОНТАЛЬНАЯ ОРИЕНТАЦИЯ ТЕЛЕФОНА */
+/* ==================== */
 
-            .admin-vk-button {
-                padding: 0.9rem 1.5rem;
-                min-height: 50px;
-                font-size: 0.85rem;
-                flex-direction: column;
-                gap: 0.3rem;
-            }
+@media (max-height: 600px) and (orientation: landscape) {
+    .welcome-section {
+        min-height: auto;
+        padding: 3rem 0;
+    }
+    
+    .welcome-banner {
+        padding: 2rem 1.5rem;
+        margin: 1rem 0;
+    }
+    
+    .welcome-banner h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    .welcome-banner p {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .interactive-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin: 2rem auto;
+    }
+    
+    .grid-item {
+        padding: 1.2rem 0.8rem;
+    }
+    
+    .interactive-stats {
+        flex-direction: row;
+        gap: 0.8rem;
+        margin: 1.5rem 0;
+    }
+    
+    .stat {
+        padding: 0.8rem;
+    }
+    
+    /* Компактный header в ландшафте */
+    .header-container {
+        padding: 0.5rem;
+    }
+    
+    .logo-icon {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .logo-text {
+        font-size: 1.2rem;
+    }
+    
+    /* Компактное мобильное меню в ландшафте */
+    .mobile-nav {
+        padding-top: 70px;
+    }
+}
 
-            .admin-vk-icon {
-                margin-right: 0;
-                font-size: 1.1rem;
-            }
+/* ==================== */
+/* ОПТИМИЗАЦИЯ ДЛЯ IOS */
+/* ==================== */
 
-            .admin-vk-badge {
-                margin-left: 0;
-            }
-        }
+@supports (-webkit-touch-callout: none) {
+    /* iOS specific styles */
+    .btn, .nav-link, .auth-btn {
+        -webkit-tap-highlight-color: rgba(0, 243, 255, 0.3);
+    }
+    
+    input, textarea {
+        border-radius: 0;
+        -webkit-appearance: none;
+    }
+    
+    /* Улучшаем скролл на iOS */
+    .mobile-nav {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Предотвращаем увеличение текста в полях ввода */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    textarea {
+        font-size: 16px !important;
+    }
+}
 
+/* ==================== */
+/* ОПТИМИЗАЦИЯ ДЛЯ ANDROID */
+/* ==================== */
+
+@supports not (-webkit-touch-callout: none) {
+    /* Android specific styles */
+    .btn:active, .nav-link:active, .auth-btn:active {
+        transform: scale(0.98);
+        transition: transform 0.1s;
+    }
+}
+
+/* ==================== */
+/* УЛУЧШЕННАЯ ТИПОГРАФИКА ДЛЯ МОБИЛЬНЫХ */
+/* ==================== */
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    h1, h2, h3 {
+        line-height: 1.2;
+    }
+    
+    p {
+        margin-bottom: 1rem;
+        line-height: 1.5;
+    }
+    
+    /* Улучшаем читаемость текста */
+    .text-primary, .text-secondary {
+        line-height: 1.5;
+    }
+}
+
+/* ==================== */
+/* АДАПТИВНЫЕ ИЗОБРАЖЕНИЯ */
+/* ==================== */
+
+@media (max-width: 768px) {
+    .gallery-item {
+        height: 200px;
+    }
+    
+    .image-placeholder {
+        font-size: 1.2rem;
+    }
+    
+    /* Оптимизация для медленных сетей */
+    .particles, .lightning-overlay {
+        display: none;
+    }
+    
+    /* Отключаем сложные анимации на телефонах для экономии батареи */
+    .loader-ring, .floating-element, .grid-overlay {
+        animation-duration: 0s;
+        animation-iteration-count: 1;
+    }
+}
+
+/* ==================== */
+/* УЛУЧШЕНИЯ ДЛЯ СЕНСОРНОГО ВВОДА */
+/* ==================== */
+
+@media (hover: none) and (pointer: coarse) {
+    /* Увеличиваем минимальный размер кликабельных элементов для пальцев */
+    .btn, .nav-link, .auth-btn, .buy-btn, .register-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Увеличиваем отступы для лучшего тапа */
+    .nav-link {
+        padding: 0.8rem 1.2rem;
+    }
+    
+    /* Улучшаем feedback при тапе */
+    .btn:active, .nav-link:active, .auth-btn:active {
+        opacity: 0.8;
+        transform: translateY(1px);
+    }
+    
+    /* Отключаем hover эффекты для сенсорных устройств */
+    .grid-item:hover,
+    .service-card:hover,
+    .product-card:hover,
+    .gallery-item:hover,
+    .review-card:hover,
+    .contact-item:hover {
+        transform: none;
+        border-color: rgba(0, 243, 255, 0.2);
+    }
+    
+    /* Включаем активные состояния для тапа */
+    .grid-item:active,
+    .service-card:active,
+    .product-card:active,
+    .gallery-item:active,
+    .review-card:active,
+    .contact-item:active {
+        transform: scale(0.98);
+        border-color: var(--neon-cyan);
+    }
+}
+
+/* ==================== */
+/* УЛУЧШЕНИЯ ДЛЯ КЛАВИАТУРЫ НА ТЕЛЕФОНЕ */
+/* ==================== */
+
+@media (max-width: 768px) {
+    /* Поднимаем форму при фокусе на поле ввода */
+    input:focus, textarea:focus, select:focus {
+        scroll-margin-top: 100px;
+    }
+    
+    /* Улучшаем видимость активного поля ввода */
+    .form-control:focus {
+        box-shadow: 0 0 0 2px var(--neon-cyan);
+    }
+}
+
+/* ==================== */
+/* СПЕЦИАЛЬНЫЕ ФИКСЫ ДЛЯ РАЗНЫХ УСТРОЙСТВ */
+/* ==================== */
+
+/* Фикс для Safari на iOS */
+@supports (-webkit-overflow-scrolling: touch) {
+    .modal-content {
+        max-height: -webkit-fill-available;
+    }
+}
+
+/* Фикс для Chrome на Android */
+@media (max-width: 768px) {
+    select.form-control {
+        height: 48px;
+        line-height: 48px;
+    }
+}
+
+/* ==================== */
+/* ТЕМНАЯ/СВЕТЛАЯ ТЕМА ДЛЯ МОБИЛЬНЫХ */
+/* ==================== */
+
+@media (max-width: 768px) {
+    .light-theme .mobile-nav {
+        background: rgba(255, 255, 255, 0.98);
+    }
+    
+    .light-theme .mobile-nav a {
+        color: var(--text-primary);
+    }
+    
+    .light-theme .mobile-overlay {
+        background: rgba(240, 242, 245, 0.9);
+    }
+}
+
+/* ==================== */
+/* АНИМАЦИИ ДЛЯ МОБИЛЬНЫХ (ОПТИМИЗИРОВАННЫЕ) */
+/* ==================== */
+
+@media (max-width: 768px) {
+    .page-transition {
+        animation: mobilePageFadeIn 0.4s ease-out;
+    }
+    
+    @keyframes mobilePageFadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .modal.active .modal-content {
+        animation: mobileModalSlideIn 0.3s ease-out;
+    }
+    
+    @keyframes mobileModalSlideIn {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+}
+
+/* ==================== */
+/* ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ */
+/* ==================== */
+
+/* Улучшение для очень маленьких экранов в портретной ориентации */
+@media (max-width: 360px) {
+    .logo-text {
+        font-size: 1.1rem;
+    }
+    
+    .auth-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .welcome-banner h1 {
+        font-size: 1.6rem;
+    }
+    
+    .page-banner h1 {
+        font-size: 1.6rem;
+    }
+    
+    .product-price {
+        font-size: 1.4rem;
+    }
+}
+
+/* Фикс для высоты экрана на современных телефонах */
+@media (max-height: 700px) and (orientation: portrait) {
+    .welcome-section {
+        padding: 3rem 0 4rem;
+    }
+    
+    .grid-item {
+        padding: 1.2rem;
+    }
+}
         /* Анимация появления для кнопки */
         .admin-vk-section {
             animation: fadeInUp 0.8s ease-out;
@@ -3966,8 +4904,10 @@
     </header>
 
     <!-- Мобильная навигация -->
+     
     <div class="mobile-overlay" id="mobile-overlay"></div>
     <div class="mobile-nav" id="mobile-nav">
+        
         <ul>
             <!-- Убрана кнопка "Главная" -->
             <li><a href="#" class="nav-link" data-page="gallery">Галерея</a></li>
