@@ -7,6 +7,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>" />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
+        
         /* МОДЕРНИЗИРОВАННЫЕ КУРСОРЫ В СТИЛЕ CYBERPUNK 2077 */
 /* Улучшенные: оптимизированные SVG, добавлены анимации, исправлены проблемы с производительностью */
 
@@ -4781,7 +4782,385 @@ select, .no-cyber-cursor {
             border: 1px solid rgba(255, 0, 200, 0.3);
             border-radius: 10px;
         }
+/* ==================== */
+/* КРИТИЧЕСКИЕ ИСПРАВЛЕНИЯ ДЛЯ МОБИЛЬНЫХ */
+/* ==================== */
 
+/* 1. Отключаем сложные анимации на мобильных */
+@media (max-width: 768px) {
+    .particle, .lightning, .floating-element, 
+    .grid-overlay, .scanline, .loader-ring,
+    .loader-logo, .logo-icon, .loader-ring {
+        display: none !important;
+        animation: none !important;
+    }
+    
+    /* Отключаем сложные фоны */
+    .cyber-bg, .grid-overlay {
+        display: none !important;
+    }
+    
+    /* Упрощаем прелоадер */
+    .preloader {
+        background: var(--dark-bg);
+    }
+    
+    .loader-logo {
+        width: 100px !important;
+        height: 100px !important;
+        animation: none !important;
+    }
+    
+    .loader-ring {
+        display: none !important;
+    }
+    
+    .loading-bar {
+        width: 280px !important;
+    }
+}
+
+/* 2. Фикс для навигации на мобильных */
+@media (max-width: 768px) {
+    header {
+        position: relative !important;
+        height: auto;
+        min-height: 60px;
+    }
+    
+    .header-container {
+        flex-wrap: nowrap !important;
+        padding: 0 10px !important;
+    }
+    
+    .logo {
+        order: 1;
+        flex: 1;
+    }
+    
+    .burger-menu {
+        order: 2;
+        display: flex !important;
+        margin-left: auto;
+        margin-right: 10px;
+    }
+    
+    .settings-container {
+        order: 3;
+        display: none; /* Скрываем на маленьких экранах */
+    }
+    
+    .auth-buttons, .user-menu {
+        display: none !important;
+    }
+    
+    /* Мобильное меню */
+    .mobile-nav {
+        width: 100% !important;
+        max-width: 100% !important;
+        right: -100%;
+    }
+    
+    .mobile-nav.active {
+        right: 0;
+    }
+    
+    .mobile-nav ul {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .mobile-nav a {
+        margin: 5px 0;
+        text-align: center;
+    }
+}
+
+/* 3. Фикс для главной страницы */
+@media (max-width: 768px) {
+    .welcome-section {
+        padding: 1rem !important;
+        min-height: auto !important;
+    }
+    
+    .welcome-banner {
+        padding: 1.5rem !important;
+        margin: 0.5rem !important;
+        animation: none !important;
+        box-shadow: none !important;
+    }
+    
+    .welcome-banner h1 {
+        font-size: 1.8rem !important;
+        letter-spacing: 2px !important;
+        line-height: 1.2 !important;
+    }
+    
+    .welcome-banner p {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+    }
+    
+    .interactive-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        margin: 1rem 0 !important;
+    }
+    
+    .grid-item {
+        padding: 1rem !important;
+    }
+    
+    .interactive-stats {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        margin: 1rem 0 !important;
+    }
+    
+    .stat {
+        width: 100% !important;
+        margin: 5px 0;
+    }
+}
+
+/* 4. Фикс для всех остальных страниц */
+@media (max-width: 768px) {
+    main {
+        padding: 1rem !important;
+    }
+    
+    .page-banner {
+        padding: 1.5rem 1rem !important;
+        margin: 0.5rem 0 !important;
+        text-align: center;
+    }
+    
+    .page-banner h1 {
+        font-size: 1.6rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .page-banner p {
+        font-size: 0.9rem !important;
+    }
+    
+    h2 {
+        font-size: 1.4rem !important;
+        margin-bottom: 1.5rem !important;
+        text-align: center;
+    }
+    
+    /* Галерея */
+    .gallery {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.5rem !important;
+    }
+    
+    .gallery-item {
+        height: 150px !important;
+    }
+    
+    /* Услуги */
+    .services {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    
+    .service-card {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    /* Турниры */
+    .tournament-item {
+        flex-direction: column !important;
+        padding: 1rem !important;
+        text-align: center;
+    }
+    
+    /* Магазин */
+    .products {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    
+    /* Формы */
+    .booking-form, .payment-form {
+        padding: 1rem !important;
+        margin: 0 !important;
+    }
+    
+    .form-control {
+        font-size: 16px !important; /* Важно для iOS */
+    }
+    
+    /* Модальные окна */
+    .modal-content {
+        width: 95% !important;
+        margin: 10px !important;
+        padding: 1rem !important;
+    }
+    
+    .purchase-modal .zone-selection {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.5rem !important;
+    }
+    
+    .zone-option {
+        padding: 0.5rem !important;
+    }
+}
+
+/* 5. Фикс для очень маленьких экранов */
+@media (max-width: 480px) {
+    .gallery {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .logo-text {
+        font-size: 1.2rem !important;
+    }
+    
+    .logo-icon {
+        width: 35px !important;
+        height: 35px !important;
+    }
+    
+    .burger-menu {
+        width: 25px !important;
+        height: 18px !important;
+    }
+    
+    .btn, .auth-btn, .register-btn, .buy-btn {
+        padding: 0.7rem 1rem !important;
+        font-size: 0.8rem !important;
+        min-height: 40px !important;
+    }
+    
+    .modal-content {
+        padding: 0.8rem !important;
+    }
+    
+    .purchase-modal .zone-selection {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* 6. Оптимизация производительности */
+@media (max-width: 768px) {
+    /* Отключаем тяжелые CSS эффекты */
+    * {
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        filter: none !important;
+        backdrop-filter: none !important;
+    }
+    
+    /* Сохраняем только необходимые анимации */
+    .page-transition {
+        animation: fadeIn 0.3s ease-out !important;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    /* Упрощаем кнопки */
+    .btn:hover, .auth-btn:hover, .nav-link:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Упрощаем карточки */
+    .grid-item:hover, .service-card:hover, .product-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* 7. Фикс для касаний на мобильных */
+@media (hover: none) and (pointer: coarse) {
+    /* Увеличиваем зону клика */
+    .btn, .nav-link, .auth-btn, .buy-btn {
+        min-height: 44px !important;
+        min-width: 44px !important;
+    }
+    
+    /* Увеличиваем отступы в навигации */
+    .nav-link {
+        padding: 12px 16px !important;
+        margin: 4px 0 !important;
+    }
+    
+    /* Feedback при касании */
+    .btn:active, .nav-link:active {
+        opacity: 0.7;
+        background: rgba(0, 243, 255, 0.2) !important;
+    }
+    
+    /* Отключаем hover эффекты */
+    .grid-item:hover::before,
+    .service-card:hover::before,
+    .btn:hover::before {
+        display: none !important;
+    }
+}
+
+/* 8. Фикс для iOS */
+@supports (-webkit-touch-callout: none) {
+    /* Предотвращаем масштабирование */
+    input, textarea, select {
+        font-size: 16px !important;
+        -webkit-text-size-adjust: 100%;
+    }
+    
+    /* Улучшаем скролл */
+    .mobile-nav {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Фикс для fixed элементов */
+    header {
+        position: sticky;
+        top: 0;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+}
+
+/* 9. Фикс для Android */
+@supports not (-webkit-touch-callout: none) {
+    .btn:active, .nav-link:active {
+        transform: scale(0.98);
+        transition: transform 0.1s;
+    }
+}
+
+/* 10. Улучшение для медленных устройств */
+@media (max-width: 768px) {
+    /* Скрываем ненужные элементы */
+    .floating-elements,
+    .lightning-overlay,
+    .particles,
+    .grid-overlay,
+    .scanline {
+        display: none !important;
+    }
+    
+    /* Упрощаем фон */
+    body {
+        background: var(--dark-bg) !important;
+        background-image: none !important;
+    }
+    
+    /* Уменьшаем качество градиентов */
+    .logo-icon, .loader-logo {
+        background: var(--neon-cyan) !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -5872,6 +6251,7 @@ select, .no-cyber-cursor {
     </div>
 
     <script>
+        
         // Система пользователей и отзывов
         class UserSystem {
             constructor() {
@@ -6623,6 +7003,29 @@ select, .no-cyber-cursor {
         }
 
         // Обновление мобильного меню
+        // Обновите функцию updateMobileMenu
+function updateMobileMenu() {
+    if (!elements.mobileUserSection) return;
+    
+    if (userSystem.isLoggedIn()) {
+        elements.mobileUserSection.innerHTML = `
+            <div class="user-avatar-with-balance" style="margin: 1rem 0;">
+                <div class="user-avatar">${userSystem.currentUser.firstName[0] + userSystem.currentUser.lastName[0]}</div>
+                <div class="user-balance">Баланс: ${formatMoney(userSystem.currentUser.balance)} ₽</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <a href="#" class="nav-link" data-page="profile" style="text-align: center;">Кабинет</a>
+                ${userSystem.isAdmin() ? '<a href="#" class="nav-link" data-page="admin" style="text-align: center;">Админ</a>' : ''}
+                <a href="#" class="nav-link" id="mobile-logout-btn" style="text-align: center;">Выйти</a>
+            </div>
+        `;
+        elements.mobileAuthButtons.style.display = 'none';
+        elements.mobileUserSection.style.display = 'block';
+    } else {
+        elements.mobileUserSection.style.display = 'none';
+        elements.mobileAuthButtons.style.display = 'flex';
+    }
+}
         function updateMobileMenu() {
             if (userSystem.isLoggedIn()) {
                 // Показываем секцию пользователя в мобильном меню
@@ -6690,7 +7093,9 @@ select, .no-cyber-cursor {
                 `;
                 elements.reviewsList.appendChild(reviewElement);
             });
+            
         }
+
 
         function loadUserReviews() {
             const userReviewsList = document.getElementById('user-reviews-list');
