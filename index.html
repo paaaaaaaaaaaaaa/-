@@ -5161,6 +5161,384 @@ select, .no-cyber-cursor {
         background: var(--neon-cyan) !important;
     }
 }
+/* ==================== */
+/* СТИЛИ ДЛЯ ПОДТВЕРЖДЕНИЯ РЕГИСТРАЦИИ */
+/* ==================== */
+
+.confirmation-method-selector {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.confirmation-method {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1.5rem;
+    background: var(--panel-bg);
+    border: 2px solid rgba(0, 243, 255, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex: 1;
+    max-width: 250px;
+}
+
+.light-theme .confirmation-method {
+    border: 2px solid rgba(0, 140, 255, 0.2);
+}
+
+.confirmation-method:hover {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+}
+
+.light-theme .confirmation-method:hover {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 15px rgba(0, 140, 255, 0.3);
+}
+
+.confirmation-method.selected {
+    border-color: var(--neon-green);
+    background: rgba(0, 255, 136, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.light-theme .confirmation-method.selected {
+    background: rgba(0, 204, 106, 0.1);
+    box-shadow: 0 0 20px rgba(0, 204, 106, 0.3);
+}
+
+.confirmation-method-icon {
+    font-size: 1.8rem;
+    color: var(--neon-cyan);
+}
+
+.confirmation-method.selected .confirmation-method-icon {
+    color: var(--neon-green);
+}
+
+.confirmation-method-info {
+    flex: 1;
+}
+
+.confirmation-method-title {
+    font-weight: 700;
+    color: var(--neon-cyan);
+    margin-bottom: 0.3rem;
+}
+
+.confirmation-method.selected .confirmation-method-title {
+    color: var(--neon-green);
+}
+
+.confirmation-method-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.confirmation-checkbox {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--panel-bg);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.light-theme .confirmation-checkbox {
+    border: 1px solid rgba(0, 140, 255, 0.2);
+}
+
+.confirmation-agreement {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.confirmation-agreement input {
+    width: 20px;
+    height: 20px;
+}
+
+.confirmation-agreement span {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.confirmation-agreement span a {
+    color: var(--neon-cyan);
+    text-decoration: none;
+}
+
+.confirmation-agreement span a:hover {
+    text-decoration: underline;
+}
+
+/* Модальное окно подтверждения */
+.confirmation-modal .modal-content {
+    max-width: 500px;
+}
+
+.confirmation-code-container {
+    text-align: center;
+    padding: 2rem;
+}
+
+.confirmation-method-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 243, 255, 0.1);
+    border: 1px solid var(--neon-cyan);
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    color: var(--neon-cyan);
+    font-weight: 700;
+}
+
+.light-theme .confirmation-method-badge {
+    background: rgba(0, 140, 255, 0.1);
+}
+
+.confirmation-sent-to {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.confirmation-code {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 10px;
+    color: var(--neon-green);
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(0, 255, 136, 0.05);
+    border: 2px dashed var(--neon-green);
+    border-radius: 10px;
+    text-align: center;
+    user-select: all;
+}
+
+.confirmation-code-inputs {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.confirmation-code-input {
+    width: 50px;
+    height: 70px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: 'Orbitron', monospace;
+    background: var(--panel-bg);
+    border: 2px solid rgba(0, 243, 255, 0.3);
+    color: var(--neon-cyan);
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.light-theme .confirmation-code-input {
+    border: 2px solid rgba(0, 140, 255, 0.3);
+}
+
+.confirmation-code-input:focus {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+    outline: none;
+}
+
+.light-theme .confirmation-code-input:focus {
+    box-shadow: 0 0 15px rgba(0, 140, 255, 0.5);
+}
+
+.confirmation-code-input.filled {
+    border-color: var(--neon-green);
+    background: rgba(0, 255, 136, 0.1);
+}
+
+.confirmation-timer {
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.confirmation-timer span {
+    color: var(--neon-cyan);
+    font-weight: 700;
+}
+
+.confirmation-timer.expired {
+    color: var(--neon-pink);
+}
+
+.confirmation-timer.expired span {
+    color: var(--neon-pink);
+}
+
+.confirmation-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.confirmation-actions .btn {
+    min-width: 150px;
+}
+
+.confirmation-success {
+    text-align: center;
+    padding: 2rem;
+    animation: fadeIn 0.5s ease;
+}
+
+.confirmation-success-icon {
+    font-size: 4rem;
+    color: var(--neon-green);
+    margin-bottom: 1.5rem;
+    animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.confirmation-success h3 {
+    color: var(--neon-green);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.confirmation-success p {
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+}
+
+.confirmation-error {
+    color: var(--neon-pink);
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    display: none;
+}
+
+.confirmation-error.show {
+    display: block;
+}
+
+/* Индикатор подтвержденного аккаунта */
+.user-confirmed-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--neon-green);
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-left: 0.5rem;
+    border: 1px solid var(--neon-green);
+}
+
+.light-theme .user-confirmed-badge {
+    background: rgba(0, 204, 106, 0.1);
+}
+
+/* Блок неподтвержденного аккаунта */
+.unconfirmed-warning {
+    background: linear-gradient(135deg, rgba(255, 238, 0, 0.1) 0%, rgba(255, 119, 0, 0.1) 100%);
+    border: 1px solid var(--neon-yellow);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.light-theme .unconfirmed-warning {
+    background: linear-gradient(135deg, rgba(230, 216, 0, 0.1) 0%, rgba(230, 92, 0, 0.1) 100%);
+}
+
+.unconfirmed-warning h4 {
+    color: var(--neon-yellow);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.unconfirmed-warning p {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+/* Адаптивность для подтверждения */
+@media (max-width: 768px) {
+    .confirmation-method-selector {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .confirmation-method {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .confirmation-code-inputs {
+        gap: 0.3rem;
+    }
+    
+    .confirmation-code-input {
+        width: 40px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+    
+    .confirmation-code {
+        font-size: 2rem;
+        letter-spacing: 8px;
+        padding: 0.8rem;
+    }
+    
+    .confirmation-actions {
+        flex-direction: column;
+    }
+    
+    .confirmation-actions .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .confirmation-code-inputs {
+        gap: 0.2rem;
+    }
+    
+    .confirmation-code-input {
+        width: 35px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .confirmation-code {
+        font-size: 1.8rem;
+        letter-spacing: 6px;
+        padding: 0.6rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -5811,6 +6189,40 @@ select, .no-cyber-cursor {
                             <label for="reg-confirm-password">Подтвердите пароль</label>
                             <input type="password" id="reg-confirm-password" class="form-control" required>
                         </div>
+                        <!-- Выбор метода подтверждения -->
+<div class="form-group">
+    <label>Способ подтверждения аккаунта:</label>
+    <div class="confirmation-method-selector">
+        <div class="confirmation-method" data-method="email">
+            <div class="confirmation-method-icon">📧</div>
+            <div class="confirmation-method-info">
+                <div class="confirmation-method-title">По Email</div>
+                <div class="confirmation-method-desc">Код придёт на указанную почту</div>
+            </div>
+        </div>
+        <div class="confirmation-method" data-method="phone">
+            <div class="confirmation-method-icon">📱</div>
+            <div class="confirmation-method-info">
+                <div class="confirmation-method-title">По SMS</div>
+                <div class="confirmation-method-desc">Код придёт на номер телефона</div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="confirmation-method" name="confirmation-method" value="email" required>
+</div>
+
+<!-- Согласие на подтверждение -->
+<div class="confirmation-checkbox">
+    <label class="confirmation-agreement">
+        <input type="checkbox" id="confirmation-agreement" required>
+        <span>
+            Я согласен(на) на подтверждение аккаунта выбранным способом и принимаю 
+            <a href="#" onclick="showNotification('В демо-версии правила не загружены', 'error'); return false;">
+                условия использования
+            </a>
+        </span>
+    </label>
+</div>
                         <div class="form-actions">
                             <button type="button" class="btn-secondary" id="reg-cancel-btn">Отмена</button>
                             <button type="submit" class="btn">Зарегистрироваться</button>
@@ -6009,7 +6421,68 @@ select, .no-cyber-cursor {
             </form>
         </div>
     </div>
-
+<!-- Модальное окно подтверждения регистрации -->
+<div class="modal confirmation-modal" id="confirmation-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Подтверждение регистрации</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+        
+        <div class="confirmation-code-container">
+            <!-- Бейдж метода подтверждения -->
+            <div class="confirmation-method-badge" id="confirmation-method-badge">
+                <span class="confirmation-method-icon" id="confirmation-badge-icon">📧</span>
+                <span id="confirmation-badge-text">Подтверждение по Email</span>
+            </div>
+            
+            <!-- Куда отправлен код -->
+            <div class="confirmation-sent-to">
+                Код подтверждения отправлен на: 
+                <strong id="confirmation-target">example@email.com</strong>
+            </div>
+            
+            <!-- Генерация кода (для демонстрации) -->
+            <div class="confirmation-code" id="demo-confirmation-code">
+                123456
+            </div>
+            
+            <!-- Поле ввода кода -->
+            <div class="confirmation-code-inputs" id="confirmation-inputs-container">
+                <input type="text" class="confirmation-code-input" maxlength="1" data-index="0">
+                <input type="text" class="confirmation-code-input" maxlength="1" data-index="1">
+                <input type="text" class="confirmation-code-input" maxlength="1" data-index="2">
+                <input type="text" class="confirmation-code-input" maxlength="1" data-index="3">
+                <input type="text" class="confirmation-code-input" maxlength="1" data-index="4">
+                <input type="text" class="confirmation-code-input" maxlength="1" data-index="5">
+            </div>
+            
+            <!-- Таймер обратного отсчета -->
+            <div class="confirmation-timer" id="confirmation-timer">
+                Отправить код повторно через: <span id="timer-count">60</span> сек.
+            </div>
+            
+            <!-- Ошибка -->
+            <div class="confirmation-error" id="confirmation-error">
+                Неверный код подтверждения. Пожалуйста, проверьте и попробуйте снова.
+            </div>
+            
+            <!-- Успешное подтверждение (скрыто по умолчанию) -->
+            <div class="confirmation-success" id="confirmation-success" style="display: none;">
+                <div class="confirmation-success-icon">✓</div>
+                <h3>Аккаунт подтвержден!</h3>
+                <p>Вы успешно подтвердили ваш аккаунт. Теперь вы можете пользоваться всеми возможностями платформы.</p>
+                <button class="btn-success" id="confirmation-continue-btn">Продолжить</button>
+            </div>
+            
+            <!-- Действия -->
+            <div class="confirmation-actions" id="confirmation-actions">
+                <button class="btn-secondary" id="resend-code-btn" disabled>Отправить повторно</button>
+                <button class="btn-success" id="verify-code-btn">Подтвердить</button>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- ИСПРАВЛЕННОЕ МОДАЛЬНОЕ ОКНО ПОКУПКИ - КОМПАКТНОЕ -->
     <div class="modal purchase-modal" id="purchase-modal">
         <div class="modal-content">
@@ -6251,282 +6724,423 @@ select, .no-cyber-cursor {
     </div>
 
     <script>
+       // Система пользователей и отзывов
+class UserSystem {
+    constructor() {
+        this.users = JSON.parse(localStorage.getItem('users')) || [];
+        this.reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+        this.MAX_BALANCE = 10000; // Ограничение баланса
+        this.purchases = JSON.parse(localStorage.getItem('purchases')) || [];
+        this.pendingConfirmations = JSON.parse(localStorage.getItem('pendingConfirmations')) || {};
         
-        // Система пользователей и отзывов
-        class UserSystem {
-            constructor() {
-                this.users = JSON.parse(localStorage.getItem('users')) || [];
-                this.reviews = JSON.parse(localStorage.getItem('reviews')) || [];
-                this.currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
-                this.MAX_BALANCE = 10000; // Ограничение баланса
-                this.purchases = JSON.parse(localStorage.getItem('purchases')) || [];
-                
-                // Создаем админа по умолчанию если нет пользователей
-                if (this.users.length === 0) {
-                    this.createDefaultAdmin();
-                }
-            }
+        // Создаем админа по умолчанию если нет пользователей
+        if (this.users.length === 0) {
+            this.createDefaultAdmin();
+        }
+    }
 
-            createDefaultAdmin() {
-                const adminUser = {
-                    id: 1,
-                    firstName: 'Администратор',
-                    lastName: 'Системы',
-                    username: 'admin',
-                    email: 'admin@kibersfera.ru',
-                    password: 'admin123',
-                    phone: '+7 (000) 000-00-00',
-                    birthdate: '1990-01-01',
-                    role: 'admin',
-                    balance: 10000,
-                    joined: new Date().toISOString(),
-                    stats: {
-                        tournaments: 0,
-                        hours: 0,
-                        reviews: 0
-                    }
+    createDefaultAdmin() {
+        const adminUser = {
+            id: 1,
+            firstName: 'Администратор',
+            lastName: 'Системы',
+            username: 'admin',
+            email: 'admin@kibersfera.ru',
+            password: 'admin123',
+            phone: '+7 (000) 000-00-00',
+            birthdate: '1990-01-01',
+            role: 'admin',
+            balance: 10000,
+            joined: new Date().toISOString(),
+            confirmed: true, // Админ уже подтвержден
+            confirmedAt: new Date().toISOString(),
+            confirmationMethod: 'email',
+            stats: {
+                tournaments: 0,
+                hours: 0,
+                reviews: 0
+            }
+        };
+        this.users.push(adminUser);
+        this.saveUsers();
+    }
+
+    saveUsers() {
+        localStorage.setItem('users', JSON.stringify(this.users));
+    }
+
+    saveReviews() {
+        localStorage.setItem('reviews', JSON.stringify(this.reviews));
+    }
+
+    savePurchases() {
+        localStorage.setItem('purchases', JSON.stringify(this.purchases));
+    }
+
+    savePendingConfirmations() {
+        localStorage.setItem('pendingConfirmations', JSON.stringify(this.pendingConfirmations));
+    }
+
+    generateConfirmationCode() {
+        return Math.floor(100000 + Math.random() * 900000).toString(); // 6-значный код
+    }
+
+    sendConfirmationCode(email, phone, method) {
+        const code = this.generateConfirmationCode();
+        const expiresAt = Date.now() + 5 * 60 * 1000; // Код действует 5 минут
+        
+        // Сохраняем ожидаемое подтверждение
+        const target = method === 'email' ? email : phone;
+        this.pendingConfirmations[target] = {
+            code: code,
+            expiresAt: expiresAt,
+            method: method,
+            attempts: 0
+        };
+        
+        this.savePendingConfirmations();
+        
+        // В реальном приложении здесь был бы API вызов для отправки SMS/Email
+        // В демо-версии просто возвращаем код для отображения
+        return {
+            success: true,
+            code: code,
+            method: method,
+            target: target
+        };
+    }
+
+    verifyConfirmationCode(target, enteredCode) {
+        const confirmation = this.pendingConfirmations[target];
+        
+        if (!confirmation) {
+            return { success: false, message: 'Код подтверждения не найден' };
+        }
+        
+        // Проверяем срок действия
+        if (Date.now() > confirmation.expiresAt) {
+            delete this.pendingConfirmations[target];
+            this.savePendingConfirmations();
+            return { success: false, message: 'Срок действия кода истек' };
+        }
+        
+        // Увеличиваем счетчик попыток
+        confirmation.attempts++;
+        this.savePendingConfirmations();
+        
+        // Проверяем код
+        if (confirmation.code === enteredCode) {
+            // Успешное подтверждение
+            delete this.pendingConfirmations[target];
+            this.savePendingConfirmations();
+            return { success: true };
+        } else {
+            if (confirmation.attempts >= 3) {
+                // Слишком много неудачных попыток
+                delete this.pendingConfirmations[target];
+                this.savePendingConfirmations();
+                return { 
+                    success: false, 
+                    message: 'Слишком много неверных попыток. Запросите новый код.' 
                 };
-                this.users.push(adminUser);
-                this.saveUsers();
             }
+            return { 
+                success: false, 
+                    message: `Неверный код. Осталось попыток: ${3 - confirmation.attempts}` 
+            };
+        }
+    }
 
-            saveUsers() {
-                localStorage.setItem('users', JSON.stringify(this.users));
+    register(userData) {
+        // Проверяем, нет ли пользователя с таким email или username
+        const existingUser = this.users.find(u => 
+            u.email === userData.email || u.username === userData.username
+        );
+
+        if (existingUser) {
+            return { success: false, message: 'Пользователь с таким email или именем уже существует' };
+        }
+
+        // Проверяем дату рождения
+        const birthYear = new Date(userData.birthdate).getFullYear();
+        if (birthYear >= 2020 && birthYear <= 2025) {
+            return { success: false, message: 'Не твой уровень дорогой' };
+        }
+        
+        if (birthYear > 2025) {
+            return { success: false, message: 'Год рождения не может быть больше 2025' };
+        }
+
+        // Проверяем согласие на подтверждение
+        if (!userData.confirmationAgreed) {
+            return { success: false, message: 'Необходимо согласие на подтверждение аккаунта' };
+        }
+
+        // Проверяем выбранный метод подтверждения
+        if (!userData.confirmationMethod || !['email', 'phone'].includes(userData.confirmationMethod)) {
+            return { success: false, message: 'Выберите метод подтверждения' };
+        }
+
+        const newUser = {
+            id: Date.now(),
+            ...userData,
+            role: 'user',
+            balance: 0,
+            joined: new Date().toISOString(),
+            confirmed: false, // Пользователь не подтвержден до верификации
+            confirmedAt: null,
+            confirmationMethod: userData.confirmationMethod,
+            stats: {
+                tournaments: 0,
+                hours: Math.floor(Math.random() * 100),
+                reviews: 0
             }
+        };
 
-            saveReviews() {
-                localStorage.setItem('reviews', JSON.stringify(this.reviews));
+        this.users.push(newUser);
+        this.saveUsers();
+        
+        // Отправляем код подтверждения
+        const confirmation = this.sendConfirmationCode(
+            userData.email,
+            userData.phone,
+            userData.confirmationMethod
+        );
+        
+        return { 
+            success: true, 
+            user: newUser,
+            confirmation: confirmation
+        };
+    }
+
+    confirmUser(userId) {
+        const userIndex = this.users.findIndex(u => u.id === userId);
+        if (userIndex !== -1) {
+            this.users[userIndex].confirmed = true;
+            this.users[userIndex].confirmedAt = new Date().toISOString();
+            this.saveUsers();
+            
+            // Обновляем текущего пользователя если это он
+            if (this.currentUser && this.currentUser.id === userId) {
+                this.currentUser.confirmed = true;
+                this.currentUser.confirmedAt = this.users[userIndex].confirmedAt;
+                localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
             }
+            
+            return { success: true };
+        }
+        return { success: false, message: 'Пользователь не найден' };
+    }
 
-            savePurchases() {
-                localStorage.setItem('purchases', JSON.stringify(this.purchases));
-            }
-
-            register(userData) {
-                // Проверяем, нет ли пользователя с таким email или username
-                const existingUser = this.users.find(u => 
-                    u.email === userData.email || u.username === userData.username
-                );
-
-                if (existingUser) {
-                    return { success: false, message: 'Пользователь с таким email или именем уже существует' };
-                }
-
-                // Проверяем дату рождения
-                const birthYear = new Date(userData.birthdate).getFullYear();
-                if (birthYear >= 2020 && birthYear <= 2025) {
-                    return { success: false, message: 'Не твой уровень дорогой' };
-                }
-                
-                if (birthYear > 2025) {
-                    return { success: false, message: 'Год рождения не может быть больше 2025' };
-                }
-
-                const newUser = {
-                    id: Date.now(),
-                    ...userData,
-                    role: 'user',
-                    balance: 0,
-                    joined: new Date().toISOString(),
-                    stats: {
-                        tournaments: 0,
-                        hours: Math.floor(Math.random() * 100),
-                        reviews: 0
-                    }
+    login(email, password) {
+        const user = this.users.find(u => u.email === email && u.password === password);
+        if (user) {
+            const { password: _, ...userWithoutPassword } = user;
+            this.currentUser = userWithoutPassword;
+            localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
+            
+            // Проверяем, подтвержден ли аккаунт
+            if (!user.confirmed) {
+                return { 
+                    success: true, 
+                    user: userWithoutPassword,
+                    requiresConfirmation: true,
+                    confirmationMethod: user.confirmationMethod
                 };
+            }
+            
+            return { success: true, user: userWithoutPassword, requiresConfirmation: false };
+        }
+        return { success: false, message: 'Неверный email или пароль' };
+    }
 
-                this.users.push(newUser);
-                this.saveUsers();
-                return { success: true, user: newUser };
+    resendConfirmationCode(email, phone, method) {
+        return this.sendConfirmationCode(email, phone, method);
+    }
+
+    // Другие методы остаются без изменений, но проверяем confirmed при выполнении действий
+    addReview(text, userId) {
+        // Проверяем, подтвержден ли пользователь
+        const user = this.users.find(u => u.id === userId);
+        if (!user || !user.confirmed) {
+            return { success: false, message: 'Для добавления отзывов необходимо подтвердить аккаунт' };
+        }
+
+        const review = {
+            id: Date.now(),
+            userId,
+            text,
+            date: new Date().toISOString(),
+            status: 'approved'
+        };
+
+        this.reviews.push(review);
+        
+        // Увеличиваем счетчик отзывов пользователя
+        const userIndex = this.users.findIndex(u => u.id === userId);
+        if (userIndex !== -1) {
+            this.users[userIndex].stats.reviews++;
+            this.saveUsers();
+        }
+
+        this.saveReviews();
+        return { success: true, review: review };
+    }
+
+    deductBalance(userId, amount) {
+        // Проверяем, подтвержден ли пользователь
+        const user = this.users.find(u => u.id === userId);
+        if (!user || !user.confirmed) {
+            return { success: false, message: 'Для совершения покупок необходимо подтвердить аккаунт' };
+        }
+
+        const userIndex = this.users.findIndex(u => u.id === userId);
+        if (userIndex !== -1) {
+            if (this.users[userIndex].balance < amount) {
+                return { success: false, message: 'Недостаточно средств' };
+            }
+            
+            this.users[userIndex].balance -= amount;
+            this.saveUsers();
+
+            // Обновляем текущего пользователя если это он
+            if (this.currentUser && this.currentUser.id === userId) {
+                this.currentUser.balance = this.users[userIndex].balance;
+                localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
             }
 
-            login(email, password) {
-                const user = this.users.find(u => u.email === email && u.password === password);
-                if (user) {
-                    const { password: _, ...userWithoutPassword } = user;
-                    this.currentUser = userWithoutPassword;
-                    localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
-                    return { success: true, user: userWithoutPassword };
-                }
-                return { success: false, message: 'Неверный email или пароль' };
+            return { success: true, newBalance: this.users[userIndex].balance };
+        }
+        return { success: false, message: 'Пользователь не найден' };
+    }
+
+    // Обновляем остальные методы для проверки confirmed
+    logout() {
+        this.currentUser = null;
+        localStorage.removeItem('currentUser');
+    }
+
+    updateUser(userId, userData) {
+        // Проверяем дату рождения при обновлении профиля
+        if (userData.birthdate) {
+            const birthYear = new Date(userData.birthdate).getFullYear();
+            if (birthYear >= 2020 && birthYear <= 2025) {
+                return { success: false, message: 'Не твой уровень дорогой' };
             }
-
-            logout() {
-                this.currentUser = null;
-                localStorage.removeItem('currentUser');
-            }
-
-            updateUser(userId, userData) {
-                // Проверяем дату рождения при обновлении профиля
-                if (userData.birthdate) {
-                    const birthYear = new Date(userData.birthdate).getFullYear();
-                    if (birthYear >= 2020 && birthYear <= 2025) {
-                        return { success: false, message: 'Не твой уровень дорогой' };
-                    }
-                    
-                    if (birthYear > 2025) {
-                        return { success: false, message: 'Год рождения не может быть больше 2025' };
-                    }
-                }
-
-                const userIndex = this.users.findIndex(u => u.id === userId);
-                if (userIndex !== -1) {
-                    this.users[userIndex] = { ...this.users[userIndex], ...userData };
-                    this.saveUsers();
-
-                    // Обновляем текущего пользователя если это он
-                    if (this.currentUser && this.currentUser.id === userId) {
-                        const { password: _, ...userWithoutPassword } = this.users[userIndex];
-                        this.currentUser = userWithoutPassword;
-                        localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
-                    }
-
-                    return { success: true };
-                }
-                return { success: false, message: 'Пользователь не найден' };
-            }
-
-            addBalance(userId, amount) {
-                const userIndex = this.users.findIndex(u => u.id === userId);
-                if (userIndex !== -1) {
-                    const newBalance = this.users[userIndex].balance + amount;
-                    
-                    // Проверяем ограничение баланса
-                    if (newBalance > this.MAX_BALANCE) {
-                        return { 
-                            success: false, 
-                            message: `Превышен максимальный баланс ${formatMoney(this.MAX_BALANCE)} ₽. Текущий баланс: ${formatMoney(this.users[userIndex].balance)} ₽. Вы можете пополнить не более ${formatMoney(this.MAX_BALANCE - this.users[userIndex].balance)} ₽.` 
-                        };
-                    }
-                    
-                    this.users[userIndex].balance = newBalance;
-                    this.saveUsers();
-
-                    // Обновляем текущего пользователя если это он
-                    if (this.currentUser && this.currentUser.id === userId) {
-                        this.currentUser.balance = newBalance;
-                        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-                    }
-
-                    return { success: true, newBalance: newBalance };
-                }
-                return { success: false, message: 'Пользователь не найден' };
-            }
-
-            deductBalance(userId, amount) {
-                const userIndex = this.users.findIndex(u => u.id === userId);
-                if (userIndex !== -1) {
-                    if (this.users[userIndex].balance < amount) {
-                        return { success: false, message: 'Недостаточно средств' };
-                    }
-                    
-                    this.users[userIndex].balance -= amount;
-                    this.saveUsers();
-
-                    // Обновляем текущего пользователя если это он
-                    if (this.currentUser && this.currentUser.id === userId) {
-                        this.currentUser.balance = this.users[userIndex].balance;
-                        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-                    }
-
-                    return { success: true, newBalance: this.users[userIndex].balance };
-                }
-                return { success: false, message: 'Пользователь не найден' };
-            }
-
-            addPurchase(userId, purchaseData) {
-                const purchase = {
-                    id: Date.now(),
-                    userId,
-                    ...purchaseData,
-                    purchaseDate: new Date().toISOString(),
-                    status: 'active'
-                };
-
-                this.purchases.push(purchase);
-                this.savePurchases();
-                return purchase;
-            }
-
-            getUserPurchases(userId) {
-                return this.purchases.filter(p => p.userId === userId);
-            }
-
-            addReview(text, userId) {
-                const review = {
-                    id: Date.now(),
-                    userId,
-                    text,
-                    date: new Date().toISOString(),
-                    status: 'approved'
-                };
-
-                this.reviews.push(review);
-                
-                // Увеличиваем счетчик отзывов пользователя
-                const userIndex = this.users.findIndex(u => u.id === userId);
-                if (userIndex !== -1) {
-                    this.users[userIndex].stats.reviews++;
-                    this.saveUsers();
-                }
-
-                this.saveReviews();
-                return review;
-            }
-
-            deleteReview(reviewId) {
-                const reviewIndex = this.reviews.findIndex(r => r.id === reviewId);
-                if (reviewIndex !== -1) {
-                    // Уменьшаем счетчик отзывов пользователя
-                    const review = this.reviews[reviewIndex];
-                    const userIndex = this.users.findIndex(u => u.id === review.userId);
-                    if (userIndex !== -1 && this.users[userIndex].stats.reviews > 0) {
-                        this.users[userIndex].stats.reviews--;
-                        this.saveUsers();
-                    }
-
-                    this.reviews.splice(reviewIndex, 1);
-                    this.saveReviews();
-                    return true;
-                }
-                return false;
-            }
-
-            getUserReviews(userId) {
-                return this.reviews.filter(r => r.userId === userId && r.status === 'approved');
-            }
-
-            getAllReviews() {
-                return this.reviews.filter(r => r.status === 'approved').map(review => {
-                    const user = this.users.find(u => u.id === review.userId);
-                    return {
-                        ...review,
-                        userName: user ? `${user.firstName} ${user.lastName}` : 'Неизвестный пользователь',
-                        userInitials: user ? user.firstName[0] + user.lastName[0] : '??'
-                    };
-                });
-            }
-
-            getAllUsers() {
-                return this.users.map(user => {
-                    const userReviews = this.getUserReviews(user.id);
-                    return {
-                        ...user,
-                        reviewCount: userReviews.length,
-                        lastActivity: userReviews.length > 0 ? 
-                            userReviews[userReviews.length - 1].date : user.joined
-                    };
-                });
-            }
-
-            isAdmin() {
-                return this.currentUser && this.currentUser.role === 'admin';
-            }
-
-            isLoggedIn() {
-                return this.currentUser !== null;
+            
+            if (birthYear > 2025) {
+                return { success: false, message: 'Год рождения не может быть больше 2025' };
             }
         }
+
+        const userIndex = this.users.findIndex(u => u.id === userId);
+        if (userIndex !== -1) {
+            this.users[userIndex] = { ...this.users[userIndex], ...userData };
+            this.saveUsers();
+
+            // Обновляем текущего пользователя если это он
+            if (this.currentUser && this.currentUser.id === userId) {
+                const { password: _, ...userWithoutPassword } = this.users[userIndex];
+                this.currentUser = userWithoutPassword;
+                localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
+            }
+
+            return { success: true };
+        }
+        return { success: false, message: 'Пользователь не найден' };
+    }
+
+    addBalance(userId, amount) {
+        const userIndex = this.users.findIndex(u => u.id === userId);
+        if (userIndex !== -1) {
+            const newBalance = this.users[userIndex].balance + amount;
+            
+            // Проверяем ограничение баланса
+            if (newBalance > this.MAX_BALANCE) {
+                return { 
+                    success: false, 
+                    message: `Превышен максимальный баланс ${formatMoney(this.MAX_BALANCE)} ₽. Текущий баланс: ${formatMoney(this.users[userIndex].balance)} ₽. Вы можете пополнить не более ${formatMoney(this.MAX_BALANCE - this.users[userIndex].balance)} ₽.` 
+                };
+            }
+            
+            this.users[userIndex].balance = newBalance;
+            this.saveUsers();
+
+            // Обновляем текущего пользователя если это он
+            if (this.currentUser && this.currentUser.id === userId) {
+                this.currentUser.balance = newBalance;
+                localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+            }
+
+            return { success: true, newBalance: newBalance };
+        }
+        return { success: false, message: 'Пользователь не найден' };
+    }
+
+    addPurchase(userId, purchaseData) {
+        const user = this.users.find(u => u.id === userId);
+        if (!user || !user.confirmed) {
+            return { success: false, message: 'Для совершения покупок необходимо подтвердить аккаунт' };
+        }
+
+        const purchase = {
+            id: Date.now(),
+            userId,
+            ...purchaseData,
+            purchaseDate: new Date().toISOString(),
+            status: 'active'
+        };
+
+        this.purchases.push(purchase);
+        this.savePurchases();
+        return { success: true, purchase: purchase };
+    }
+
+    getUserPurchases(userId) {
+        return this.purchases.filter(p => p.userId === userId);
+    }
+
+    getUserReviews(userId) {
+        return this.reviews.filter(r => r.userId === userId && r.status === 'approved');
+    }
+
+    getAllReviews() {
+        return this.reviews.filter(r => r.status === 'approved').map(review => {
+            const user = this.users.find(u => u.id === review.userId);
+            return {
+                ...review,
+                userName: user ? `${user.firstName} ${user.lastName}` : 'Неизвестный пользователь',
+                userInitials: user ? user.firstName[0] + user.lastName[0] : '??'
+            };
+        });
+    }
+
+    getAllUsers() {
+        return this.users.map(user => {
+            const userReviews = this.getUserReviews(user.id);
+            return {
+                ...user,
+                reviewCount: userReviews.length,
+                lastActivity: userReviews.length > 0 ? 
+                    userReviews[userReviews.length - 1].date : user.joined
+            };
+        });
+    }
+
+    isAdmin() {
+        return this.currentUser && this.currentUser.role === 'admin';
+    }
+
+    isLoggedIn() {
+        return this.currentUser !== null;
+    }
+
+    isConfirmed() {
+        return this.currentUser && this.currentUser.confirmed === true;
+    }
+}
 
         // VK API интеграция
         class VKIntegration {
@@ -8296,6 +8910,1312 @@ function updateMobileMenu() {
         // Инициализация эффектов
         createRedLightning();
         createParticles();
+        // Система подтверждения регистрации
+class ConfirmationSystem {
+    constructor() {
+        this.confirmationModal = document.getElementById('confirmation-modal');
+        this.confirmationCode = '';
+        this.confirmationMethod = 'email';
+        this.confirmationTarget = '';
+        this.userData = null;
+        this.timerInterval = null;
+        this.timeLeft = 60;
+    }
+
+    showConfirmation(userData, confirmationData) {
+        this.userData = userData;
+        this.confirmationMethod = confirmationData.method;
+        this.confirmationTarget = confirmationData.target;
+        this.confirmationCode = confirmationData.code;
+        
+        // Обновляем UI
+        this.updateConfirmationUI();
+        
+        // Сбрасываем таймер
+        this.resetTimer();
+        
+        // Показываем модальное окно
+        this.confirmationModal.classList.add('active');
+        
+        // Фокус на первый input
+        setTimeout(() => {
+            document.querySelector('.confirmation-code-input[data-index="0"]').focus();
+        }, 100);
+    }
+
+    updateConfirmationUI() {
+        // Обновляем бейдж метода
+        const badgeIcon = document.getElementById('confirmation-badge-icon');
+        const badgeText = document.getElementById('confirmation-badge-text');
+        
+        if (this.confirmationMethod === 'email') {
+            badgeIcon.textContent = '📧';
+            badgeText.textContent = 'Подтверждение по Email';
+        } else {
+            badgeIcon.textContent = '📱';
+            badgeText.textContent = 'Подтверждение по SMS';
+        }
+        
+        // Обновляем цель
+        document.getElementById('confirmation-target').textContent = this.confirmationTarget;
+        
+        // Показываем код для демо
+        document.getElementById('demo-confirmation-code').textContent = this.confirmationCode;
+        
+        // Сбрасываем inputs
+        document.querySelectorAll('.confirmation-code-input').forEach(input => {
+            input.value = '';
+            input.classList.remove('filled');
+        });
+        
+        // Скрываем успешное сообщение и ошибку
+        document.getElementById('confirmation-success').style.display = 'none';
+        document.getElementById('confirmation-error').classList.remove('show');
+        document.getElementById('confirmation-inputs-container').style.display = 'flex';
+        document.getElementById('confirmation-actions').style.display = 'flex';
+    }
+
+    resetTimer() {
+        clearInterval(this.timerInterval);
+        this.timeLeft = 60;
+        this.updateTimer();
+        
+        this.timerInterval = setInterval(() => {
+            this.timeLeft--;
+            this.updateTimer();
+            
+            if (this.timeLeft <= 0) {
+                clearInterval(this.timerInterval);
+                this.enableResendButton();
+            }
+        }, 1000);
+        
+        this.disableResendButton();
+    }
+
+    updateTimer() {
+        const timerElement = document.getElementById('timer-count');
+        const timerContainer = document.getElementById('confirmation-timer');
+        
+        timerElement.textContent = this.timeLeft;
+        
+        if (this.timeLeft <= 10) {
+            timerContainer.classList.add('expired');
+        } else {
+            timerContainer.classList.remove('expired');
+        }
+    }
+
+    disableResendButton() {
+        const resendBtn = document.getElementById('resend-code-btn');
+        resendBtn.disabled = true;
+        resendBtn.textContent = 'Отправить повторно';
+    }
+
+    enableResendButton() {
+        const resendBtn = document.getElementById('resend-code-btn');
+        resendBtn.disabled = false;
+        resendBtn.textContent = 'Отправить новый код';
+    }
+
+    verifyCode() {
+        // Собираем код из inputs
+        const codeInputs = document.querySelectorAll('.confirmation-code-input');
+        let enteredCode = '';
+        
+        codeInputs.forEach(input => {
+            enteredCode += input.value;
+        });
+        
+        // Проверяем длину
+        if (enteredCode.length !== 6) {
+            this.showError('Введите полный 6-значный код');
+            return false;
+        }
+        
+        // Проверяем код
+        const result = userSystem.verifyConfirmationCode(this.confirmationTarget, enteredCode);
+        
+        if (result.success) {
+            // Подтверждаем пользователя
+            userSystem.confirmUser(this.userData.id);
+            
+            // Автоматически логиним пользователя
+            const loginResult = userSystem.login(this.userData.email, this.userData.password);
+            
+            if (loginResult.success) {
+                this.showSuccess();
+                return true;
+            }
+        } else {
+            this.showError(result.message);
+            return false;
+        }
+    }
+
+    showError(message) {
+        const errorElement = document.getElementById('confirmation-error');
+        errorElement.textContent = message;
+        errorElement.classList.add('show');
+        
+        // Анимация ошибки
+        errorElement.style.animation = 'none';
+        setTimeout(() => {
+            errorElement.style.animation = 'fadeIn 0.3s ease';
+        }, 10);
+    }
+
+    showSuccess() {
+        // Показываем успешное сообщение
+        document.getElementById('confirmation-inputs-container').style.display = 'none';
+        document.getElementById('confirmation-actions').style.display = 'none';
+        document.getElementById('confirmation-error').classList.remove('show');
+        document.getElementById('confirmation-success').style.display = 'block';
+        
+        // Останавливаем таймер
+        clearInterval(this.timerInterval);
+    }
+
+    resendCode() {
+        // Отправляем новый код
+        const result = userSystem.resendConfirmationCode(
+            this.userData.email,
+            this.userData.phone,
+            this.confirmationMethod
+        );
+        
+        if (result.success) {
+            this.confirmationCode = result.code;
+            this.updateConfirmationUI();
+            this.resetTimer();
+            showNotification('Новый код отправлен!', 'success');
+        }
+    }
+}
+
+// Инициализация системы подтверждения
+const confirmationSystem = new ConfirmationSystem();
+
+// Обновляем функцию updateAuthUI для отображения статуса подтверждения
+function updateAuthUI() {
+    if (userSystem.isLoggedIn()) {
+        elements.authButtons.style.display = 'none';
+        elements.userMenu.style.display = 'flex';
+        elements.userAvatar.textContent = 
+            userSystem.currentUser.firstName[0] + userSystem.currentUser.lastName[0];
+        
+        // Проверяем, подтвержден ли аккаунт
+        if (userSystem.isConfirmed()) {
+            // Добавляем бейдж подтверждения
+            const balanceElement = document.getElementById('user-balance-amount');
+            if (balanceElement && !balanceElement.parentElement.querySelector('.user-confirmed-badge')) {
+                const badge = document.createElement('span');
+                badge.className = 'user-confirmed-badge';
+                badge.innerHTML = '✓ Подтвержден';
+                balanceElement.parentElement.appendChild(badge);
+            }
+        } else {
+            // Показываем предупреждение
+            showUnconfirmedWarning();
+        }
+        
+        // Обновляем баланс в объединенной кнопке
+        if (elements.userBalance) {
+            elements.userBalance.textContent = formatMoney(userSystem.currentUser.balance);
+        }
+        
+        if (userSystem.isAdmin()) {
+            elements.adminLink.style.display = 'block';
+        }
+        
+        // Показываем форму отзывов если пользователь авторизован И подтвержден
+        if (elements.reviewFormContainer) {
+            if (userSystem.isConfirmed()) {
+                elements.reviewFormContainer.style.display = 'block';
+            } else {
+                elements.reviewFormContainer.style.display = 'none';
+            }
+        }
+        
+        // Обновляем баланс на странице баланса
+        if (elements.balanceAmount) {
+            elements.balanceAmount.textContent = formatMoney(userSystem.currentUser.balance) + ' ₽';
+        }
+
+        // Обновляем мобильное меню
+        updateMobileMenu();
+    } else {
+        elements.authButtons.style.display = 'flex';
+        elements.userMenu.style.display = 'none';
+        elements.adminLink.style.display = 'none';
+
+        // Скрываем форму отзывов
+        if (elements.reviewFormContainer) {
+            elements.reviewFormContainer.style.display = 'none';
+        }
+
+        // Обновляем мобильное меню
+        updateMobileMenu();
+    }
+    loadReviews();
+}
+
+// Функция для показа предупреждения о неподтвержденном аккаунте
+function showUnconfirmedWarning() {
+    // Проверяем, не добавлено ли уже предупреждение
+    if (document.querySelector('.unconfirmed-warning')) return;
+    
+    // Создаем предупреждение
+    const warning = document.createElement('div');
+    warning.className = 'unconfirmed-warning';
+    warning.innerHTML = `
+        <h4>⚠️ Аккаунт не подтвержден</h4>
+        <p>Для доступа ко всем функциям платформы необходимо подтвердить ваш аккаунт.</p>
+        <p>Проверьте ${userSystem.currentUser.confirmationMethod === 'email' ? 'электронную почту' : 'SMS сообщения'} и введите код подтверждения.</p>
+        <button class="btn-secondary" id="request-new-code-btn">Отправить код повторно</button>
+    `;
+    
+    // Добавляем предупреждение на главную страницу
+    const mainPage = document.getElementById('main-page');
+    if (mainPage.querySelector('.welcome-banner')) {
+        mainPage.querySelector('.welcome-banner').after(warning);
+    }
+    
+    // Обработчик для кнопки отправки кода повторно
+    setTimeout(() => {
+        const requestBtn = document.getElementById('request-new-code-btn');
+        if (requestBtn) {
+            requestBtn.addEventListener('click', function() {
+                const result = userSystem.resendConfirmationCode(
+                    userSystem.currentUser.email,
+                    userSystem.currentUser.phone,
+                    userSystem.currentUser.confirmationMethod
+                );
+                
+                if (result.success) {
+                    // Показываем модальное окно подтверждения
+                    confirmationSystem.showConfirmation(userSystem.currentUser, result);
+                    showNotification('Новый код отправлен!', 'success');
+                }
+            });
+        }
+    }, 100);
+}
+
+// Обновляем обработчик регистрации
+document.getElementById('registration-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Получаем выбранный метод подтверждения
+    const confirmationMethod = document.getElementById('confirmation-method').value;
+    const confirmationAgreed = document.getElementById('confirmation-agreement').checked;
+    
+    const userData = {
+        firstName: document.getElementById('reg-firstname').value,
+        lastName: document.getElementById('reg-lastname').value,
+        username: document.getElementById('reg-username').value,
+        email: document.getElementById('reg-email').value,
+        password: document.getElementById('reg-password').value,
+        phone: document.getElementById('reg-phone').value,
+        birthdate: document.getElementById('reg-birthdate').value,
+        confirmationMethod: confirmationMethod,
+        confirmationAgreed: confirmationAgreed
+    };
+
+    const confirmPassword = document.getElementById('reg-confirm-password').value;
+    
+    if (userData.password !== confirmPassword) {
+        showNotification('Пароли не совпадают!', 'error');
+        return;
+    }
+    
+    if (!confirmationAgreed) {
+        showNotification('Необходимо согласие на подтверждение аккаунта!', 'error');
+        return;
+    }
+
+    const result = userSystem.register(userData);
+    if (result.success) {
+        showNotification('Регистрация прошла успешно! Подтвердите ваш аккаунт.', 'success');
+        
+        // Показываем модальное окно подтверждения
+        confirmationSystem.showConfirmation(result.user, result.confirmation);
+        
+        // Не логиним автоматически, ждем подтверждения
+        this.reset();
+    } else {
+        showNotification(result.message, 'error');
+    }
+});
+
+// Обновляем обработчик входа для проверки подтверждения
+document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    const result = userSystem.login(email, password);
+    if (result.success) {
+        if (result.requiresConfirmation) {
+            // Пользователь не подтвержден - показываем модальное окно подтверждения
+            showNotification('Ваш аккаунт требует подтверждения', 'error');
+            
+            // Отправляем новый код
+            const user = userSystem.users.find(u => u.email === email);
+            if (user) {
+                const confirmation = userSystem.resendConfirmationCode(
+                    user.email,
+                    user.phone,
+                    user.confirmationMethod
+                );
+                
+                if (confirmation.success) {
+                    confirmationSystem.showConfirmation(user, confirmation);
+                }
+            }
+        } else {
+            showNotification('Вход выполнен!', 'success');
+            elements.loginModal.classList.remove('active');
+            updateAuthUI();
+            this.reset();
+        }
+    } else {
+        showNotification(result.message, 'error');
+    }
+});
+
+// Обработчики для модального окна подтверждения
+document.addEventListener('DOMContentLoaded', function() {
+    // Выбор метода подтверждения в форме регистрации
+    document.querySelectorAll('.confirmation-method').forEach(method => {
+        method.addEventListener('click', function() {
+            // Убираем выделение у всех методов
+            document.querySelectorAll('.confirmation-method').forEach(m => {
+                m.classList.remove('selected');
+            });
+            
+            // Выделяем выбранный метод
+            this.classList.add('selected');
+            
+            // Обновляем hidden input
+            const methodValue = this.getAttribute('data-method');
+            document.getElementById('confirmation-method').value = methodValue;
+        });
+    });
+    
+    // Ввод кода подтверждения
+    document.querySelectorAll('.confirmation-code-input').forEach(input => {
+        input.addEventListener('input', function(e) {
+            const value = e.target.value;
+            const index = parseInt(this.getAttribute('data-index'));
+            
+            // Разрешаем только цифры
+            if (!/^\d?$/.test(value)) {
+                this.value = '';
+                return;
+            }
+            
+            // Добавляем/убираем класс filled
+            if (value) {
+                this.classList.add('filled');
+                
+                // Автопереход к следующему полю
+                if (index < 5) {
+                    const nextInput = document.querySelector(`.confirmation-code-input[data-index="${index + 1}"]`);
+                    if (nextInput) nextInput.focus();
+                }
+            } else {
+                this.classList.remove('filled');
+                
+                // Переход к предыдущему полю при удалении
+                if (index > 0 && e.inputType === 'deleteContentBackward') {
+                    const prevInput = document.querySelector(`.confirmation-code-input[data-index="${index - 1}"]`);
+                    if (prevInput) prevInput.focus();
+                }
+            }
+        });
+        
+        // Обработка нажатия клавиш
+        input.addEventListener('keydown', function(e) {
+            const index = parseInt(this.getAttribute('data-index'));
+            
+            // Стрелка влево
+            if (e.key === 'ArrowLeft' && index > 0) {
+                e.preventDefault();
+                const prevInput = document.querySelector(`.confirmation-code-input[data-index="${index - 1}"]`);
+                if (prevInput) prevInput.focus();
+            }
+            
+            // Стрелка вправо
+            if (e.key === 'ArrowRight' && index < 5) {
+                e.preventDefault();
+                const nextInput = document.querySelector(`.confirmation-code-input[data-index="${index + 1}"]`);
+                if (nextInput) nextInput.focus();
+            }
+            
+            // Backspace
+            if (e.key === 'Backspace' && !this.value && index > 0) {
+                e.preventDefault();
+                const prevInput = document.querySelector(`.confirmation-code-input[data-index="${index - 1}"]`);
+                if (prevInput) {
+                    prevInput.value = '';
+                    prevInput.classList.remove('filled');
+                    prevInput.focus();
+                }
+            }
+        });
+        
+        // Вставка из буфера обмена
+        input.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const pasteData = e.clipboardData.getData('text').trim();
+            
+            if (/^\d{6}$/.test(pasteData)) {
+                const inputs = document.querySelectorAll('.confirmation-code-input');
+                inputs.forEach((inputEl, idx) => {
+                    if (idx < 6) {
+                        inputEl.value = pasteData[idx];
+                        inputEl.classList.add('filled');
+                    }
+                });
+                
+                // Фокус на последнее поле
+                inputs[5].focus();
+            }
+        });
+    });
+    
+    // Кнопка подтверждения кода
+    document.getElementById('verify-code-btn').addEventListener('click', function() {
+        const success = confirmationSystem.verifyCode();
+        if (success) {
+            // Закрываем модальное окно через 3 секунды
+            setTimeout(() => {
+                confirmationSystem.confirmationModal.classList.remove('active');
+                updateAuthUI();
+                switchPage('main');
+            }, 3000);
+        }
+    });
+    
+    // Кнопка отправки кода повторно
+    document.getElementById('resend-code-btn').addEventListener('click', function() {
+        confirmationSystem.resendCode();
+    });
+    
+    // Кнопка продолжения после успешного подтверждения
+    document.getElementById('confirmation-continue-btn').addEventListener('click', function() {
+        confirmationSystem.confirmationModal.classList.remove('active');
+        updateAuthUI();
+        switchPage('main');
+    });
+    
+    // Закрытие модального окна подтверждения
+    confirmationSystem.confirmationModal.querySelector('.modal-close').addEventListener('click', function() {
+        confirmationSystem.confirmationModal.classList.remove('active');
+        
+        // Если пользователь только что зарегистрировался, но не подтвердился
+        if (userSystem.currentUser && !userSystem.isConfirmed()) {
+            showNotification('Завершите подтверждение аккаунта для доступа ко всем функциям', 'error');
+        }
+    });
+    
+    // Автоподтверждение при вводе последней цифры
+    document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('confirmation-code-input')) {
+            const inputs = document.querySelectorAll('.confirmation-code-input');
+            let allFilled = true;
+            let code = '';
+            
+            inputs.forEach(input => {
+                if (!input.value) allFilled = false;
+                code += input.value;
+            });
+            
+            // Если все поля заполнены, автоматически подтверждаем
+            if (allFilled && code.length === 6) {
+                // Небольшая задержка для UX
+                setTimeout(() => {
+                    const success = confirmationSystem.verifyCode();
+                    if (success) {
+                        setTimeout(() => {
+                            confirmationSystem.confirmationModal.classList.remove('active');
+                            updateAuthUI();
+                            switchPage('main');
+                        }, 3000);
+                    }
+                }, 500);
+            }
+        }
+    });
+});
+// В обработчике кнопки покупки
+document.querySelectorAll('.buy-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        if (!userSystem.isLoggedIn()) {
+            showNotification('Для покупки необходимо войти в систему', 'error');
+            return;
+        }
+        
+        // ПРОВЕРКА ПОДТВЕРЖДЕНИЯ
+        if (!userSystem.isConfirmed()) {
+            showNotification('Для совершения покупок необходимо подтвердить аккаунт', 'error');
+            return;
+        }
+        
+        // ... остальной код покупки
+    });
+});
+
+// В обработчике добавления отзыва
+document.getElementById('add-review-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!userSystem.isLoggedIn()) {
+        showNotification('Для добавления отзыва необходимо войти в систему', 'error');
+        return;
+    }
+    
+    // ПРОВЕРКА ПОДТВЕРЖДЕНИЯ
+    if (!userSystem.isConfirmed()) {
+        showNotification('Для добавления отзывов необходимо подтвердить аккаунт', 'error');
+        return;
+    }
+    
+    // ... остальной код отзыва
+});
+function updateMobileMenu() {
+    if (!elements.mobileUserSection) return;
+    
+    if (userSystem.isLoggedIn()) {
+        let confirmationBadge = '';
+        if (userSystem.isConfirmed()) {
+            confirmationBadge = '<span class="user-confirmed-badge" style="margin-left: 0.5rem;">✓</span>';
+        }
+        
+        elements.mobileUserSection.innerHTML = `
+            <div class="user-avatar-with-balance" style="margin: 1rem 0;">
+                <div class="user-avatar">${userSystem.currentUser.firstName[0] + userSystem.currentUser.lastName[0]}</div>
+                <div class="user-balance">Баланс: ${formatMoney(userSystem.currentUser.balance)} ₽ ${confirmationBadge}</div>
+            </div>
+            ${!userSystem.isConfirmed() ? `
+            <div class="unconfirmed-warning" style="margin: 1rem 0; padding: 1rem;">
+                <h4 style="font-size: 0.9rem;">⚠️ Аккаунт не подтвержден</h4>
+                <button class="btn-secondary" id="mobile-request-code-btn" style="width: 100%; margin-top: 0.5rem;">
+                    Отправить код подтверждения
+                </button>
+            </div>
+            ` : ''}
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <a href="#" class="nav-link" data-page="profile" style="text-align: center;">Кабинет</a>
+                ${userSystem.isAdmin() ? '<a href="#" class="nav-link" data-page="admin" style="text-align: center;">Админ</a>' : ''}
+                <a href="#" class="nav-link" id="mobile-logout-btn" style="text-align: center;">Выйти</a>
+            </div>
+        `;
+        elements.mobileAuthButtons.style.display = 'none';
+        elements.mobileUserSection.style.display = 'block';
+        
+        // Обработчик для кнопки отправки кода в мобильном меню
+        const requestBtn = document.getElementById('mobile-request-code-btn');
+        if (requestBtn) {
+            requestBtn.addEventListener('click', function() {
+                const result = userSystem.resendConfirmationCode(
+                    userSystem.currentUser.email,
+                    userSystem.currentUser.phone,
+                    userSystem.currentUser.confirmationMethod
+                );
+                
+                if (result.success) {
+                    confirmationSystem.showConfirmation(userSystem.currentUser, result);
+                    closeMobileMenu();
+                    showNotification('Новый код отправлен!', 'success');
+                }
+            });
+        }
+    } else {
+        elements.mobileUserSection.style.display = 'none';
+        elements.mobileAuthButtons.style.display = 'flex';
+    }
+}
+// Симуляция отправки кода подтверждения
+class ConfirmationSimulator {
+    constructor() {
+        this.sentCodes = JSON.parse(localStorage.getItem('demoConfirmationCodes')) || {};
+    }
+
+    saveCodes() {
+        localStorage.setItem('demoConfirmationCodes', JSON.stringify(this.sentCodes));
+    }
+
+    // Симуляция отправки SMS
+    simulateSMSSend(phoneNumber, code) {
+        console.log(`📱 [ДЕМО] SMS отправлено на ${phoneNumber}: Ваш код подтверждения: ${code}`);
+        console.log(`Для демо используйте код: ${code}`);
+        
+        // Сохраняем код для демо
+        this.sentCodes[phoneNumber] = {
+            code: code,
+            timestamp: Date.now(),
+            type: 'sms'
+        };
+        this.saveCodes();
+        
+        // Показываем уведомление в интерфейсе
+        this.showDemoNotification(`SMS отправлено на ${phoneNumber} (демо)`, code);
+        
+        return true;
+    }
+
+    // Симуляция отправки Email
+    simulateEmailSend(email, code) {
+        console.log(`📧 [ДЕМО] Email отправлен на ${email}: Ваш код подтверждения: ${code}`);
+        console.log(`Для демо используйте код: ${code}`);
+        
+        // Сохраняем код для демо
+        this.sentCodes[email] = {
+            code: code,
+            timestamp: Date.now(),
+            type: 'email'
+        };
+        this.saveCodes();
+        
+        // Показываем уведомление в интерфейсе
+        this.showDemoNotification(`Email отправлен на ${email} (демо)`, code);
+        
+        return true;
+    }
+
+    // Показать демо-уведомление
+    showDemoNotification(message, code) {
+        const notification = document.createElement('div');
+        notification.className = 'notification success';
+        notification.innerHTML = `
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <strong>${message}</strong>
+                <div style="display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem;">
+                    <span>Код для демо:</span>
+                    <div style="
+                        background: rgba(0, 255, 136, 0.1);
+                        border: 2px solid var(--neon-green);
+                        color: var(--neon-green);
+                        padding: 0.5rem 1rem;
+                        border-radius: 8px;
+                        font-weight: 900;
+                        font-size: 1.2rem;
+                        letter-spacing: 3px;
+                        font-family: 'Courier New', monospace;
+                    ">${code}</div>
+                </div>
+                <small style="color: var(--text-secondary);">В реальном приложении код придет на указанный адрес/телефон</small>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Показываем уведомление
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 100);
+        
+        // Убираем через 10 секунд
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 500);
+        }, 10000);
+    }
+
+    // Проверка кода
+    verifyCode(target, code) {
+        const savedCode = this.sentCodes[target];
+        if (!savedCode) {
+            return { success: false, message: 'Код не найден' };
+        }
+        
+        // Проверяем, не устарел ли код (30 минут)
+        if (Date.now() - savedCode.timestamp > 30 * 60 * 1000) {
+            delete this.sentCodes[target];
+            this.saveCodes();
+            return { success: false, message: 'Код устарел' };
+        }
+        
+        if (savedCode.code === code) {
+            // Удаляем использованный код
+            delete this.sentCodes[target];
+            this.saveCodes();
+            return { success: true };
+        }
+        
+        return { success: false, message: 'Неверный код' };
+    }
+
+    // Получить все отправленные коды (для админки)
+    getAllSentCodes() {
+        return this.sentCodes;
+    }
+}
+
+// Инициализация симулятора
+const confirmationSimulator = new ConfirmationSimulator();
+
+// ОБНОВЛЯЕМ КЛАСС UserSystem - ДОБАВЛЯЕМ РЕАЛЬНУЮ СИМУЛЯЦИЮ
+// Найдите метод sendConfirmationCode в классе UserSystem и замените его на этот:
+UserSystem.prototype.sendConfirmationCode = function(email, phone, method) {
+    const code = this.generateConfirmationCode();
+    const expiresAt = Date.now() + 30 * 60 * 1000; // Код действует 30 минут
+    
+    // Сохраняем ожидаемое подтверждение
+    const target = method === 'email' ? email : phone;
+    this.pendingConfirmations[target] = {
+        code: code,
+        expiresAt: expiresAt,
+        method: method,
+        attempts: 0,
+        createdAt: Date.now()
+    };
+    
+    this.savePendingConfirmations();
+    
+    // Симуляция отправки
+    if (method === 'email') {
+        confirmationSimulator.simulateEmailSend(email, code);
+    } else {
+        confirmationSimulator.simulateSMSSend(phone, code);
+    }
+    
+    return {
+        success: true,
+        code: code,
+        method: method,
+        target: target
+    };
+};
+
+// ОБНОВЛЯЕМ ПРОВЕРКУ КОДА - ДОБАВЛЯЕМ СИМУЛЯЦИЮ
+UserSystem.prototype.verifyConfirmationCode = function(target, enteredCode) {
+    // Сначала проверяем через симулятор (для демо)
+    const demoVerification = confirmationSimulator.verifyCode(target, enteredCode);
+    if (demoVerification.success) {
+        // Удаляем из pendingConfirmations
+        delete this.pendingConfirmations[target];
+        this.savePendingConfirmations();
+        return { success: true };
+    }
+    
+    // Затем проверяем обычную систему (на всякий случай)
+    const confirmation = this.pendingConfirmations[target];
+    
+    if (!confirmation) {
+        return { success: false, message: 'Код подтверждения не найден' };
+    }
+    
+    // Проверяем срок действия
+    if (Date.now() > confirmation.expiresAt) {
+        delete this.pendingConfirmations[target];
+        this.savePendingConfirmations();
+        return { success: false, message: 'Срок действия кода истек' };
+    }
+    
+    // Увеличиваем счетчик попыток
+    confirmation.attempts++;
+    this.savePendingConfirmations();
+    
+    // Проверяем код
+    if (confirmation.code === enteredCode) {
+        // Успешное подтверждение
+        delete this.pendingConfirmations[target];
+        this.savePendingConfirmations();
+        return { success: true };
+    } else {
+        if (confirmation.attempts >= 5) {
+            // Слишком много неудачных попыток
+            delete this.pendingConfirmations[target];
+            this.savePendingConfirmations();
+            return { 
+                success: false, 
+                message: 'Слишком много неверных попыток. Запросите новый код.' 
+            };
+        }
+        return { 
+            success: false, 
+            message: `Неверный код. Осталось попыток: ${5 - confirmation.attempts}` 
+        };
+    }
+};
+
+// ДОБАВЛЯЕМ АДМИН-ПАНЕЛЬ ДЛЯ УПРАВЛЕНИЯ КОДАМИ
+function addConfirmationAdminPanel() {
+    // Добавляем вкладку в админ-панель
+    const adminTabs = document.querySelector('.admin-tabs');
+    if (adminTabs && !document.getElementById('confirmation-admin-tab')) {
+        const tab = document.createElement('button');
+        tab.className = 'admin-tab';
+        tab.id = 'confirmation-admin-tab';
+        tab.dataset.tab = 'confirmations';
+        tab.textContent = '📧 Коды подтверждения';
+        adminTabs.appendChild(tab);
+        
+        // Добавляем контент
+        const adminContent = document.querySelector('.admin-panel');
+        if (adminContent) {
+            const content = document.createElement('div');
+            content.id = 'confirmations-tab';
+            content.className = 'admin-content';
+            content.innerHTML = `
+                <h3>Отправленные коды подтверждения</h3>
+                <div class="user-list" id="confirmation-codes-list">
+                    <p>Загружаем данные...</p>
+                </div>
+                <div class="form-actions" style="margin-top: 2rem;">
+                    <button class="btn-secondary" id="refresh-codes-btn">Обновить список</button>
+                    <button class="btn-danger" id="clear-old-codes-btn">Очистить старые коды (30+ мин)</button>
+                </div>
+                <div class="unconfirmed-warning" style="margin-top: 2rem;">
+                    <h4>ℹ️ Информация о системе подтверждения</h4>
+                    <p><strong>Демо-режим:</strong> Коды отображаются в консоли и в уведомлениях</p>
+                    <p><strong>Для реального использования:</strong> Подключите SMS-шлюз или Email-сервис</p>
+                    <p><strong>Лимиты:</strong> 5 попыток ввода, код действителен 30 минут</p>
+                </div>
+            `;
+            adminContent.appendChild(content);
+        }
+        
+        // Обработчик для вкладки
+        tab.addEventListener('click', function() {
+            loadConfirmationCodes();
+        });
+    }
+}
+
+// Функция загрузки отправленных кодов
+function loadConfirmationCodes() {
+    const container = document.getElementById('confirmation-codes-list');
+    if (!container) return;
+    
+    const codes = confirmationSimulator.getAllSentCodes();
+    const pending = userSystem.pendingConfirmations;
+    
+    if (Object.keys(codes).length === 0 && Object.keys(pending).length === 0) {
+        container.innerHTML = '<p>Нет отправленных кодов</p>';
+        return;
+    }
+    
+    let html = '';
+    
+    // Отправленные коды (симуляция)
+    for (const [target, data] of Object.entries(codes)) {
+        const timeAgo = Math.floor((Date.now() - data.timestamp) / 60000); // минут назад
+        const expired = timeAgo > 30;
+        
+        html += `
+            <div class="user-item" style="${expired ? 'opacity: 0.6;' : ''}">
+                <div class="user-info">
+                    <div class="user-name">
+                        ${data.type === 'email' ? '📧' : '📱'} 
+                        ${target}
+                        ${expired ? '<span style="color: var(--neon-pink);"> (Просрочен)</span>' : ''}
+                    </div>
+                    <div class="user-email">
+                        Код: <strong>${data.code}</strong> • 
+                        Отправлен: ${timeAgo} минут назад • 
+                        Тип: ${data.type === 'email' ? 'Email' : 'SMS'}
+                    </div>
+                </div>
+                <div class="admin-actions">
+                    <span style="color: ${expired ? 'var(--neon-pink)' : 'var(--neon-green)'}">
+                        ${expired ? '❌ Просрочен' : '✅ Активен'}
+                    </span>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Ожидающие подтверждения (система)
+    for (const [target, data] of Object.entries(pending)) {
+        const timeLeft = Math.floor((data.expiresAt - Date.now()) / 60000); // минут осталось
+        const attempts = data.attempts || 0;
+        
+        html += `
+            <div class="user-item" style="background: rgba(255, 238, 0, 0.05);">
+                <div class="user-info">
+                    <div class="user-name">
+                        ${data.method === 'email' ? '📧' : '📱'} 
+                        ${target}
+                        <span style="color: var(--neon-yellow);"> (Ожидает подтверждения)</span>
+                    </div>
+                    <div class="user-email">
+                        Код: <strong>${data.code}</strong> • 
+                        Истекает через: ${timeLeft} минут • 
+                        Попыток: ${attempts}/5
+                    </div>
+                </div>
+                <div class="admin-actions">
+                    <span style="color: var(--neon-yellow);">⏳ ${timeLeft} мин</span>
+                </div>
+            </div>
+        `;
+    }
+    
+    container.innerHTML = html;
+}
+
+// ДОБАВЛЯЕМ РЕАЛЬНЫЕ API ДЛЯ ОТПРАВКИ (СТАБЫ)
+// В реальном приложении здесь будут настоящие API вызовы
+
+class RealConfirmationAPI {
+    // Заглушки для реальных API
+    
+    static async sendSMS(phone, code) {
+        // В реальном приложении здесь будет вызов к SMS-шлюзу
+        console.log(`[REAL SMS API] Отправка SMS на ${phone}: ${code}`);
+        
+        // Примеры реальных сервисов:
+        // - Twilio (https://www.twilio.com/docs/sms)
+        // - MessageBird (https://developers.messagebird.com/docs/sms-messaging)
+        // - СМС-центр (https://smsc.ru/api/)
+        // - UniSender (https://www.unisender.com/ru/support/api/messages/sendsms/)
+        
+        return {
+            success: true,
+            messageId: `sms_${Date.now()}`,
+            provider: 'SMS_шлюз'
+        };
+    }
+    
+    static async sendEmail(email, code) {
+        // В реальном приложении здесь будет вызов к Email-сервису
+        console.log(`[REAL EMAIL API] Отправка Email на ${email}: ${code}`);
+        
+        // Примеры реальных сервисов:
+        // - SendGrid (https://docs.sendgrid.com/for-developers/sending-email/api-getting-started)
+        // - Mailgun (https://documentation.mailgun.com/en/latest/quickstart-sending.html)
+        // - Amazon SES (https://docs.aws.amazon.com/ses/latest/dg/send-email-api.html)
+        // - Яндекс.Почта для доменов
+        
+        return {
+            success: true,
+            messageId: `email_${Date.now()}`,
+            provider: 'Email_сервис'
+        };
+    }
+    
+    static async sendTelegram(chatId, code) {
+        // Дополнительно: отправка в Telegram
+        console.log(`[REAL TELEGRAM API] Отправка в Telegram ${chatId}: ${code}`);
+        
+        return {
+            success: true,
+            messageId: `tg_${Date.now()}`
+        };
+    }
+}
+
+// ДОБАВЛЯЕМ КНОПКУ ДЛЯ ПРОВЕРКИ API В АДМИНКЕ
+function addAPITestButtons() {
+    const confirmationsTab = document.getElementById('confirmations-tab');
+    if (confirmationsTab) {
+        const apiTestSection = document.createElement('div');
+        apiTestSection.className = 'admin-vk-section';
+        apiTestSection.style.marginTop = '2rem';
+        apiTestSection.innerHTML = `
+            <h3>Тестирование API отправки</h3>
+            <p>Проверка подключения к реальным сервисам отправки</p>
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                <button class="btn-secondary" id="test-sms-api">Тест SMS API</button>
+                <button class="btn-secondary" id="test-email-api">Тест Email API</button>
+                <button class="btn" id="setup-real-api">Настроить реальные API</button>
+            </div>
+            <div id="api-test-results" style="margin-top: 1.5rem; display: none;">
+                <h4>Результаты тестирования:</h4>
+                <div id="api-test-output"></div>
+            </div>
+        `;
+        confirmationsTab.appendChild(apiTestSection);
+        
+        // Обработчики тестов
+        document.getElementById('test-sms-api')?.addEventListener('click', testSMSAPI);
+        document.getElementById('test-email-api')?.addEventListener('click', testEmailAPI);
+        document.getElementById('setup-real-api')?.addEventListener('click', showAPISetupGuide);
+    }
+}
+
+async function testSMSAPI() {
+    const resultsDiv = document.getElementById('api-test-output');
+    const resultsContainer = document.getElementById('api-test-results');
+    
+    resultsContainer.style.display = 'block';
+    resultsDiv.innerHTML = '<p>🔄 Тестируем SMS API...</p>';
+    
+    try {
+        // Тестовый номер для демо
+        const result = await RealConfirmationAPI.sendSMS('+79990001122', '123456');
+        
+        if (result.success) {
+            resultsDiv.innerHTML = `
+                <div style="color: var(--neon-green);">
+                    <p>✅ SMS API работает!</p>
+                    <p>ID сообщения: ${result.messageId}</p>
+                    <p>Провайдер: ${result.provider}</p>
+                </div>
+                <div class="unconfirmed-warning" style="margin-top: 1rem;">
+                    <p><strong>Для реального использования:</strong></p>
+                    <ol style="text-align: left; padding-left: 1.5rem;">
+                        <li>Зарегистрируйтесь на <a href="https://www.twilio.com" target="_blank">Twilio</a> или другом SMS-шлюзе</li>
+                        <li>Получите API ключи (SID, Token)</li>
+                        <li>Настройте отправителя (Sender ID)</li>
+                        <li>Замените заглушку в RealConfirmationAPI.sendSMS() на реальный код</li>
+                    </ol>
+                </div>
+            `;
+        }
+    } catch (error) {
+        resultsDiv.innerHTML = `<p style="color: var(--neon-pink);">❌ Ошибка: ${error.message}</p>`;
+    }
+}
+
+async function testEmailAPI() {
+    const resultsDiv = document.getElementById('api-test-output');
+    const resultsContainer = document.getElementById('api-test-results');
+    
+    resultsContainer.style.display = 'block';
+    resultsDiv.innerHTML = '<p>🔄 Тестируем Email API...</p>';
+    
+    try {
+        const result = await RealConfirmationAPI.sendEmail('test@example.com', '123456');
+        
+        if (result.success) {
+            resultsDiv.innerHTML = `
+                <div style="color: var(--neon-green);">
+                    <p>✅ Email API работает!</p>
+                    <p>ID сообщения: ${result.messageId}</p>
+                    <p>Провайдер: ${result.provider}</p>
+                </div>
+                <div class="unconfirmed-warning" style="margin-top: 1rem;">
+                    <p><strong>Для реального использования:</strong></p>
+                    <ol style="text-align: left; padding-left: 1.5rem;">
+                        <li>Зарегистрируйтесь на <a href="https://sendgrid.com" target="_blank">SendGrid</a> или другом email-сервисе</li>
+                        <li>Верифицируйте домен отправителя</li>
+                        <li>Получите API ключ</li>
+                        <li>Замените заглушку в RealConfirmationAPI.sendEmail() на реальный код</li>
+                    </ol>
+                </div>
+            `;
+        }
+    } catch (error) {
+        resultsDiv.innerHTML = `<p style="color: var(--neon-pink);">❌ Ошибка: ${error.message}</p>`;
+    }
+}
+
+function showAPISetupGuide() {
+    const modal = document.createElement('div');
+    modal.className = 'modal active';
+    modal.innerHTML = `
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2 class="modal-title">Настройка реальных API</h2>
+                <button class="modal-close" onclick="this.closest('.modal').remove()">&times;</button>
+            </div>
+            <div style="padding: 2rem;">
+                <h3>📱 Настройка SMS отправки</h3>
+                <div class="booking-form" style="margin: 1rem 0;">
+                    <h4>Пример кода для Twilio:</h4>
+                    <pre style="
+                        background: var(--dark-bg);
+                        padding: 1rem;
+                        border-radius: 8px;
+                        overflow-x: auto;
+                        font-family: 'Courier New', monospace;
+                        font-size: 0.9rem;
+                    ">
+// Установите библиотеку: npm install twilio
+
+const accountSid = 'ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
+const authToken = 'your_auth_token';
+const client = require('twilio')(accountSid, authToken);
+
+async function sendRealSMS(phone, code) {
+    try {
+        const message = await client.messages.create({
+            body: \`Ваш код подтверждения: \${code}\`,
+            from: '+1234567890', // Ваш Twilio номер
+            to: phone
+        });
+        
+        return {
+            success: true,
+            messageId: message.sid
+        };
+    } catch (error) {
+        console.error('SMS отправка не удалась:', error);
+        throw error;
+    }
+}</pre>
+                </div>
+                
+                <h3>📧 Настройка Email отправки</h3>
+                <div class="booking-form" style="margin: 1rem 0;">
+                    <h4>Пример кода для SendGrid:</h4>
+                    <pre style="
+                        background: var(--dark-bg);
+                        padding: 1rem;
+                        border-radius: 8px;
+                        overflow-x: auto;
+                        font-family: 'Courier New', monospace;
+                        font-size: 0.9rem;
+                    ">
+// Установите библиотеку: npm install @sendgrid/mail
+
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+async function sendRealEmail(email, code) {
+    const msg = {
+        to: email,
+        from: 'noreply@ваш-домен.ru',
+        subject: 'Код подтверждения КиберСфера',
+        text: \`Ваш код подтверждения: \${code}\`,
+        html: \`&lt;strong&gt;Ваш код подтверждения: \${code}&lt;/strong&gt;\`
+    };
+    
+    try {
+        await sgMail.send(msg);
+        return { success: true };
+    } catch (error) {
+        console.error('Email отправка не удалась:', error);
+        throw error;
+    }
+}</pre>
+                </div>
+                
+                <div class="unconfirmed-warning">
+                    <h4>⚠️ Важные замечания:</h4>
+                    <ol style="text-align: left; padding-left: 1.5rem; margin-top: 1rem;">
+                        <li>Никогда не храните API ключи в фронтенд-коде</li>
+                        <li>Используйте бэкенд для отправки сообщений</li>
+                        <li>Настройте CORS на бэкенде</li>
+                        <li>Реализуйте ограничение частоты запросов (rate limiting)</li>
+                        <li>Логируйте все отправки для отладки</li>
+                    </ol>
+                </div>
+                
+                <div class="form-actions" style="margin-top: 2rem;">
+                    <button class="btn" onclick="this.closest('.modal').remove()">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+}
+
+// ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
+document.addEventListener('DOMContentLoaded', function() {
+    // Добавляем админ-панель для кодов
+    addConfirmationAdminPanel();
+    
+    // Добавляем кнопки тестирования API
+    setTimeout(addAPITestButtons, 1000);
+    
+    // Обработчики для админ-кнопок
+    document.getElementById('refresh-codes-btn')?.addEventListener('click', loadConfirmationCodes);
+    document.getElementById('clear-old-codes-btn')?.addEventListener('click', function() {
+        const codes = confirmationSimulator.getAllSentCodes();
+        let cleared = 0;
+        const now = Date.now();
+        
+        for (const [target, data] of Object.entries(codes)) {
+            if (now - data.timestamp > 30 * 60 * 1000) {
+                delete confirmationSimulator.sentCodes[target];
+                cleared++;
+            }
+        }
+        
+        confirmationSimulator.saveCodes();
+        loadConfirmationCodes();
+        showNotification(`Очищено ${cleared} просроченных кодов`, 'success');
+    });
+    
+    // Добавляем демо-сообщение при загрузке
+    setTimeout(() => {
+        if (!userSystem.isLoggedIn()) {
+            const demoAlert = document.createElement('div');
+            demoAlert.className = 'notification';
+            demoAlert.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1000;
+                max-width: 500px;
+                text-align: center;
+            `;
+            demoAlert.innerHTML = `
+                <strong>🔧 Демо-режим подтверждения</strong>
+                <p style="margin: 0.5rem 0; font-size: 0.9rem;">
+                    Коды подтверждения отображаются в консоли браузера и во всплывающих уведомлениях.
+                    В реальном приложении они будут приходить на email/SMS.
+                </p>
+                <small style="color: var(--text-secondary);">Нажмите чтобы скрыть</small>
+            `;
+            
+            demoAlert.addEventListener('click', function() {
+                this.classList.remove('show');
+                setTimeout(() => {
+                    if (this.parentNode) {
+                        this.parentNode.removeChild(this);
+                    }
+                }, 500);
+            });
+            
+            document.body.appendChild(demoAlert);
+            
+            setTimeout(() => {
+                demoAlert.classList.add('show');
+            }, 100);
+        }
+    }, 3000);
+});
+
+// ОБНОВЛЯЕМ ФУНКЦИЮ ПОКАЗА УВЕДОМЛЕНИЙ ДЛЯ ЛУЧШЕЙ ВИДИМОСТИ
+function showNotification(message, type = '') {
+    const notification = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notification-message');
+    
+    if (!notification || !notificationMessage) return;
+    
+    // Создаем новое уведомление если старое активно
+    if (notification.classList.contains('show')) {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            showNotification(message, type);
+        }, 300);
+        return;
+    }
+    
+    notificationMessage.innerHTML = message;
+    notification.className = 'notification';
+    
+    if (type) {
+        notification.classList.add(type);
+    }
+    
+    // Добавляем иконку в зависимости от типа
+    if (type === 'success') {
+        notificationMessage.innerHTML = `✅ ${message}`;
+    } else if (type === 'error') {
+        notificationMessage.innerHTML = `❌ ${message}`;
+    }
+    
+    notification.classList.add('show');
+    
+    // Автоматически скрываем через 5 секунд
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 5000);
+}
     </script>
 </body>
 </html>
