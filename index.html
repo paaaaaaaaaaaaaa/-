@@ -1965,22 +1965,23 @@ select, .no-cyber-cursor {
         }
 
         .settings-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: var(--panel-bg);
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            border-radius: 10px;
-            padding: 1.5rem;
-            min-width: 280px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            transform: translateY(10px);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--panel-bg);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    border-radius: 10px;
+    padding: 1.5rem;
+    min-width: 280px;
+    max-width: calc(100vw - 20px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    transform: translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
 
         .light-theme .settings-dropdown {
             border: 1px solid rgba(0, 140, 255, 0.3);
@@ -2174,10 +2175,15 @@ select, .no-cyber-cursor {
                 display: none;
             }
 
-            .settings-dropdown {
-                right: -50px;
-                min-width: 250px;
-            }
+            
+    .settings-dropdown {
+        right: 10px;
+        left: auto;
+        transform: none;
+        min-width: 250px;
+        max-width: calc(100vw - 20px);
+    }
+
             
             /* Адаптивность для меню пользователя */
             .user-menu {
