@@ -622,7 +622,7 @@ select, .no-cyber-cursor {
         }
 
         .header-container {
-            max-width: 999999px;
+            max-width: 1900px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -9097,7 +9097,7 @@ function updateAuthUI() {
             if (balanceElement && !balanceElement.parentElement.querySelector('.user-confirmed-badge')) {
                 const badge = document.createElement('span');
                 badge.className = 'user-confirmed-badge';
-                badge.innerHTML = '✓ Подтвержден';
+               
                 balanceElement.parentElement.appendChild(badge);
             }
         } else {
