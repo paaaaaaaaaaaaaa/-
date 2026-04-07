@@ -9091,15 +9091,7 @@ function updateAuthUI() {
             userSystem.currentUser.firstName[0] + userSystem.currentUser.lastName[0];
         
         // Проверяем, подтвержден ли аккаунт
-        if (userSystem.isConfirmed()) {
-            // Добавляем бейдж подтверждения
-            const balanceElement = document.getElementById('user-balance-amount');
-            if (balanceElement && !balanceElement.parentElement.querySelector('.user-confirmed-badge')) {
-                const badge = document.createElement('span');
-                badge.className = 'user-confirmed-badge';
-                badge.innerHTML = '✓';
-                balanceElement.parentElement.appendChild(badge);
-            }
+       
         } else {
             // Показываем предупреждение
             showUnconfirmedWarning();
