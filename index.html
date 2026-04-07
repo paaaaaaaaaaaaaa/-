@@ -5759,22 +5759,22 @@ select, .no-cyber-cursor {
                 <h2>Наши игровые зоны</h2>
                 <div class="gallery">
                     <div class="gallery-item">
-                        <div class="image-placeholder">VR Зона</div>
+                        <div class="image-placeholder">  <img src="https://avatars.mds.yandex.net/get-altay/2799320/2a000001748cece4794686a29754c7a8e680/XXXL" alt="Игровая зона 1" onerror="this.src='https://via.placeholder.com/600x400/00f3ff/0a0a12?text=VR+Зона'"></div>
                     </div>
                     <div class="gallery-item">
-                        <div class="image-placeholder">Игровые ПК</div>
+                        <div class="image-placeholder"><img src="https://p1.zoon.ru/preview/-OLNIpgq2Woj20dmSRKNag/2400x1500x75/3/b/8/original_5e020265de928e5af4609e9a_5e463f6fe2f4b.jpg" alt="Игровая зона 2" onerror="this.src='https://via.placeholder.com/600x400/00f3ff/0a0a12?text=Игровые+ПК'"></div>
                     </div>
                     <div class="gallery-item">
-                        <div class="image-placeholder">Турнирная зона</div>
+                        <div class="image-placeholder"><img src="https://investvlg.ru/800/600/https/p1.zoon.ru/9/d/5e009daa02074b1dad051320_5e1f3f8e9b4ac.jpg" alt="Игровая зона 3" onerror="this.src='https://via.placeholder.com/600x400/00f3ff/0a0a12?text=Турнирная+зона'"></div>
                     </div>
                     <div class="gallery-item">
-                        <div class="image-placeholder">Комфорт зона</div>
+                        <div class="image-placeholder"><img src="https://langame.ru/storage/clubs/2022/Nov/25/166935834563806309cae34.webp" alt="Игровая зона 4" onerror="this.src='https://via.placeholder.com/600x400/00f3ff/0a0a12?text=Комфорт+зона'"></div>
                     </div>
                     <div class="gallery-item">
-                        <div class="image-placeholder">Бар и кухня</div>
+                        <div class="image-placeholder"><img src="https://avatars.mds.yandex.net/get-altay/2761244/2a00000173e75f5512758d090b46caddfa57/XXL_height" alt="Игровая зона 5" onerror="this.src='https://via.placeholder.com/600x400/00f3ff/0a0a12?text=Бар+и+кухня'"></div>
                     </div>
                     <div class="gallery-item">
-                        <div class="image-placeholder">Кибер-арт</div>
+                        <div class="image-placeholder"><img src="https://i.ytimg.com/vi/KlQSSGqLcQA/maxresdefault.jpg" alt="Игровая зона 6" onerror="this.src='https://via.placeholder.com/600x400/00f3ff/0a0a12?text=Кибер-арт'"></div>
                     </div>
                 </div>
             </section>
@@ -9726,17 +9726,7 @@ UserSystem.prototype.verifyConfirmationCode = function(target, enteredCode) {
     }
 };
 
-// ДОБАВЛЯЕМ АДМИН-ПАНЕЛЬ ДЛЯ УПРАВЛЕНИЯ КОДАМИ
-function addConfirmationAdminPanel() {
-    // Добавляем вкладку в админ-панель
-    const adminTabs = document.querySelector('.admin-tabs');
-    if (adminTabs && !document.getElementById('confirmation-admin-tab')) {
-        const tab = document.createElement('button');
-        tab.className = 'admin-tab';
-        tab.id = 'confirmation-admin-tab';
-        tab.dataset.tab = 'confirmations';
-        tab.textContent = '📧 Коды подтверждения';
-        adminTabs.appendChild(tab);
+
         
         // Добавляем контент
         const adminContent = document.querySelector('.admin-panel');
@@ -9767,8 +9757,8 @@ function addConfirmationAdminPanel() {
         tab.addEventListener('click', function() {
             loadConfirmationCodes();
         });
-    }
-}
+    
+
 
 // Функция загрузки отправленных кодов
 function loadConfirmationCodes() {
