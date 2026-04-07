@@ -9097,7 +9097,7 @@ function updateAuthUI() {
             if (balanceElement && !balanceElement.parentElement.querySelector('.user-confirmed-badge')) {
                 const badge = document.createElement('span');
                 badge.className = 'user-confirmed-badge';
-               
+                badge.innerHTML = '✓';
                 balanceElement.parentElement.appendChild(badge);
             }
         } else {
