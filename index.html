@@ -6612,6 +6612,7 @@ select, .no-cyber-cursor {
         </span>
     </label>
 </div>
+
                         <div class="form-actions">
                             <button type="button" class="btn-secondary" id="reg-cancel-btn">Отмена</button>
                             <button type="submit" class="btn">Зарегистрироваться</button>
@@ -8022,6 +8023,10 @@ function updateMobileMenu() {
                 <a href="#" class="nav-link" id="mobile-logout-btn" style="text-align: center;">Выйти</a>
             </div>
         `;
+        // Убедимся, что все ссылки в мобильном меню корректно отрабатывают
+document.querySelectorAll('.mobile-nav .nav-link, .mobile-nav #mobile-logout-btn').forEach(link => {
+    link.addEventListener('click', () => closeMobileMenu());
+});
         elements.mobileAuthButtons.style.display = 'none';
         elements.mobileUserSection.style.display = 'block';
     } else {
@@ -8773,6 +8778,7 @@ function updateMobileMenu() {
                 if (result.success) {
                     showNotification('Вход выполнен!', 'success');
                     elements.loginModal.classList.remove('active');
+                    closeMobileMenu();
                     updateAuthUI();
                     this.reset();
                 } else {
@@ -9060,25 +9066,34 @@ function updateMobileMenu() {
             });
 
             // Переключение страниц
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const pageName = this.getAttribute('data-page');
-                    
-                    // Проверка прав доступа
-                    if (pageName === 'admin' && !userSystem.isAdmin()) {
-                        showNotification('У вас нет прав доступа к админ-панели', 'error');
-                        return;
-                    }
-                    
-                    if (pageName === 'profile' && !userSystem.isLoggedIn()) {
-                        showNotification('Для доступа к личному кабинету необходимо войти в систему', 'error');
-                        return;
-                    }
-
-                    switchPage(pageName);
-                });
-            });
+           // Делегированный обработчик для всех .nav-link (включая динамически добавленные)
+document.body.addEventListener('click', function(e) {
+    const target = e.target.closest('.nav-link');
+    if (target && target.getAttribute('data-page')) {
+        e.preventDefault();
+        const pageName = target.getAttribute('data-page');
+        
+        // Проверка прав доступа
+        if (pageName === 'admin' && !userSystem.isAdmin()) {
+            showNotification('У вас нет прав доступа к админ-панели', 'error');
+            return;
+        }
+        if (pageName === 'profile' && !userSystem.isLoggedIn()) {
+            showNotification('Для доступа к личному кабинету необходимо войти в систему', 'error');
+            return;
+        }
+        switchPage(pageName);
+        closeMobileMenu(); // закрываем мобильное меню при клике
+    }
+    
+    // Отдельная обработка кнопки "Выйти" в мобильном меню
+    const logoutBtn = e.target.closest('#mobile-logout-btn');
+    if (logoutBtn) {
+        e.preventDefault();
+        elements.logoutConfirmModal.classList.add('active');
+        closeMobileMenu();
+    }
+});
 
             // Переход на главную по логотипу
             document.getElementById('home-link').addEventListener('click', function(e) {
@@ -10550,7 +10565,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             document.body.appendChild(demoAlert);
-            
+            setTimeout(() => {
+    if (demoAlert && demoAlert.parentNode) {
+        demoAlert.classList.remove('show');
+        setTimeout(() => demoAlert.remove(), 500);
+    }
+}, 10000);
             setTimeout(() => {
                 demoAlert.classList.add('show');
             }, 100);
@@ -10592,6 +10612,26 @@ function showNotification(message, type = '') {
     
     // Автоматически скрываем через 5 секунд
     setTimeout(() => {
+        notification.classList.remove('show');
+    }, 5000);
+}
+let notificationTimeout = null;
+
+function showNotification(message, type = '') {
+    const notification = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notification-message');
+    if (!notification || !notificationMessage) return;
+    
+    // Сброс предыдущего таймера
+    if (notificationTimeout) clearTimeout(notificationTimeout);
+    
+    notificationMessage.innerHTML = type === 'success' ? `✅ ${message}` : (type === 'error' ? `❌ ${message}` : message);
+    notification.className = 'notification';
+    if (type) notification.classList.add(type);
+    
+    notification.classList.add('show');
+    
+    notificationTimeout = setTimeout(() => {
         notification.classList.remove('show');
     }, 5000);
 }
