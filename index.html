@@ -10177,10 +10177,13 @@ UserSystem.prototype.verifyConfirmationCode = function(target, enteredCode) {
             adminContent.appendChild(content);
         }
         
-        // Обработчик для вкладки
-        tab.addEventListener('click', function() {
-            loadConfirmationCodes();
-        });
+        // Обработчик для вкладки кодов подтверждения (если вкладка существует)
+const confirmationsTabBtn = document.querySelector('[data-tab="confirmations"]');
+if (confirmationsTabBtn) {
+    confirmationsTabBtn.addEventListener('click', function() {
+        loadConfirmationCodes();
+    });
+}
     
 
 
