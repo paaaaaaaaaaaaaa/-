@@ -9892,6 +9892,11 @@ function updateMobileMenu() {
     if (!elements.mobileUserSection) return;
     
     if (userSystem.isLoggedIn()) {
+        // Скрываем кнопки авторизации
+        elements.mobileAuthButtons.style.display = 'none';
+        // Показываем секцию пользователя
+        elements.mobileUserSection.style.display = 'block';
+        
         let confirmationBadge = '';
         if (userSystem.isConfirmed()) {
             confirmationBadge = '<span class="user-confirmed-badge" style="margin-left: 0.5rem;">✓</span>';
@@ -9916,29 +9921,29 @@ function updateMobileMenu() {
                 <a href="#" class="nav-link" id="mobile-logout-btn" style="text-align: center;">Выйти</a>
             </div>
         `;
-        elements.mobileAuthButtons.style.display = 'none';
-        elements.mobileUserSection.style.display = 'block';
         
-        // Обработчик для кнопки отправки кода в мобильном меню
+        // Обработчик для кнопки отправки кода
         const requestBtn = document.getElementById('mobile-request-code-btn');
         if (requestBtn) {
-            requestBtn.addEventListener('click', function() {
+            requestBtn.onclick = function() {
                 const result = userSystem.resendConfirmationCode(
                     userSystem.currentUser.email,
                     userSystem.currentUser.phone,
                     userSystem.currentUser.confirmationMethod
                 );
-                
                 if (result.success) {
                     confirmationSystem.showConfirmation(userSystem.currentUser, result);
                     closeMobileMenu();
                     showNotification('Новый код отправлен!', 'success');
                 }
-            });
+            };
         }
     } else {
+        // Показываем кнопки авторизации, скрываем секцию пользователя
         elements.mobileUserSection.style.display = 'none';
         elements.mobileAuthButtons.style.display = 'flex';
+        // Очищаем содержимое секции, чтобы не оставалось старых данных
+        elements.mobileUserSection.innerHTML = '';
     }
 }
 // Симуляция отправки кода подтверждения
@@ -10619,8 +10624,19 @@ function showNotification(message, type = '') {
     }, 5000);
 }
 let notificationTimeout = null;
+let currentNotification = null;
 
 function showNotification(message, type = '') {
+    // Удаляем предыдущее уведомление, если оно существует
+    if (currentNotification && currentNotification.parentNode) {
+        currentNotification.classList.remove('show');
+        setTimeout(() => {
+            if (currentNotification && currentNotification.parentNode) {
+                currentNotification.parentNode.removeChild(currentNotification);
+            }
+        }, 300);
+    }
+    
     const notification = document.getElementById('notification');
     const notificationMessage = document.getElementById('notification-message');
     if (!notification || !notificationMessage) return;
@@ -10633,10 +10649,14 @@ function showNotification(message, type = '') {
     if (type) notification.classList.add(type);
     
     notification.classList.add('show');
+    currentNotification = notification;
     
     notificationTimeout = setTimeout(() => {
-        notification.classList.remove('show');
-    }, 5000);
+        if (notification) {
+            notification.classList.remove('show');
+            // Не удаляем элемент, просто скрываем
+        }
+    }, 4000);
 }
     </script>
 </body>
