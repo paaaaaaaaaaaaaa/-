@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes" />
-    <title>КиберСфера — ВКонтакте</title>
+    <title>КиберСфера — мобильная версия</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>" />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet" />
     <style>
@@ -14,12 +14,37 @@
             --neon-purple: #9d00ff;
             --neon-green: #00ff88;
             --neon-yellow: #ffee00;
+            --neon-orange: #ff7700;
+            --neon-red: #ff0000;
             --dark-bg: #0a0a12;
+            --darker-bg: #050508;
             --panel-bg: rgba(15, 15, 25, 0.92);
             --text-primary: #e0e0ff;
             --text-secondary: #a0a0c0;
-            --glow-cyan: 0 0 15px rgba(0, 243, 255, 0.5);
-            --border-glow: 0 0 10px rgba(0, 243, 255, 0.3);
+            --glow-cyan: 0 0 10px rgba(0, 243, 255, 0.7), 0 0 20px rgba(0, 243, 255, 0.5), 0 0 30px rgba(0, 243, 255, 0.3);
+            --glow-pink: 0 0 10px rgba(255, 0, 200, 0.7), 0 0 20px rgba(255, 0, 200, 0.5), 0 0 30px rgba(255, 0, 200, 0.3);
+            --glow-purple: 0 0 10px rgba(157, 0, 255, 0.7), 0 0 20px rgba(157, 0, 255, 0.5), 0 0 30px rgba(157, 0, 255, 0.3);
+            --glow-red: 0 0 10px rgba(255, 0, 0, 0.7), 0 0 20px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Светлая тема (опционально) */
+        .light-theme {
+            --neon-cyan: #008cff;
+            --neon-pink: #d400a6;
+            --neon-purple: #7a00cc;
+            --neon-green: #00cc6a;
+            --neon-yellow: #e6d800;
+            --neon-orange: #e65c00;
+            --neon-red: #cc0000;
+            --dark-bg: #f0f2f5;
+            --darker-bg: #e1e5eb;
+            --panel-bg: rgba(255, 255, 255, 0.95);
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a6e;
+            --glow-cyan: 0 0 10px rgba(0, 140, 255, 0.5), 0 0 20px rgba(0, 140, 255, 0.3);
+            --glow-pink: 0 0 10px rgba(212, 0, 166, 0.5), 0 0 20px rgba(212, 0, 166, 0.3);
+            --glow-purple: 0 0 10px rgba(122, 0, 204, 0.5), 0 0 20px rgba(122, 0, 204, 0.3);
+            --glow-red: 0 0 10px rgba(204, 0, 0, 0.5), 0 0 20px rgba(204, 0, 0, 0.3);
         }
 
         * {
@@ -30,522 +55,3571 @@
 
         body {
             font-family: 'Orbitron', monospace;
-            background: var(--dark-bg);
+            background-color: var(--dark-bg);
             color: var(--text-primary);
             line-height: 1.6;
+            overflow-x: hidden;
             min-height: 100vh;
-            padding: 16px;
+            transition: background 0.5s ease, color 0.5s ease;
+            padding: 0 10px 20px;
+        }
+
+        /* Прелоадер */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker-bg);
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-container {
+            text-align: center;
+        }
+        .loader-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+            margin: 0 auto 1.5rem;
+            animation: spin 2s linear infinite;
+            box-shadow: 0 0 30px var(--neon-cyan);
+            position: relative;
+        }
+        .loader-logo::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            background: var(--darker-bg);
+        }
+        .loader-logo::after {
+            content: '⚡';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px var(--neon-cyan);
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .loader-text {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+        }
+        .loader-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        .loading-bar {
+            width: 80%;
+            max-width: 300px;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            margin: 1.5rem auto 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .loading-progress {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            transition: width 0.3s;
+        }
+
+        /* Фоновые эффекты (упрощены для мобильных) */
+        .cyber-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -4;
+            background: radial-gradient(circle at 20% 30%, rgba(0, 243, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(255, 0, 200, 0.05) 0%, transparent 50%),
+                        linear-gradient(135deg, #0a0a12 0%, #0d0d1a 100%);
+        }
+        .light-theme .cyber-bg {
+            background: radial-gradient(circle at 20% 30%, rgba(0, 140, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(212, 0, 166, 0.05) 0%, transparent 50%),
+                        linear-gradient(135deg, #f0f2f5 0%, #e1e5eb 100%);
+        }
+        .grid-overlay {
+            display: none; /* отключаем сетку на мобильных для производительности */
         }
 
         /* ==================== ШАПКА ==================== */
         .header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 0 16px;
-            border-bottom: 1px solid rgba(0, 243, 255, 0.3);
-            margin-bottom: 20px;
+            justify-content: space-between;
+            padding: 12px 0 10px;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--neon-cyan), var(--neon-pink));
+            animation: spin 6s linear infinite;
+            box-shadow: 0 0 15px var(--neon-cyan);
+            position: relative;
             flex-shrink: 0;
         }
-
-        .back-btn {
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            background: var(--dark-bg);
+        }
+        .logo-icon::after {
+            content: '⚡';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
             color: var(--neon-cyan);
-            text-decoration: none;
+        }
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+        }
+
+        /* Гамбургер-меню */
+        .burger-btn {
+            background: none;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            color: var(--neon-cyan);
             font-size: 1.8rem;
+            padding: 0 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            line-height: 1;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            height: 44px;
+        }
+        .burger-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+
+        /* Навигационное меню (мобильное) */
+        .nav-mobile {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 12px 0;
+            margin-top: 10px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+        .nav-mobile.open {
+            display: flex;
+        }
+        .nav-mobile a {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 12px 20px;
             font-weight: 700;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.05);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-mobile a:last-child {
+            border-bottom: none;
+        }
+        .nav-mobile a:hover,
+        .nav-mobile a:active {
+            background: rgba(0, 243, 255, 0.1);
+            color: var(--neon-cyan);
+        }
+
+        /* Кнопки авторизации в шапке */
+        .auth-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .auth-btn {
+            padding: 6px 14px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 0.7rem;
+            border-radius: 20px;
+            border: 1px solid var(--neon-cyan);
+            background: transparent;
+            color: var(--neon-cyan);
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .auth-btn-secondary {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+        .auth-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+        .auth-btn-secondary:hover {
+            background: rgba(255, 0, 200, 0.1);
+            box-shadow: 0 0 15px rgba(255, 0, 200, 0.3);
+        }
+
+        /* Меню пользователя (авторизован) */
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .user-avatar-with-balance {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 243, 255, 0.05);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 30px;
+            padding: 4px 12px 4px 4px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .user-avatar-with-balance:active {
+            transform: scale(0.96);
+        }
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 48px;
-            height: 48px;
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            border-radius: 50%;
-            transition: all 0.3s;
-            background: rgba(0, 243, 255, 0.05);
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--dark-bg);
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 8px var(--neon-cyan);
         }
-        .back-btn:hover {
-            background: rgba(0, 243, 255, 0.15);
-            box-shadow: var(--glow-cyan);
-            transform: scale(1.05);
+        .user-balance {
+            font-size: 0.7rem;
+            color: var(--neon-yellow);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .user-confirmed-badge {
+            font-size: 0.6rem;
+            color: var(--neon-green);
+            margin-left: 2px;
+        }
+        .logout-btn {
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border: 1px solid var(--neon-red);
+            color: var(--neon-red);
+            border-radius: 20px;
+            background: transparent;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .logout-btn:active {
+            background: rgba(255,0,0,0.1);
         }
 
-        .header-title {
+        /* ==================== ОСНОВНОЙ КОНТЕНТ ==================== */
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        section {
+            margin-bottom: 2.5rem;
+        }
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        /* Баннер страницы */
+        .page-banner {
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.08), rgba(255, 0, 200, 0.08));
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            margin: 1rem 0 2rem;
+            text-align: center;
+        }
+        .page-banner h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            margin-bottom: 0.5rem;
+        }
+        .page-banner p {
+            font-size: 1rem;
+            color: var(--text-primary);
+            opacity: 0.8;
+        }
+
+        /* Главная страница */
+        .welcome-banner {
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            background: rgba(0, 243, 255, 0.03);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+        .welcome-banner h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        .welcome-banner p {
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 1.5rem 0;
+        }
+        .grid-item {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            border-radius: 12px;
+            padding: 1.2rem 0.8rem;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .grid-item:active {
+            transform: scale(0.96);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+        }
+        .grid-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .grid-item h3 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+            color: var(--neon-cyan);
+        }
+        .grid-item p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .interactive-stats {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+            padding: 0.8rem;
+            background: rgba(0, 243, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            flex: 1 1 80px;
+            min-width: 70px;
+        }
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+        }
+        .stat-label {
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        /* Услуги, товары, галерея – адаптивные сетки */
+        .services, .products, .gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 1.5rem;
+        }
+        .service-card, .product-card, .gallery-item {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .service-card:active, .product-card:active, .gallery-item:active {
+            transform: scale(0.97);
+            border-color: var(--neon-cyan);
+        }
+        .service-icon, .product-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .service-card h3, .product-card h3 {
+            font-size: 1rem;
+            color: var(--neon-cyan);
+            margin-bottom: 0.3rem;
+        }
+        .service-card p, .product-card p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--neon-pink);
+            margin: 0.5rem 0;
+        }
+        .product-features {
+            list-style: none;
+            font-size: 0.7rem;
+            text-align: left;
+            margin: 0.5rem 0;
+            padding-left: 1rem;
+        }
+        .product-features li {
+            padding: 0.2rem 0;
+            color: var(--text-secondary);
+        }
+        .product-features li::before {
+            content: '✓';
+            color: var(--neon-green);
+            margin-right: 0.3rem;
+        }
+
+        .gallery-item .image-placeholder {
+            width: 100%;
+            height: 120px;
+            background: rgba(0, 243, 255, 0.05);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            overflow: hidden;
+        }
+        .gallery-item .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Турниры */
+        .tournament-item {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .tournament-game {
+            font-weight: 700;
+            color: var(--neon-cyan);
+            font-size: 1.1rem;
+        }
+        .tournament-date, .tournament-prize {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .register-btn {
+            padding: 8px 16px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 0.7rem;
+            border-radius: 30px;
+            border: 1px solid var(--neon-cyan);
+            background: transparent;
+            color: var(--neon-cyan);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .register-btn:active {
+            background: rgba(0, 243, 255, 0.2);
+        }
+
+        /* Отзывы */
+        .reviews {
+            display: grid;
+            gap: 12px;
+        }
+        .review-card {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            border-radius: 12px;
+            padding: 1rem;
+            position: relative;
+        }
+        .review-text {
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+        .review-author {
+            text-align: right;
+            color: var(--neon-cyan);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .review-actions {
+            margin-top: 0.8rem;
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+        .btn-danger {
+            padding: 4px 12px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 0.6rem;
+            border-radius: 20px;
+            border: 1px solid var(--neon-red);
+            background: transparent;
+            color: var(--neon-red);
+            cursor: pointer;
+        }
+
+        /* Формы */
+        .booking-form {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-control {
+            width: 100%;
+            background: rgba(10, 10, 18, 0.6);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 8px;
+            padding: 0.8rem;
+            color: var(--text-primary);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+        }
+        .form-row {
+            display: flex;
+            gap: 10px;
+        }
+        .form-row .form-group {
+            flex: 1;
+        }
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+        .form-actions .btn {
+            flex: 1;
+        }
+
+        .btn, .btn-secondary, .btn-success {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.2rem;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border-radius: 30px;
+            border: 2px solid var(--neon-cyan);
+            background: transparent;
+            color: var(--neon-cyan);
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            text-align: center;
+            min-height: 44px;
+        }
+        .btn:active, .btn-secondary:active, .btn-success:active {
+            transform: scale(0.96);
+        }
+        .btn-secondary {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+        .btn-success {
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+        }
+        .btn-danger {
+            border-color: var(--neon-red);
+            color: var(--neon-red);
+        }
+
+        /* Контакты */
+        .contact-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .contact-item {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .contact-item h3 {
+            font-size: 1rem;
+            color: var(--neon-cyan);
+            margin-bottom: 0.5rem;
+        }
+        .contact-item p {
+            font-size: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .social-link:active {
+            background: rgba(0, 243, 255, 0.1);
+            transform: scale(0.9);
+        }
+
+        /* Профиль */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin: 0 auto 1rem;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 20px var(--neon-cyan);
+        }
+        .profile-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+        .stat-card {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .stat-card .stat-value {
+            font-size: 1.6rem;
+        }
+        .stat-card .stat-label {
+            font-size: 0.6rem;
+        }
+
+        /* Админ-панель */
+        .admin-panel {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+        .admin-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .admin-tab {
+            padding: 8px 14px;
+            background: transparent;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            color: var(--text-secondary);
+            border-radius: 20px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .admin-tab.active {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+        }
+        .admin-content {
+            display: none;
+        }
+        .admin-content.active {
+            display: block;
+        }
+        .user-item, .review-item {
+            background: rgba(10, 10, 18, 0.3);
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .user-name {
+            font-weight: 700;
+            color: var(--neon-cyan);
+        }
+        .user-email {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+        .admin-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        /* VK админка */
+        .admin-vk-section {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0, 119, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 119, 255, 0.2);
+            margin: 1rem 0;
+        }
+        .admin-vk-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #0077FF;
+            color: #fff;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4);
+            transition: 0.3s;
+        }
+        .admin-vk-button:active {
+            transform: scale(0.96);
+        }
+
+        /* Модальные окна */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 8, 0.95);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+            backdrop-filter: blur(5px);
+        }
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: var(--panel-bg);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 16px;
+            padding: 1.5rem;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.3);
+            position: relative;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+        }
+        .modal-title {
             font-size: 1.4rem;
             font-weight: 900;
             background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: 2px;
-            flex: 1;
         }
-
-        .header-badge {
-            background: rgba(0, 243, 255, 0.15);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
+        .modal-close {
+            background: none;
+            border: none;
             color: var(--neon-cyan);
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            white-space: nowrap;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0 8px;
         }
 
-        /* ==================== ИНФО О СООБЩЕСТВЕ ==================== */
-        .community-info {
-            background: var(--panel-bg);
-            border: 1px solid rgba(0, 243, 255, 0.2);
-            border-radius: 16px;
-            padding: 20px 16px;
-            margin-bottom: 20px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            flex-shrink: 0;
-        }
-
-        .community-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
-            margin: 0 auto 12px;
+        /* Подтверждение регистрации */
+        .confirmation-method-selector {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.8rem;
-            box-shadow: var(--glow-cyan);
-            position: relative;
+            gap: 10px;
+            margin-bottom: 1rem;
         }
-        .community-avatar::after {
-            content: '';
-            position: absolute;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: var(--dark-bg);
-        }
-        .community-avatar span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .community-name {
-            font-size: 1.4rem;
-            font-weight: 900;
-            color: var(--neon-cyan);
-            text-shadow: var(--glow-cyan);
-            margin-bottom: 4px;
-        }
-
-        .community-members {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-        }
-
-        .community-desc {
-            color: var(--text-primary);
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .community-actions {
+        .confirmation-method {
             display: flex;
-            gap: 12px;
-            margin-top: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .vk-btn {
-            display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 12px 24px;
-            background: #0077FF;
-            color: #fff;
-            border: none;
-            border-radius: 30px;
-            font-family: 'Orbitron', monospace;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4);
-            transition: all 0.3s;
+            padding: 10px 14px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
             cursor: pointer;
+            flex: 1;
+            transition: 0.3s;
+            background: rgba(0, 243, 255, 0.03);
         }
-        .vk-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 119, 255, 0.6);
+        .confirmation-method.selected {
+            border-color: var(--neon-green);
+            background: rgba(0, 255, 136, 0.05);
         }
-
-        .refresh-btn {
-            background: rgba(0, 243, 255, 0.1);
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            padding: 12px 20px;
-            border-radius: 30px;
-            font-family: 'Orbitron', monospace;
+        .confirmation-method-icon {
+            font-size: 1.5rem;
+        }
+        .confirmation-method-info {
+            flex: 1;
+        }
+        .confirmation-method-title {
             font-weight: 700;
             font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s;
+            color: var(--neon-cyan);
         }
-        .refresh-btn:hover {
-            background: rgba(0, 243, 255, 0.2);
-            box-shadow: var(--glow-cyan);
+        .confirmation-method-desc {
+            font-size: 0.6rem;
+            color: var(--text-secondary);
         }
-
-        /* ==================== ЛЕНТА ПОСТОВ ==================== */
-        .feed {
-            flex: 1;
+        .confirmation-code-inputs {
             display: flex;
-            flex-direction: column;
-            gap: 16px;
-            padding-bottom: 20px;
-            overflow-y: auto;
+            gap: 8px;
+            justify-content: center;
+            margin: 1.5rem 0;
         }
-
-        .post-card {
+        .confirmation-code-input {
+            width: 44px;
+            height: 56px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 900;
+            font-family: 'Orbitron', monospace;
             background: var(--panel-bg);
-            border: 1px solid rgba(0, 243, 255, 0.15);
-            border-radius: 16px;
-            padding: 16px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s;
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            color: var(--neon-cyan);
+            border-radius: 8px;
         }
-        .post-card:hover {
+        .confirmation-code-input:focus {
             border-color: var(--neon-cyan);
-            box-shadow: var(--border-glow);
+            outline: none;
+        }
+        .confirmation-code-input.filled {
+            border-color: var(--neon-green);
+        }
+        .confirmation-code {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 8px;
+            color: var(--neon-green);
+            text-align: center;
+            padding: 0.8rem;
+            background: rgba(0, 255, 136, 0.05);
+            border: 2px dashed var(--neon-green);
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        .confirmation-timer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .confirmation-timer span {
+            color: var(--neon-cyan);
+            font-weight: 700;
+        }
+        .confirmation-error {
+            color: var(--neon-pink);
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            display: none;
+        }
+        .confirmation-error.show {
+            display: block;
+        }
+        .confirmation-success {
+            text-align: center;
+            padding: 1rem 0;
+        }
+        .confirmation-success-icon {
+            font-size: 3rem;
+            color: var(--neon-green);
+            margin-bottom: 0.5rem;
+        }
+        .confirmation-success h3 {
+            color: var(--neon-green);
+            margin-bottom: 0.5rem;
         }
 
-        .post-header {
+        /* Покупка */
+        .purchase-details {
+            background: rgba(0, 243, 255, 0.05);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .purchase-summary {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .purchase-total {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(0, 243, 255, 0.2);
+            padding-top: 0.8rem;
+            font-weight: 700;
+        }
+        .total-amount {
+            color: var(--neon-yellow);
+        }
+        .zone-selection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+        .zone-option {
+            background: rgba(0, 243, 255, 0.03);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            border-radius: 8px;
+            padding: 0.8rem;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .zone-option.selected {
+            border-color: var(--neon-yellow);
+            background: rgba(255, 238, 0, 0.05);
+        }
+        .zone-icon {
+            font-size: 1.5rem;
+        }
+        .zone-name {
+            font-weight: 700;
             font-size: 0.8rem;
+        }
+        .zone-description {
+            font-size: 0.6rem;
             color: var(--text-secondary);
         }
-
-        .post-date {
-            display: flex;
-            align-items: center;
+        .purchase-confirmation {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid var(--neon-green);
+            border-radius: 10px;
+        }
+        .purchase-confirmation.active {
+            display: block;
+        }
+        .confirmation-details {
+            display: grid;
             gap: 6px;
-        }
-
-        .post-text {
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 12px;
-            word-break: break-word;
-        }
-
-        .post-image {
-            max-width: 100%;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(0, 243, 255, 0.1);
-        }
-
-        .post-stats {
-            display: flex;
-            gap: 20px;
             font-size: 0.85rem;
-            color: var(--text-secondary);
-            padding-top: 12px;
-            border-top: 1px solid rgba(0, 243, 255, 0.08);
         }
-        .post-stats span {
+        .confirmation-item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Уведомления */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            padding: 1rem;
+            background: var(--panel-bg);
+            border-left: 4px solid var(--neon-cyan);
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            z-index: 2000;
+            transform: translateY(150%);
+            transition: 0.5s;
+            backdrop-filter: blur(10px);
+            font-size: 0.9rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .notification.show {
+            transform: translateY(0);
+        }
+        .notification.success {
+            border-left-color: var(--neon-green);
+        }
+        .notification.error {
+            border-left-color: var(--neon-pink);
+        }
+
+        /* Футер */
+        footer {
+            margin-top: 2rem;
+            padding: 1.5rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 243, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+        }
+
+        /* Скрытые страницы */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==================== АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ ==================== */
+        @media (max-width: 480px) {
+            .interactive-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .services, .products, .gallery {
+                grid-template-columns: 1fr 1fr;
+            }
+            .contact-info {
+                grid-template-columns: 1fr 1fr;
+            }
+            .profile-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            .confirmation-method-selector {
+                flex-direction: column;
+            }
+            .form-row {
+                flex-direction: column;
+            }
+            .tournament-item {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .admin-tabs {
+                justify-content: center;
+            }
+            .user-item {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .zone-selection {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 380px) {
+            .interactive-grid {
+                grid-template-columns: 1fr;
+            }
+            .services, .products, .gallery {
+                grid-template-columns: 1fr;
+            }
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+            .profile-stats {
+                grid-template-columns: 1fr;
+            }
+            .zone-selection {
+                grid-template-columns: 1fr;
+            }
+            .auth-btn {
+                font-size: 0.6rem;
+                padding: 4px 10px;
+            }
+            .logo-text {
+                font-size: 1rem;
+            }
+        }
+
+        /* Стили для масок ввода */
+        .masked-input {
+            font-family: 'Orbitron', monospace;
+        }
+        .money {
+            font-family: 'Orbitron', monospace;
+        }
+        .checkbox-group {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+        }
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
         }
 
-        /* ==================== СОСТОЯНИЯ ЗАГРУЗКИ ==================== */
-        .loading {
-            text-align: center;
-            padding: 40px 20px;
+        /* Стили для VK новостей */
+        .news-post {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .news-post-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
             color: var(--text-secondary);
+            margin-bottom: 0.5rem;
         }
-        .loading .spinner {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(0, 243, 255, 0.2);
-            border-top-color: var(--neon-cyan);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-bottom: 16px;
+        .news-post-date {
+            color: var(--neon-cyan);
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .news-text {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
         }
-
-        .error {
+        .news-image {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+        }
+        .news-error {
             text-align: center;
-            padding: 30px 20px;
-            background: rgba(255, 0, 200, 0.08);
-            border: 1px solid var(--neon-pink);
-            border-radius: 16px;
+            padding: 2rem;
             color: var(--neon-pink);
+            background: rgba(255,0,200,0.05);
+            border-radius: 12px;
         }
-        .error h3 {
-            margin-bottom: 8px;
-        }
-
-        .empty {
+        .news-loading {
             text-align: center;
-            padding: 40px 20px;
+            padding: 2rem;
             color: var(--text-secondary);
         }
 
-        /* ==================== АДАПТИВНОСТЬ ==================== */
-        @media (max-width: 480px) {
-            body { padding: 12px; }
-            .header-title { font-size: 1.2rem; }
-            .community-name { font-size: 1.2rem; }
-            .vk-btn { padding: 10px 18px; font-size: 0.8rem; }
-            .post-text { font-size: 0.9rem; }
+        /* Стили для VK модалки */
+        .vk-preview {
+            background: rgba(0, 243, 255, 0.03);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
         }
-
-        @media (min-width: 768px) {
-            body { max-width: 600px; margin: 0 auto; }
+        .vk-preview-text {
+            margin-bottom: 0.8rem;
         }
-
-        /* ==================== СВЕТЛАЯ ТЕМА (опционально) ==================== */
-        .light-theme {
-            --dark-bg: #f0f2f5;
-            --panel-bg: rgba(255, 255, 255, 0.95);
-            --text-primary: #1a1a2e;
-            --text-secondary: #4a4a6e;
-            --neon-cyan: #008cff;
-            --neon-pink: #d400a6;
+        .vk-preview-image {
+            max-width: 100%;
+            border-radius: 8px;
         }
-        /* Чтобы включить светлую тему, добавьте класс light-theme на body */
+        .vk-preview-link {
+            display: block;
+            padding: 0.5rem;
+            background: rgba(0, 119, 255, 0.1);
+            border-radius: 6px;
+            color: var(--neon-cyan);
+            text-decoration: none;
+        }
+        .vk-post-item {
+            background: rgba(10,10,18,0.3);
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+        .vk-post-date {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+        .vk-post-text {
+            font-size: 0.85rem;
+        }
+        .confirmation-checkbox {
+            margin: 1rem 0;
+        }
+        .unconfirmed-warning {
+            background: rgba(255, 238, 0, 0.05);
+            border: 1px solid var(--neon-yellow);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .unconfirmed-warning h4 {
+            color: var(--neon-yellow);
+            margin-bottom: 0.5rem;
+        }
+        .unconfirmed-warning p {
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+        .unconfirmed-warning .btn-secondary {
+            margin-top: 0.5rem;
+        }
+        /* Стили для чекбоксов согласия */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+        }
     </style>
 </head>
 <body>
-
-    <!-- ====== ШАПКА ====== -->
-    <header class="header">
-        <a href="javascript:history.back()" class="back-btn" aria-label="Назад">←</a>
-        <div class="header-title">КиберСфера VK</div>
-        <span class="header-badge">📱 Мобильная версия</span>
-    </header>
-
-    <!-- ====== ИНФО О СООБЩЕСТВЕ ====== -->
-    <div class="community-info" id="communityInfo">
-        <div class="community-avatar"><span>⚡</span></div>
-        <div class="community-name">КиберСфера</div>
-        <div class="community-members">👥 <span id="membersCount">1250</span> подписчиков</div>
-        <div class="community-desc">Лучший киберспортивный клуб в городе! Турниры, игровые зоны, VR и многое другое.</div>
-        <div class="community-actions">
-            <a href="https://vk.com/kibersfera" target="_blank" class="vk-btn">👥 Перейти в VK</a>
-            <button class="refresh-btn" id="refreshFeedBtn">🔄 Обновить</button>
+    <!-- Прелоадер -->
+    <div class="preloader" id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo"></div>
+            <div class="loader-text">КиберСфера</div>
+            <div class="loader-subtitle">Загрузка...</div>
+            <div class="loading-bar">
+                <div class="loading-progress" id="loading-progress"></div>
+            </div>
         </div>
     </div>
 
-    <!-- ====== ЛЕНТА ====== -->
-    <div class="feed" id="feedContainer">
-        <!-- Контент будет загружен динамически -->
+    <div class="cyber-bg"></div>
+    <!-- Остальные фоновые эффекты отключены для мобильных -->
+
+    <!-- ШАПКА -->
+    <header class="header">
+        <div class="logo" id="home-link">
+            <div class="logo-icon"></div>
+            <span class="logo-text">КиберСфера</span>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px;">
+            <!-- Блок авторизации/пользователя -->
+            <div class="auth-buttons" id="auth-buttons">
+                <a href="#" class="auth-btn auth-btn-secondary" id="login-btn">Войти</a>
+                <a href="#" class="auth-btn" id="register-btn">Рег.</a>
+            </div>
+            <div class="user-menu" id="user-menu" style="display:none;">
+                <div class="user-avatar-with-balance" id="user-avatar-balance">
+                    <div class="user-avatar" id="user-avatar"></div>
+                    <div class="user-balance"><span id="user-balance-amount">0</span> ₽</div>
+                </div>
+                <button class="logout-btn" id="logout-btn">Выйти</button>
+            </div>
+            <!-- Гамбургер -->
+            <button class="burger-btn" id="burger-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Мобильное меню -->
+    <div class="nav-mobile" id="nav-mobile">
+        <a href="#" data-page="main">🏠 Главная</a>
+        <a href="#" data-page="gallery">🖼️ Галерея</a>
+        <a href="#" data-page="services">🎮 Услуги</a>
+        <a href="#" data-page="tournaments">🏆 Турниры</a>
+        <a href="#" data-page="news">📰 Новости</a>
+        <a href="#" data-page="store">🛒 Магазин</a>
+        <a href="#" data-page="contacts">📞 Контакты</a>
+        <a href="#" data-page="profile" id="nav-profile" style="display:none;">👤 Профиль</a>
+        <a href="#" data-page="balance" id="nav-balance" style="display:none;">💰 Баланс</a>
+        <a href="#" data-page="admin" id="nav-admin" style="display:none;">⚙️ Админ</a>
     </div>
 
-    <!-- ====== ПОДВАЛ ====== -->
-    <footer style="
-        margin-top: 20px;
-        padding: 16px 0;
-        text-align: center;
-        color: var(--text-secondary);
-        font-size: 0.8rem;
-        border-top: 1px solid rgba(0, 243, 255, 0.1);
-        flex-shrink: 0;
-    ">
-        © 2025 КиберСфера · Мобильная версия
+    <!-- СТРАНИЦЫ -->
+    <main>
+        <!-- Главная -->
+        <div id="main-page" class="page active">
+            <section class="welcome-banner">
+                <h1>КиберСфера</h1>
+                <p>Футуристичный киберспортивный хаб. Турниры, VR, мощные ПК.</p>
+            </section>
+
+            <div class="interactive-stats">
+                <div class="stat" data-value="1500">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Онлайн</div>
+                </div>
+                <div class="stat" data-value="42">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Турниров/мес</div>
+                </div>
+                <div class="stat" data-value="99">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Удовлетвор.</div>
+                </div>
+            </div>
+
+            <div class="interactive-grid">
+                <div class="grid-item" data-page="tournaments">
+                    <span class="grid-icon">⚡</span>
+                    <h3>Турниры</h3>
+                    <p>Соревнования</p>
+                </div>
+                <div class="grid-item" data-page="services">
+                    <span class="grid-icon">🎮</span>
+                    <h3>Услуги</h3>
+                    <p>ПК, VR</p>
+                </div>
+                <div class="grid-item" data-page="store">
+                    <span class="grid-icon">🛒</span>
+                    <h3>Магазин</h3>
+                    <p>Абонементы</p>
+                </div>
+                <div class="grid-item" data-page="news">
+                    <span class="grid-icon">📰</span>
+                    <h3>Новости</h3>
+                    <p>События</p>
+                </div>
+            </div>
+
+            <button class="btn" id="register-main-btn">Присоединиться</button>
+        </div>
+
+        <!-- Галерея -->
+        <div id="gallery-page" class="page">
+            <div class="page-banner">
+                <h1>Галерея</h1>
+                <p>Наши игровые зоны</p>
+            </div>
+            <section>
+                <div class="gallery">
+                    <div class="gallery-item"><div class="image-placeholder"><img src="https://avatars.mds.yandex.net/get-altay/2799320/2a000001748cece4794686a29754c7a8e680/XXXL" alt="VR" onerror="this.src='https://via.placeholder.com/300x150/00f3ff/0a0a12?text=VR'"></div></div>
+                    <div class="gallery-item"><div class="image-placeholder"><img src="https://p1.zoon.ru/preview/-OLNIpgq2Woj20dmSRKNag/2400x1500x75/3/b/8/original_5e020265de928e5af4609e9a_5e463f6fe2f4b.jpg" alt="ПК" onerror="this.src='https://via.placeholder.com/300x150/00f3ff/0a0a12?text=PC'"></div></div>
+                    <div class="gallery-item"><div class="image-placeholder"><img src="https://investvlg.ru/800/600/https/p1.zoon.ru/9/d/5e009daa02074b1dad051320_5e1f3f8e9b4ac.jpg" alt="Турнир" onerror="this.src='https://via.placeholder.com/300x150/00f3ff/0a0a12?text=Турнир'"></div></div>
+                    <div class="gallery-item"><div class="image-placeholder"><img src="https://langame.ru/storage/clubs/2022/Nov/25/166935834563806309cae34.webp" alt="Зона" onerror="this.src='https://via.placeholder.com/300x150/00f3ff/0a0a12?text=Зона'"></div></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Услуги -->
+        <div id="services-page" class="page">
+            <div class="page-banner">
+                <h1>Услуги</h1>
+                <p>Что мы предлагаем</p>
+            </div>
+            <section>
+                <div class="services">
+                    <div class="service-card">
+                        <span class="service-icon">🎮</span>
+                        <h3>Игровые ПК</h3>
+                        <p>RTX 4080, i9, 240 Гц</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">🕶️</span>
+                        <h3>VR Зона</h3>
+                        <p>Полное погружение</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">🎯</span>
+                        <h3>Турниры</h3>
+                        <p>Призовые фонды</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">🍕</span>
+                        <h3>Питание</h3>
+                        <p>Закуски и напитки</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">👥</span>
+                        <h3>Командные игры</h3>
+                        <p>Корпоративы</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-icon">🎓</span>
+                        <h3>Обучение</h3>
+                        <p>Тренировки с про</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Турниры -->
+        <div id="tournaments-page" class="page">
+            <div class="page-banner">
+                <h1>Турниры</h1>
+                <p>Ближайшие события</p>
+            </div>
+            <section>
+                <div class="tournament-item">
+                    <div>
+                        <div class="tournament-game">Counter-Strike 2</div>
+                        <div class="tournament-date">15 апр 2025, 18:00</div>
+                        <div class="tournament-prize">💰 50 000 ₽</div>
+                    </div>
+                    <button class="register-btn">Участвовать</button>
+                </div>
+                <div class="tournament-item">
+                    <div>
+                        <div class="tournament-game">Dota 2</div>
+                        <div class="tournament-date">22 апр 2025, 17:00</div>
+                        <div class="tournament-prize">💰 75 000 ₽</div>
+                    </div>
+                    <button class="register-btn">Участвовать</button>
+                </div>
+                <div class="tournament-item">
+                    <div>
+                        <div class="tournament-game">Valorant</div>
+                        <div class="tournament-date">29 апр 2025, 19:00</div>
+                        <div class="tournament-prize">💰 40 000 ₽</div>
+                    </div>
+                    <button class="register-btn">Участвовать</button>
+                </div>
+                <div class="tournament-item">
+                    <div>
+                        <div class="tournament-game">League of Legends</div>
+                        <div class="tournament-date">6 мая 2025, 16:00</div>
+                        <div class="tournament-prize">💰 60 000 ₽</div>
+                    </div>
+                    <button class="register-btn">Участвовать</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Новости (VK) -->
+        <div id="news-page" class="page">
+            <div class="page-banner">
+                <h1>Новости</h1>
+                <p>Из нашего сообщества ВКонтакте</p>
+            </div>
+            <section>
+                <div id="news-container">
+                    <div class="news-loading">Загрузка новостей...</div>
+                </div>
+                <button class="btn" id="refresh-news" style="margin-top:1rem;">Обновить</button>
+            </section>
+        </div>
+
+        <!-- Магазин -->
+        <div id="store-page" class="page">
+            <div class="page-banner">
+                <h1>Магазин</h1>
+                <p>Абонементы и игровое время</p>
+            </div>
+            <section>
+                <div class="products">
+                    <div class="product-card">
+                        <span class="product-icon">⏱️</span>
+                        <h3>1 час</h3>
+                        <div class="product-price">200 ₽</div>
+                        <button class="btn buy-btn" data-product="1 час" data-price="200">Купить</button>
+                    </div>
+                    <div class="product-card featured">
+                        <span class="product-icon">🔥</span>
+                        <h3>5 часов</h3>
+                        <div class="product-price">800 ₽</div>
+                        <button class="btn buy-btn" data-product="5 часов" data-price="800">Купить</button>
+                    </div>
+                    <div class="product-card">
+                        <span class="product-icon">⭐</span>
+                        <h3>10 часов</h3>
+                        <div class="product-price">1 500 ₽</div>
+                        <button class="btn buy-btn" data-product="10 часов" data-price="1500">Купить</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Контакты -->
+        <div id="contacts-page" class="page">
+            <div class="page-banner">
+                <h1>Контакты</h1>
+                <p>Как нас найти</p>
+            </div>
+            <section>
+                <div class="contact-info">
+                    <div class="contact-item"><h3>Адрес</h3><p>г. Пермь, ул. Ленина, 123<br>ТЦ "КиберПлаза", 3 эт.</p></div>
+                    <div class="contact-item"><h3>Телефон</h3><p>+7 (342) 123-45-67</p></div>
+                    <div class="contact-item"><h3>Email</h3><p>info@kibersfera.ru</p></div>
+                    <div class="contact-item"><h3>Часы работы</h3><p>Пн-Чт: 12-00<br>Пт-Вс: 12-02</p></div>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link">📱</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📷</a>
+                </div>
+            </section>
+        </div>
+
+        <!-- Профиль -->
+        <div id="profile-page" class="page">
+            <div class="page-banner">
+                <h1>Личный кабинет</h1>
+                <p>Ваши данные</p>
+            </div>
+            <section>
+                <div class="profile-header">
+                    <div class="profile-avatar" id="profile-avatar">A</div>
+                    <h2 id="profile-name"></h2>
+                    <p id="profile-email"></p>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat-card"><div class="stat-value" id="stat-tournaments">0</div><div class="stat-label">Турниров</div></div>
+                    <div class="stat-card"><div class="stat-value" id="stat-hours">0</div><div class="stat-label">Часов игры</div></div>
+                    <div class="stat-card"><div class="stat-value" id="stat-reviews">0</div><div class="stat-label">Отзывов</div></div>
+                    <div class="stat-card"><div class="stat-value" id="stat-joined">2025</div><div class="stat-label">С нами с</div></div>
+                </div>
+
+                <div class="booking-form">
+                    <h3>Редактировать профиль</h3>
+                    <form id="profile-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profile-firstname">Имя</label>
+                                <input type="text" id="profile-firstname" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-lastname">Фамилия</label>
+                                <input type="text" id="profile-lastname" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-username">Имя пользователя</label>
+                            <input type="text" id="profile-username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-email">Email</label>
+                            <input type="email" id="profile-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-phone">Телефон</label>
+                            <input type="tel" id="profile-phone" class="form-control masked-input" placeholder="+7 (___) ___-__-__" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-birthdate">Дата рождения</label>
+                            <input type="date" id="profile-birthdate" class="form-control" max="2025-12-31" required>
+                        </div>
+                        <button type="submit" class="btn">Сохранить</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <!-- Баланс -->
+        <div id="balance-page" class="page">
+            <div class="page-banner">
+                <h1>Баланс</h1>
+                <p>Пополните счёт</p>
+            </div>
+            <section>
+                <div style="text-align:center; margin-bottom:1.5rem;">
+                    <div style="font-size:2.5rem; font-weight:900; color:var(--neon-yellow); text-shadow:0 0 20px var(--neon-yellow);">
+                        <span id="balance-amount">0</span> ₽
+                    </div>
+                    <div style="font-size:0.7rem; color:var(--text-secondary);">Максимум: 10 000 ₽</div>
+                </div>
+
+                <div class="payment-methods" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div class="payment-method" data-method="card" style="background:var(--panel-bg); border:1px solid rgba(0,243,255,0.15); border-radius:12px; padding:1rem; text-align:center; cursor:pointer;">
+                        <div style="font-size:2rem;">💳</div>
+                        <div style="font-weight:700; font-size:0.9rem;">Карта</div>
+                    </div>
+                    <div class="payment-method" data-method="qiwi" style="background:var(--panel-bg); border:1px solid rgba(0,243,255,0.15); border-radius:12px; padding:1rem; text-align:center; cursor:pointer;">
+                        <div style="font-size:2rem;">🧾</div>
+                        <div style="font-weight:700; font-size:0.9rem;">QIWI</div>
+                    </div>
+                    <div class="payment-method" data-method="yoomoney" style="background:var(--panel-bg); border:1px solid rgba(0,243,255,0.15); border-radius:12px; padding:1rem; text-align:center; cursor:pointer;">
+                        <div style="font-size:2rem;">💰</div>
+                        <div style="font-weight:700; font-size:0.9rem;">ЮMoney</div>
+                    </div>
+                    <div class="payment-method" data-method="crypto" style="background:var(--panel-bg); border:1px solid rgba(0,243,255,0.15); border-radius:12px; padding:1rem; text-align:center; cursor:pointer;">
+                        <div style="font-size:2rem;">₿</div>
+                        <div style="font-weight:700; font-size:0.9rem;">Крипто</div>
+                    </div>
+                </div>
+
+                <!-- Формы пополнения -->
+                <div id="card-payment-form" class="payment-form" style="display:none; margin-top:1.5rem;">
+                    <div class="booking-form">
+                        <h3>Пополнение картой</h3>
+                        <form id="card-payment-form-content">
+                            <div class="form-group">
+                                <label for="card-amount">Сумма (₽)</label>
+                                <input type="text" id="card-amount" class="form-control money" placeholder="1000">
+                            </div>
+                            <div class="form-group">
+                                <label for="card-number">Номер карты</label>
+                                <input type="text" id="card-number" class="form-control masked-input" placeholder="0000 0000 0000 0000">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label for="card-expiry">Срок</label><input type="text" id="card-expiry" class="form-control masked-input" placeholder="ММ/ГГ"></div>
+                                <div class="form-group"><label for="card-cvc">CVC</label><input type="text" id="card-cvc" class="form-control masked-input" placeholder="123"></div>
+                            </div>
+                            <div style="font-weight:700; margin:0.5rem 0;">К оплате: <span id="card-payment-amount" class="money">1 000</span> ₽</div>
+                            <button type="submit" class="btn-success">Оплатить</button>
+                        </form>
+                    </div>
+                </div>
+                <div id="qiwi-payment-form" class="payment-form" style="display:none; margin-top:1.5rem;">
+                    <div class="booking-form">
+                        <h3>Пополнение QIWI</h3>
+                        <form id="qiwi-payment-form-content">
+                            <div class="form-group">
+                                <label for="qiwi-amount">Сумма (₽)</label>
+                                <input type="text" id="qiwi-amount" class="form-control money" placeholder="1000">
+                            </div>
+                            <div class="form-group">
+                                <label for="qiwi-phone">Номер QIWI</label>
+                                <input type="tel" id="qiwi-phone" class="form-control masked-input" placeholder="+7 (___) ___-__-__">
+                            </div>
+                            <div style="font-weight:700; margin:0.5rem 0;">К оплате: <span id="qiwi-payment-amount" class="money">1 000</span> ₽</div>
+                            <button type="submit" class="btn-success">Перейти к оплате</button>
+                        </form>
+                    </div>
+                </div>
+                <div id="yoomoney-payment-form" class="payment-form" style="display:none; margin-top:1.5rem;">
+                    <div class="booking-form">
+                        <h3>Пополнение ЮMoney</h3>
+                        <form id="yoomoney-payment-form-content">
+                            <div class="form-group">
+                                <label for="yoomoney-amount">Сумма (₽)</label>
+                                <input type="text" id="yoomoney-amount" class="form-control money" placeholder="1000">
+                            </div>
+                            <div style="font-weight:700; margin:0.5rem 0;">К оплате: <span id="yoomoney-payment-amount" class="money">1 000</span> ₽</div>
+                            <button type="submit" class="btn-success">Перейти к оплате</button>
+                        </form>
+                    </div>
+                </div>
+                <div id="crypto-payment-form" class="payment-form" style="display:none; margin-top:1.5rem;">
+                    <div class="booking-form">
+                        <h3>Пополнение криптовалютой</h3>
+                        <form id="crypto-payment-form-content">
+                            <div class="form-group">
+                                <label for="crypto-amount">Сумма (₽)</label>
+                                <input type="text" id="crypto-amount" class="form-control money" placeholder="1000">
+                            </div>
+                            <div class="form-group">
+                                <label for="crypto-currency">Валюта</label>
+                                <select id="crypto-currency" class="form-control">
+                                    <option value="btc">Bitcoin</option>
+                                    <option value="eth">Ethereum</option>
+                                    <option value="usdt">Tether</option>
+                                </select>
+                            </div>
+                            <div style="font-weight:700; margin:0.5rem 0;">К оплате: <span id="crypto-payment-amount" class="money">1 000</span> ₽</div>
+                            <div class="form-group">
+                                <label>Адрес для оплаты</label>
+                                <div class="form-control" style="font-family:monospace;">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</div>
+                            </div>
+                            <button type="submit" class="btn-success">Скопировать адрес</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Админ-панель -->
+        <div id="admin-page" class="page">
+            <div class="page-banner">
+                <h1>Админ-панель</h1>
+                <p>Управление</p>
+            </div>
+            <section>
+                <div class="admin-panel">
+                    <div class="admin-tabs">
+                        <button class="admin-tab active" data-tab="users">Пользователи</button>
+                        <button class="admin-tab" data-tab="reviews">Отзывы</button>
+                        <button class="admin-tab" data-tab="stats">Статистика</button>
+                        <button class="admin-tab" data-tab="vk">VK</button>
+                    </div>
+
+                    <div id="users-tab" class="admin-content active">
+                        <h3>Пользователи</h3>
+                        <div id="admin-users-list"></div>
+                    </div>
+                    <div id="reviews-tab" class="admin-content">
+                        <h3>Отзывы</h3>
+                        <div id="admin-reviews-list"></div>
+                    </div>
+                    <div id="stats-tab" class="admin-content">
+                        <h3>Статистика</h3>
+                        <div class="profile-stats">
+                            <div class="stat-card"><div class="stat-value" id="admin-total-users">0</div><div class="stat-label">Пользователей</div></div>
+                            <div class="stat-card"><div class="stat-value" id="admin-total-reviews">0</div><div class="stat-label">Отзывов</div></div>
+                            <div class="stat-card"><div class="stat-value" id="admin-active-today">0</div><div class="stat-label">Активных сегодня</div></div>
+                            <div class="stat-card"><div class="stat-value" id="admin-new-week">0</div><div class="stat-label">Новых за неделю</div></div>
+                        </div>
+                    </div>
+                    <div id="vk-tab" class="admin-content">
+                        <h3>Управление VK</h3>
+                        <div class="admin-vk-section">
+                            <p>Наше сообщество ВКонтакте</p>
+                            <a href="#" class="admin-vk-button" id="open-vk-modal">👥 Открыть панель VK</a>
+                        </div>
+                        <div class="profile-stats">
+                            <div class="stat-card"><div class="stat-value" id="vk-stats-posts">0</div><div class="stat-label">Опубликовано</div></div>
+                            <div class="stat-card"><div class="stat-value" id="vk-stats-scheduled">0</div><div class="stat-label">Запланировано</div></div>
+                            <div class="stat-card"><div class="stat-value" id="vk-stats-failed">0</div><div class="stat-label">Ошибок</div></div>
+                            <div class="stat-card"><div class="stat-value" id="vk-stats-last">-</div><div class="stat-label">Последняя публикация</div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-text">© 2025 КиберСфера · Мобильная версия</div>
     </footer>
+
+    <!-- МОДАЛЬНЫЕ ОКНА -->
+
+    <!-- Вход -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Вход</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <input type="password" id="login-password" class="form-control" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="login-cancel-btn">Отмена</button>
+                    <button type="submit" class="btn">Войти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Регистрация (отдельная страница, но для мобильных можно сделать модалкой, однако у нас уже есть страница регистрации, поэтому модалка не нужна) -->
+    <!-- Но для удобства оставим страницу регистрации в виде модалки? Лучше оставить как страницу, но для мобильных проще модалка. Однако в ПК-версии была страница. Для унификации оставим страницу. Но можно добавить модалку регистрации? У нас уже есть страница registration-page, но в мобильной версии мы её не включили. Добавим как модалку. -->
+
+    <!-- Модалка регистрации -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Регистрация</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="registration-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="reg-firstname">Имя</label>
+                        <input type="text" id="reg-firstname" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-lastname">Фамилия</label>
+                        <input type="text" id="reg-lastname" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reg-username">Имя пользователя</label>
+                    <input type="text" id="reg-username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email</label>
+                    <input type="email" id="reg-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-phone">Телефон</label>
+                    <input type="tel" id="reg-phone" class="form-control masked-input" placeholder="+7 (___) ___-__-__" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-birthdate">Дата рождения</label>
+                    <input type="date" id="reg-birthdate" class="form-control" max="2025-12-31" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Пароль</label>
+                    <input type="password" id="reg-password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-confirm-password">Подтвердите пароль</label>
+                    <input type="password" id="reg-confirm-password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Способ подтверждения:</label>
+                    <div class="confirmation-method-selector">
+                        <div class="confirmation-method selected" data-method="email">
+                            <span class="confirmation-method-icon">📧</span>
+                            <div class="confirmation-method-info">
+                                <div class="confirmation-method-title">Email</div>
+                                <div class="confirmation-method-desc">Код на почту</div>
+                            </div>
+                        </div>
+                        <div class="confirmation-method" data-method="phone">
+                            <span class="confirmation-method-icon">📱</span>
+                            <div class="confirmation-method-info">
+                                <div class="confirmation-method-title">SMS</div>
+                                <div class="confirmation-method-desc">Код на телефон</div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="confirmation-method" name="confirmation-method" value="email" required>
+                </div>
+                <div class="confirmation-checkbox">
+                    <label class="checkbox-group">
+                        <input type="checkbox" id="confirmation-agreement" required>
+                        <span>Я согласен на подтверждение аккаунта и принимаю <a href="#" onclick="showNotification('Демо-версия', 'error'); return false;">условия</a></span>
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="reg-cancel-btn">Отмена</button>
+                    <button type="submit" class="btn">Зарегистрироваться</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модалка подтверждения -->
+    <div class="modal" id="confirmation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Подтверждение</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="confirmation-code-container">
+                <div class="confirmation-method-badge" style="display:flex; align-items:center; gap:8px; justify-content:center; margin-bottom:1rem;">
+                    <span id="confirmation-badge-icon">📧</span>
+                    <span id="confirmation-badge-text">Подтверждение по Email</span>
+                </div>
+                <div class="confirmation-sent-to" style="text-align:center; margin-bottom:1rem;">
+                    Код отправлен на: <strong id="confirmation-target">example@email.com</strong>
+                </div>
+                <div class="confirmation-code" id="demo-confirmation-code">123456</div>
+                <div class="confirmation-code-inputs" id="confirmation-inputs-container">
+                    <input type="text" class="confirmation-code-input" maxlength="1" data-index="0">
+                    <input type="text" class="confirmation-code-input" maxlength="1" data-index="1">
+                    <input type="text" class="confirmation-code-input" maxlength="1" data-index="2">
+                    <input type="text" class="confirmation-code-input" maxlength="1" data-index="3">
+                    <input type="text" class="confirmation-code-input" maxlength="1" data-index="4">
+                    <input type="text" class="confirmation-code-input" maxlength="1" data-index="5">
+                </div>
+                <div class="confirmation-timer" id="confirmation-timer">
+                    Отправить повторно через: <span id="timer-count">60</span> сек.
+                </div>
+                <div class="confirmation-error" id="confirmation-error">Неверный код</div>
+                <div class="confirmation-success" id="confirmation-success" style="display:none;">
+                    <div class="confirmation-success-icon">✓</div>
+                    <h3>Аккаунт подтвержден!</h3>
+                    <p>Теперь вы можете пользоваться всеми возможностями.</p>
+                    <button class="btn-success" id="confirmation-continue-btn">Продолжить</button>
+                </div>
+                <div class="confirmation-actions" id="confirmation-actions" style="display:flex; gap:10px; justify-content:center; margin-top:1.5rem;">
+                    <button class="btn-secondary" id="resend-code-btn" disabled>Повторно</button>
+                    <button class="btn-success" id="verify-code-btn">Подтвердить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка покупки -->
+    <div class="modal" id="purchase-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Покупка</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="purchase-details">
+                <div class="purchase-summary">
+                    <span id="purchase-product-name">Товар</span>
+                    <span id="purchase-product-price">Цена</span>
+                </div>
+                <div class="purchase-total">
+                    <span>Итого:</span>
+                    <span class="total-amount" id="purchase-total-amount">0 ₽</span>
+                </div>
+            </div>
+            <form id="purchase-form">
+                <div class="form-group">
+                    <label for="purchase-date">Дата</label>
+                    <input type="date" id="purchase-date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="purchase-time">Время</label>
+                    <input type="time" id="purchase-time" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Зона:</label>
+                    <div class="zone-selection">
+                        <div class="zone-option" data-zone="VR Зона"><span class="zone-icon">🕶️</span><div class="zone-name">VR</div></div>
+                        <div class="zone-option" data-zone="Игровые ПК"><span class="zone-icon">🎮</span><div class="zone-name">ПК</div></div>
+                        <div class="zone-option" data-zone="Турнирная зона"><span class="zone-icon">🏆</span><div class="zone-name">Турнир</div></div>
+                        <div class="zone-option" data-zone="Комфорт зона"><span class="zone-icon">🛋️</span><div class="zone-name">Комфорт</div></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="purchase-comment">Комментарий</label>
+                    <textarea id="purchase-comment" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="purchase-cancel-btn">Отмена</button>
+                    <button type="submit" class="btn-success">Купить</button>
+                </div>
+            </form>
+            <div class="purchase-confirmation" id="purchase-confirmation">
+                <h3 style="color:var(--neon-green);">Покупка успешна!</h3>
+                <div class="confirmation-details" id="confirmation-details"></div>
+                <button class="btn" id="purchase-close-btn" style="margin-top:1rem;">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка VK -->
+    <div class="modal" id="vk-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Управление VK</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="admin-panel">
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="vk-posts">Посты</button>
+                    <button class="admin-tab" data-tab="vk-stats">Статистика</button>
+                    <button class="admin-tab" data-tab="vk-settings">Настройки</button>
+                </div>
+                <div id="vk-posts-tab" class="admin-content active">
+                    <h3>Новый пост</h3>
+                    <form id="vk-post-form">
+                        <div class="form-group">
+                            <label for="vk-post-text">Текст</label>
+                            <textarea id="vk-post-text" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="vk-post-image">Изображение (URL)</label>
+                            <input type="url" id="vk-post-image" class="form-control" placeholder="https://...">
+                        </div>
+                        <div class="form-group">
+                            <label for="vk-post-link">Ссылка</label>
+                            <input type="url" id="vk-post-link" class="form-control" placeholder="https://...">
+                        </div>
+                        <div class="form-group">
+                            <label for="vk-post-link-title">Заголовок ссылки</label>
+                            <input type="text" id="vk-post-link-title" class="form-control" placeholder="Название">
+                        </div>
+                        <div class="form-group">
+                            <label for="vk-post-schedule">Запланировать</label>
+                            <input type="datetime-local" id="vk-post-schedule" class="form-control">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" id="vk-preview-btn">Предпросмотр</button>
+                            <button type="submit" class="btn-success">Опубликовать</button>
+                            <button type="button" class="btn" id="vk-schedule-btn">Запланировать</button>
+                        </div>
+                    </form>
+                    <div id="vk-preview" class="vk-preview" style="display:none;">
+                        <h4>Предпросмотр</h4>
+                        <div id="vk-preview-content"></div>
+                    </div>
+                </div>
+                <div id="vk-stats-tab" class="admin-content">
+                    <h3>Статистика</h3>
+                    <div class="profile-stats">
+                        <div class="stat-card"><div class="stat-value" id="vk-subscribers">0</div><div class="stat-label">Подписчиков</div></div>
+                        <div class="stat-card"><div class="stat-value" id="vk-posts-count">0</div><div class="stat-label">Постов</div></div>
+                        <div class="stat-card"><div class="stat-value" id="vk-engagement">0%</div><div class="stat-label">Вовлеченность</div></div>
+                        <div class="stat-card"><div class="stat-value" id="vk-reach">0</div><div class="stat-label">Охват</div></div>
+                    </div>
+                    <h3 style="margin-top:1.5rem;">Последние посты</h3>
+                    <div id="vk-recent-posts"></div>
+                </div>
+                <div id="vk-settings-tab" class="admin-content">
+                    <h3>Настройки VK</h3>
+                    <form id="vk-settings-form">
+                        <div class="form-group">
+                            <label for="vk-group-id">ID сообщества</label>
+                            <input type="text" id="vk-group-id" class="form-control" placeholder="-12345678">
+                        </div>
+                        <div class="form-group">
+                            <label for="vk-access-token">Access Token</label>
+                            <input type="password" id="vk-access-token" class="form-control" value="vk1.a...">
+                        </div>
+                        <div class="form-group">
+                            <label for="vk-api-version">Версия API</label>
+                            <input type="text" id="vk-api-version" class="form-control" value="5.131">
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="vk-auto-publish">
+                            <label for="vk-auto-publish">Автопубликация турниров</label>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="vk-publish-events">
+                            <label for="vk-publish-events">Публиковать мероприятия</label>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Сохранить</button>
+                            <button type="button" class="btn-secondary" id="vk-test-connection">Проверить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подтверждение выхода -->
+    <div class="modal" id="logout-confirm-modal">
+        <div class="modal-content" style="max-width:400px; text-align:center;">
+            <h2 style="font-size:1.4rem; margin-bottom:1rem;">Выйти?</h2>
+            <p style="margin-bottom:1.5rem;">Вы уверены?</p>
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <button class="btn-secondary" id="logout-cancel-btn">Отмена</button>
+                <button class="btn" id="logout-confirm-btn">Выйти</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомление -->
+    <div class="notification" id="notification">
+        <div id="notification-message"></div>
+    </div>
 
     <script>
         // ================================================================
-        //  ДЕМО-ДАННЫЕ ДЛЯ ЛЕНТЫ (имитация постов ВКонтакте)
+        //  ПОЛНЫЙ ФУНКЦИОНАЛ (скопирован из ПК-версии с адаптацией)
         // ================================================================
-        const DEMO_POSTS = [{
-            date: Date.now() - 86400 * 1000,
-            text: '🎮 Турнир по Counter-Strike 2 уже на этой неделе! Призовой фонд 50 000 ₽. Успейте зарегистрироваться!',
-            image: null,
-            likes: 42,
-            comments: 12,
-            reposts: 5
-        }, {
-            date: Date.now() - 172800 * 1000,
-            text: 'Мы обновили наш парк игровых ПК! Теперь все компьютеры оснащены RTX 4080 и процессорами Intel i9 13-го поколения. Приходите тестировать!',
-            image: 'https://via.placeholder.com/600x300/00f3ff/0a0a12?text=Gaming+PC+RTX+4080',
-            likes: 78,
-            comments: 25,
-            reposts: 10
-        }, {
-            date: Date.now() - 259200 * 1000,
-            text: 'Новая VR зона теперь доступна! Испытайте виртуальную реальность на оборудовании Oculus Quest 2. Погружение гарантировано.',
-            image: null,
-            likes: 56,
-            comments: 18,
-            reposts: 7
-        }, {
-            date: Date.now() - 345600 * 1000,
-            text: 'Специальное предложение для студентов: скидка 20% на игровое время по будням с 12:00 до 17:00. Предъявите студенческий!',
-            image: null,
-            likes: 34,
-            comments: 8,
-            reposts: 3
-        }, {
-            date: Date.now() - 432000 * 1000,
-            text: 'Запускаем новый турнир по Dota 2! Регистрация открыта до 20 мая. Призовой фонд 75 000 ₽. Собирайте команду и побеждайте!',
-            image: 'https://via.placeholder.com/600x300/ff00c8/0a0a12?text=Dota+2+Tournament',
-            likes: 89,
-            comments: 31,
-            reposts: 14
-        }];
 
-        // ================================================================
-        //  КЛАСС ДЛЯ РАБОТЫ С ЛЕНТОЙ
-        // ================================================================
-        class VKMobileFeed {
-            constructor(containerId) {
-                this.container = document.getElementById(containerId);
-                this.posts = [];
-                this.loading = false;
-                this.init();
+        // --- Система пользователей ---
+        class UserSystem {
+            constructor() {
+                this.users = JSON.parse(localStorage.getItem('users')) || [];
+                this.reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+                this.currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+                this.MAX_BALANCE = 10000;
+                this.purchases = JSON.parse(localStorage.getItem('purchases')) || [];
+                this.pendingConfirmations = JSON.parse(localStorage.getItem('pendingConfirmations')) || {};
+                if (this.users.length === 0) this.createDefaultAdmin();
             }
 
-            init() {
-                // Загружаем посты из localStorage или используем демо
-                const saved = localStorage.getItem('vk_mobile_posts');
-                if (saved) {
-                    try {
-                        this.posts = JSON.parse(saved);
-                    } catch {
-                        this.posts = DEMO_POSTS.slice();
-                    }
-                } else {
-                    this.posts = DEMO_POSTS.slice();
-                    this.saveToStorage();
-                }
-                this.render();
-            }
-
-            saveToStorage() {
-                localStorage.setItem('vk_mobile_posts', JSON.stringify(this.posts));
-            }
-
-            // Имитация загрузки с сервера
-            async fetchPosts() {
-                if (this.loading) return;
-                this.loading = true;
-                this.showLoading();
-
-                // Имитируем сетевую задержку
-                await new Promise(resolve => setTimeout(resolve, 1200));
-
-                // В реальном приложении здесь был бы запрос к VK API
-                // Используем демо-данные, но можем добавить случайные изменения
-                const newPosts = DEMO_POSTS.map(p => ({
-                    ...p,
-                    date: p.date - Math.floor(Math.random() * 86400 * 1000 * 5) // сдвиг дат
-                }));
-                // Добавляем новый пост для демонстрации
-                const freshPost = {
-                    date: Date.now() - 600000, // 10 минут назад
-                    text: '🔥 Только что: В нашем клубе стартует новый киберспортивный сезон! Следите за анонсами.',
-                    image: null,
-                    likes: 12,
-                    comments: 4,
-                    reposts: 2
+            createDefaultAdmin() {
+                const admin = {
+                    id: 1,
+                    firstName: 'Админ',
+                    lastName: 'Системы',
+                    username: 'admin',
+                    email: 'admin@kibersfera.ru',
+                    password: 'admin123',
+                    phone: '+7 (000) 000-00-00',
+                    birthdate: '1990-01-01',
+                    role: 'admin',
+                    balance: 10000,
+                    joined: new Date().toISOString(),
+                    confirmed: true,
+                    confirmedAt: new Date().toISOString(),
+                    confirmationMethod: 'email',
+                    stats: { tournaments: 0, hours: 0, reviews: 0 }
                 };
-                this.posts = [freshPost, ...newPosts];
-                this.saveToStorage();
-                this.loading = false;
-                this.render();
+                this.users.push(admin);
+                this.saveUsers();
             }
 
-            showLoading() {
-                this.container.innerHTML = `
-                    <div class="loading">
-                        <div class="spinner"></div>
-                        <p>Загрузка новостей...</p>
-                    </div>
-                `;
+            saveUsers() { localStorage.setItem('users', JSON.stringify(this.users)); }
+            saveReviews() { localStorage.setItem('reviews', JSON.stringify(this.reviews)); }
+            savePurchases() { localStorage.setItem('purchases', JSON.stringify(this.purchases)); }
+            savePendingConfirmations() { localStorage.setItem('pendingConfirmations', JSON.stringify(this.pendingConfirmations)); }
+
+            generateConfirmationCode() { return Math.floor(100000 + Math.random() * 900000).toString(); }
+
+            sendConfirmationCode(email, phone, method) {
+                const code = this.generateConfirmationCode();
+                const target = method === 'email' ? email : phone;
+                this.pendingConfirmations[target] = { code, expiresAt: Date.now() + 5*60*1000, method, attempts: 0 };
+                this.savePendingConfirmations();
+                return { success: true, code, method, target };
             }
 
-            render() {
-                if (!this.posts || this.posts.length === 0) {
-                    this.container.innerHTML = `
-                        <div class="empty">
-                            <p>Новостей пока нет. Загляните позже!</p>
-                        </div>
-                    `;
-                    return;
+            verifyConfirmationCode(target, enteredCode) {
+                const conf = this.pendingConfirmations[target];
+                if (!conf) return { success: false, message: 'Код не найден' };
+                if (Date.now() > conf.expiresAt) {
+                    delete this.pendingConfirmations[target];
+                    this.savePendingConfirmations();
+                    return { success: false, message: 'Код истек' };
                 }
-
-                let html = '';
-                this.posts.forEach(post => {
-                    const dateStr = new Date(post.date).toLocaleDateString('ru-RU', {
-                        day: 'numeric', month: 'long', year: 'numeric'
-                    });
-                    const imageHtml = post.image ? `<img src="${post.image}" alt="Пост" class="post-image" onerror="this.style.display='none'">` : '';
-                    html += `
-                        <div class="post-card">
-                            <div class="post-header">
-                                <span class="post-date">📅 ${dateStr}</span>
-                            </div>
-                            <div class="post-text">${post.text.replace(/\n/g, '<br>')}</div>
-                            ${imageHtml}
-                            <div class="post-stats">
-                                <span>❤️ ${post.likes}</span>
-                                <span>💬 ${post.comments}</span>
-                                <span>↩️ ${post.reposts}</span>
-                            </div>
-                        </div>
-                    `;
-                });
-                this.container.innerHTML = html;
+                conf.attempts++;
+                this.savePendingConfirmations();
+                if (conf.code === enteredCode) {
+                    delete this.pendingConfirmations[target];
+                    this.savePendingConfirmations();
+                    return { success: true };
+                } else {
+                    if (conf.attempts >= 3) {
+                        delete this.pendingConfirmations[target];
+                        this.savePendingConfirmations();
+                        return { success: false, message: 'Слишком много попыток' };
+                    }
+                    return { success: false, message: `Неверно (осталось ${3-conf.attempts})` };
+                }
             }
 
-            // Метод для ручного обновления
-            async refresh() {
-                await this.fetchPosts();
+            register(userData) {
+                const existing = this.users.find(u => u.email === userData.email || u.username === userData.username);
+                if (existing) return { success: false, message: 'Email или username уже заняты' };
+                const birthYear = new Date(userData.birthdate).getFullYear();
+                if (birthYear >= 2020 && birthYear <= 2025) return { success: false, message: 'Не твой уровень' };
+                if (birthYear > 2025) return { success: false, message: 'Год рождения не больше 2025' };
+                if (!userData.confirmationAgreed) return { success: false, message: 'Согласие обязательно' };
+                if (!['email','phone'].includes(userData.confirmationMethod)) return { success: false, message: 'Выберите метод' };
+
+                const newUser = {
+                    id: Date.now(),
+                    ...userData,
+                    role: 'user',
+                    balance: 0,
+                    joined: new Date().toISOString(),
+                    confirmed: false,
+                    confirmedAt: null,
+                    confirmationMethod: userData.confirmationMethod,
+                    stats: { tournaments: 0, hours: Math.floor(Math.random()*100), reviews: 0 }
+                };
+                this.users.push(newUser);
+                this.saveUsers();
+                const conf = this.sendConfirmationCode(userData.email, userData.phone, userData.confirmationMethod);
+                return { success: true, user: newUser, confirmation: conf };
+            }
+
+            confirmUser(userId) {
+                const idx = this.users.findIndex(u => u.id === userId);
+                if (idx !== -1) {
+                    this.users[idx].confirmed = true;
+                    this.users[idx].confirmedAt = new Date().toISOString();
+                    this.saveUsers();
+                    if (this.currentUser && this.currentUser.id === userId) {
+                        this.currentUser.confirmed = true;
+                        this.currentUser.confirmedAt = this.users[idx].confirmedAt;
+                        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+                    }
+                    return { success: true };
+                }
+                return { success: false };
+            }
+
+            login(email, password) {
+                const user = this.users.find(u => u.email === email && u.password === password);
+                if (!user) return { success: false, message: 'Неверный email или пароль' };
+                const { password: _, ...userWithoutPass } = user;
+                this.currentUser = userWithoutPass;
+                localStorage.setItem('currentUser', JSON.stringify(userWithoutPass));
+                if (!user.confirmed) {
+                    return { success: true, user: userWithoutPass, requiresConfirmation: true, confirmationMethod: user.confirmationMethod };
+                }
+                return { success: true, user: userWithoutPass, requiresConfirmation: false };
+            }
+
+            resendConfirmationCode(email, phone, method) {
+                return this.sendConfirmationCode(email, phone, method);
+            }
+
+            addReview(text, userId) {
+                const user = this.users.find(u => u.id === userId);
+                if (!user || !user.confirmed) return { success: false, message: 'Аккаунт не подтвержден' };
+                const review = { id: Date.now(), userId, text, date: new Date().toISOString(), status: 'approved' };
+                this.reviews.push(review);
+                const idx = this.users.findIndex(u => u.id === userId);
+                if (idx !== -1) { this.users[idx].stats.reviews++; this.saveUsers(); }
+                this.saveReviews();
+                return { success: true, review };
+            }
+
+            deductBalance(userId, amount) {
+                const idx = this.users.findIndex(u => u.id === userId);
+                if (idx === -1) return { success: false, message: 'Пользователь не найден' };
+                const user = this.users[idx];
+                if (!user.confirmed) return { success: false, message: 'Аккаунт не подтвержден' };
+                if (user.balance < amount) return { success: false, message: 'Недостаточно средств' };
+                user.balance -= amount;
+                this.saveUsers();
+                if (this.currentUser && this.currentUser.id === userId) {
+                    this.currentUser.balance = user.balance;
+                    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+                }
+                return { success: true, newBalance: user.balance };
+            }
+
+            addBalance(userId, amount) {
+                const idx = this.users.findIndex(u => u.id === userId);
+                if (idx === -1) return { success: false, message: 'Пользователь не найден' };
+                const newBalance = this.users[idx].balance + amount;
+                if (newBalance > this.MAX_BALANCE) {
+                    return { success: false, message: `Превышен максимум (${this.MAX_BALANCE} ₽)` };
+                }
+                this.users[idx].balance = newBalance;
+                this.saveUsers();
+                if (this.currentUser && this.currentUser.id === userId) {
+                    this.currentUser.balance = newBalance;
+                    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+                }
+                return { success: true, newBalance };
+            }
+
+            addPurchase(userId, purchaseData) {
+                const user = this.users.find(u => u.id === userId);
+                if (!user || !user.confirmed) return { success: false, message: 'Аккаунт не подтвержден' };
+                const purchase = { id: Date.now(), userId, ...purchaseData, purchaseDate: new Date().toISOString(), status: 'active' };
+                this.purchases.push(purchase);
+                this.savePurchases();
+                return { success: true, purchase };
+            }
+
+            getUserPurchases(userId) { return this.purchases.filter(p => p.userId === userId); }
+            getUserReviews(userId) { return this.reviews.filter(r => r.userId === userId && r.status === 'approved'); }
+
+            getAllReviews() {
+                return this.reviews.filter(r => r.status === 'approved').map(review => {
+                    const user = this.users.find(u => u.id === review.userId);
+                    return { ...review, userName: user ? `${user.firstName} ${user.lastName}` : 'Неизвестный', userInitials: user ? user.firstName[0]+user.lastName[0] : '??' };
+                });
+            }
+
+            getAllUsers() {
+                return this.users.map(user => {
+                    const revs = this.getUserReviews(user.id);
+                    return { ...user, reviewCount: revs.length, lastActivity: revs.length > 0 ? revs[revs.length-1].date : user.joined };
+                });
+            }
+
+            isAdmin() { return this.currentUser && this.currentUser.role === 'admin'; }
+            isLoggedIn() { return this.currentUser !== null; }
+            isConfirmed() { return this.currentUser && this.currentUser.confirmed === true; }
+
+            deleteReview(reviewId) {
+                const idx = this.reviews.findIndex(r => r.id === reviewId);
+                if (idx !== -1) { this.reviews.splice(idx, 1); this.saveReviews(); return true; }
+                return false;
+            }
+
+            updateUser(userId, userData) {
+                if (userData.birthdate) {
+                    const birthYear = new Date(userData.birthdate).getFullYear();
+                    if (birthYear >= 2020 && birthYear <= 2025) return { success: false, message: 'Не твой уровень' };
+                    if (birthYear > 2025) return { success: false, message: 'Год рождения не больше 2025' };
+                }
+                const idx = this.users.findIndex(u => u.id === userId);
+                if (idx !== -1) {
+                    this.users[idx] = { ...this.users[idx], ...userData };
+                    this.saveUsers();
+                    if (this.currentUser && this.currentUser.id === userId) {
+                        const { password: _, ...userWithoutPass } = this.users[idx];
+                        this.currentUser = userWithoutPass;
+                        localStorage.setItem('currentUser', JSON.stringify(userWithoutPass));
+                    }
+                    return { success: true };
+                }
+                return { success: false, message: 'Пользователь не найден' };
             }
         }
 
-        // ================================================================
-        //  ИНИЦИАЛИЗАЦИЯ
-        // ================================================================
-        document.addEventListener('DOMContentLoaded', function() {
-            const feed = new VKMobileFeed('feedContainer');
+        // --- VK интеграция ---
+        class VKIntegration {
+            constructor() {
+                this.settings = JSON.parse(localStorage.getItem('vkSettings')) || {
+                    groupId: '',
+                    accessToken: 'vk1.a...',
+                    apiVersion: '5.131',
+                    autoPublish: false,
+                    publishEvents: true
+                };
+                this.isConnected = false;
+                this.groupInfo = null;
+                this.posts = JSON.parse(localStorage.getItem('vkPosts')) || [];
+                this.stats = JSON.parse(localStorage.getItem('vkStats')) || {
+                    published: 0, scheduled: 0, failed: 0, lastPost: null
+                };
+            }
+            saveSettings() { localStorage.setItem('vkSettings', JSON.stringify(this.settings)); }
+            savePosts() { localStorage.setItem('vkPosts', JSON.stringify(this.posts)); }
+            saveStats() { localStorage.setItem('vkStats', JSON.stringify(this.stats)); }
 
-            // Кнопка обновления
-            document.getElementById('refreshFeedBtn').addEventListener('click', function() {
-                this.textContent = '⏳ Загрузка...';
-                this.disabled = true;
-                feed.refresh().then(() => {
-                    this.textContent = '🔄 Обновить';
-                    this.disabled = false;
-                }).catch(() => {
-                    this.textContent = '🔄 Обновить';
-                    this.disabled = false;
+            async testConnection() {
+                try {
+                    if (!this.settings.groupId || !this.settings.accessToken) throw new Error('Заполните данные');
+                    await new Promise(r => setTimeout(r, 800));
+                    this.groupInfo = { name: 'КиберСфера', members_count: 1250 };
+                    this.isConnected = true;
+                    return { success: true, group: this.groupInfo };
+                } catch(e) { return { success: false, error: e.message }; }
+            }
+
+            async makeVKRequest(method, params) {
+                console.log('VK Request:', method, params);
+                await new Promise(r => setTimeout(r, 600));
+                return { success: true, post_id: Math.floor(Math.random()*10000) };
+            }
+
+            async publishPost(postData) {
+                try {
+                    if (!this.isConnected) throw new Error('Подключитесь к VK');
+                    const result = await this.makeVKRequest('wall.post', {
+                        owner_id: this.settings.groupId,
+                        from_group: 1,
+                        message: postData.text,
+                        publish_date: postData.publishDate ? Math.floor(new Date(postData.publishDate)/1000) : undefined
+                    });
+                    if (result.success) {
+                        const post = { ...postData, id: result.post_id, status: postData.publishDate ? 'scheduled' : 'published', timestamp: new Date().toISOString() };
+                        this.posts.push(post);
+                        if (postData.publishDate) this.stats.scheduled++;
+                        else this.stats.published++;
+                        this.stats.lastPost = new Date().toISOString();
+                        this.savePosts(); this.saveStats();
+                        return { success: true, postId: result.post_id };
+                    } else throw new Error('Ошибка публикации');
+                } catch(e) { this.stats.failed++; this.saveStats(); return { success: false, error: e.message }; }
+            }
+
+            async getGroupStats() {
+                if (!this.isConnected) return { subscribers: 0, postsCount: 0, recentPosts: [] };
+                return { subscribers: this.groupInfo.members_count, postsCount: this.posts.length, recentPosts: this.posts.slice(-5).reverse() };
+            }
+
+            getVKStats() { return this.stats; }
+
+            async loadNews() {
+                await new Promise(r => setTimeout(r, 1200));
+                return {
+                    success: true,
+                    posts: [
+                        { date: Math.floor(Date.now()/1000)-86400, text: "🎮 Турнир по CS2! Приз 50 000 ₽", likes: {count:42}, comments:{count:12}, reposts:{count:5} },
+                        { date: Math.floor(Date.now()/1000)-172800, text: "Обновление ПК: RTX 4080 и i9", attachments: { type:'photo', photo:{ sizes:[{ type:'m', url:'https://via.placeholder.com/400x200/00f3ff/0a0a12?text=PC' }] } }, likes:{count:78}, comments:{count:25}, reposts:{count:10} }
+                    ]
+                };
+            }
+        }
+
+        // --- Инициализация ---
+        const userSystem = new UserSystem();
+        const vkIntegration = new VKIntegration();
+
+        // DOM ссылки
+        const $ = id => document.getElementById(id);
+        const preloader = $('preloader');
+        const loadingProgress = $('loading-progress');
+        const burgerBtn = $('burger-btn');
+        const navMobile = $('nav-mobile');
+        const authButtons = $('auth-buttons');
+        const userMenu = $('user-menu');
+        const userAvatar = $('user-avatar');
+        const userBalance = $('user-balance-amount');
+        const userAvatarBalance = $('user-avatar-balance');
+        const logoutBtn = $('logout-btn');
+        const loginBtn = $('login-btn');
+        const registerBtn = $('register-btn');
+        const registerMainBtn = $('register-main-btn');
+        const loginModal = $('login-modal');
+        const registerModal = $('register-modal');
+        const confirmationModal = $('confirmation-modal');
+        const purchaseModal = $('purchase-modal');
+        const vkModal = $('vk-modal');
+        const logoutConfirmModal = $('logout-confirm-modal');
+        const notification = $('notification');
+        const notificationMessage = $('notification-message');
+        const navProfile = $('nav-profile');
+        const navBalance = $('nav-balance');
+        const navAdmin = $('nav-admin');
+
+        // --- Утилиты ---
+        function formatMoney(amount) {
+            return new Intl.NumberFormat('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(amount);
+        }
+        function parseMoney(str) {
+            return parseInt(str.replace(/\s/g, ''));
+        }
+        function showNotification(msg, type='') {
+            notificationMessage.textContent = msg;
+            notification.className = 'notification';
+            if (type) notification.classList.add(type);
+            notification.classList.add('show');
+            setTimeout(() => notification.classList.remove('show'), 4000);
+        }
+
+        function applyPhoneMask(input) {
+            input.addEventListener('input', function(e) {
+                let val = e.target.value.replace(/\D/g, '');
+                if (val.startsWith('7') || val.startsWith('8')) val = val.substring(1);
+                let formatted = '+7';
+                if (val.length > 0) formatted += ' (' + val.substring(0,3);
+                if (val.length > 3) formatted += ') ' + val.substring(3,6);
+                if (val.length > 6) formatted += '-' + val.substring(6,8);
+                if (val.length > 8) formatted += '-' + val.substring(8,10);
+                e.target.value = formatted;
+            });
+        }
+        function applyCardNumberMask(input) {
+            input.addEventListener('input', function(e) {
+                let val = e.target.value.replace(/\D/g, '');
+                let formatted = '';
+                for (let i=0; i<val.length; i++) {
+                    if (i>0 && i%4===0) formatted += ' ';
+                    formatted += val[i];
+                }
+                e.target.value = formatted.substring(0,19);
+            });
+        }
+        function applyCardExpiryMask(input) {
+            input.addEventListener('input', function(e) {
+                let val = e.target.value.replace(/\D/g, '');
+                if (val.length > 2) val = val.substring(0,2)+'/'+val.substring(2,4);
+                e.target.value = val.substring(0,5);
+            });
+        }
+        function applyCVCMask(input) {
+            input.addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/\D/g, '').substring(0,3);
+            });
+        }
+        function applyMoneyMask(input) {
+            input.addEventListener('input', function(e) {
+                let val = e.target.value.replace(/\D/g, '');
+                if (val === '') { e.target.value = ''; return; }
+                let num = parseInt(val);
+                if (isNaN(num)) { e.target.value = ''; return; }
+                e.target.value = formatMoney(num);
+                const form = e.target.closest('form');
+                if (form) {
+                    const span = form.querySelector('.payment-amount span');
+                    if (span) span.textContent = formatMoney(num);
+                }
+            });
+        }
+
+        function initMasks() {
+            document.querySelectorAll('input[type="tel"]').forEach(applyPhoneMask);
+            document.querySelectorAll('input#card-number').forEach(applyCardNumberMask);
+            document.querySelectorAll('input#card-expiry').forEach(applyCardExpiryMask);
+            document.querySelectorAll('input#card-cvc').forEach(applyCVCMask);
+            document.querySelectorAll('input.money').forEach(applyMoneyMask);
+        }
+
+        // --- Обновление UI ---
+        function updateAuthUI() {
+            const isLoggedIn = userSystem.isLoggedIn();
+            const isConfirmed = userSystem.isConfirmed();
+            const isAdmin = userSystem.isAdmin();
+
+            authButtons.style.display = isLoggedIn ? 'none' : 'flex';
+            userMenu.style.display = isLoggedIn ? 'flex' : 'none';
+            navProfile.style.display = isLoggedIn ? 'flex' : 'none';
+            navBalance.style.display = isLoggedIn ? 'flex' : 'none';
+            navAdmin.style.display = (isLoggedIn && isAdmin) ? 'flex' : 'none';
+
+            if (isLoggedIn) {
+                const user = userSystem.currentUser;
+                userAvatar.textContent = user.firstName[0] + user.lastName[0];
+                userBalance.textContent = formatMoney(user.balance);
+                // Баланс на странице
+                const balAmount = $('balance-amount');
+                if (balAmount) balAmount.textContent = formatMoney(user.balance);
+                // Профиль
+                if ($('profile-avatar')) {
+                    $('profile-avatar').textContent = user.firstName[0] + user.lastName[0];
+                    $('profile-name').textContent = `${user.firstName} ${user.lastName} (@${user.username})`;
+                    $('profile-email').textContent = user.email;
+                }
+                // Показываем предупреждение, если не подтвержден
+                if (!isConfirmed) {
+                    showUnconfirmedWarning();
+                } else {
+                    const warn = document.querySelector('.unconfirmed-warning');
+                    if (warn) warn.remove();
+                }
+            } else {
+                const warn = document.querySelector('.unconfirmed-warning');
+                if (warn) warn.remove();
+            }
+            // Обновляем отзывы и админку
+            loadReviews();
+            if (isLoggedIn && isAdmin) loadAdminUsers();
+        }
+
+        function showUnconfirmedWarning() {
+            const warn = document.querySelector('.unconfirmed-warning');
+            if (warn) return;
+            const div = document.createElement('div');
+            div.className = 'unconfirmed-warning';
+            div.innerHTML = `
+                <h4>⚠️ Аккаунт не подтвержден</h4>
+                <p>Проверьте ${userSystem.currentUser.confirmationMethod === 'email' ? 'почту' : 'SMS'} и введите код.</p>
+                <button class="btn-secondary" id="request-new-code-btn">Отправить повторно</button>
+            `;
+            const mainPage = $('main-page');
+            if (mainPage) mainPage.prepend(div);
+            const btn = $('request-new-code-btn');
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    const user = userSystem.currentUser;
+                    const result = userSystem.resendConfirmationCode(user.email, user.phone, user.confirmationMethod);
+                    if (result.success) {
+                        confirmationSystem.showConfirmation(user, result);
+                        showNotification('Новый код отправлен!', 'success');
+                    }
+                });
+            }
+        }
+
+        // --- Отзывы ---
+        function loadReviews() {
+            const container = document.getElementById('admin-reviews-list');
+            if (!container) return;
+            const reviews = userSystem.getAllReviews();
+            container.innerHTML = '';
+            if (reviews.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:var(--text-secondary);">Нет отзывов</p>';
+                return;
+            }
+            reviews.forEach(r => {
+                const div = document.createElement('div');
+                div.className = 'review-item';
+                div.innerHTML = `
+                    <div>
+                        <div class="review-author">${r.userName}</div>
+                        <div class="review-text">${r.text}</div>
+                    </div>
+                    <div class="admin-actions">
+                        <button class="btn-danger" onclick="deleteReview(${r.id})">Удалить</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Глобальный вызов для удаления отзыва
+        window.deleteReview = function(id) {
+            if (userSystem.deleteReview(id)) {
+                showNotification('Отзыв удален', 'success');
+                loadReviews();
+                if (document.getElementById('admin-page').classList.contains('active')) loadAdminUsers();
+            }
+        };
+
+        // --- Админ ---
+        function loadAdminUsers() {
+            const list = $('admin-users-list');
+            if (!list) return;
+            const users = userSystem.getAllUsers();
+            list.innerHTML = '';
+            users.forEach(u => {
+                const div = document.createElement('div');
+                div.className = 'user-item';
+                div.innerHTML = `
+                    <div>
+                        <div class="user-name">${u.firstName} ${u.lastName} (${u.username})</div>
+                        <div class="user-email">${u.email} • ${u.role} • Отзывов: ${u.reviewCount} • Баланс: ${formatMoney(u.balance)} ₽</div>
+                    </div>
+                    <div class="admin-actions">
+                        ${u.role !== 'admin' ? `<button class="btn-danger" onclick="deleteUser(${u.id})">Удалить</button>` : '<span style="color:var(--neon-cyan);">Админ</span>'}
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+            const totalUsers = users.length;
+            const totalReviews = userSystem.reviews.length;
+            const activeToday = users.filter(u => new Date(u.lastActivity).toDateString() === new Date().toDateString()).length;
+            const newWeek = users.filter(u => new Date(u.joined) > new Date(Date.now() - 7*24*60*60*1000)).length;
+            if ($('admin-total-users')) $('admin-total-users').textContent = totalUsers;
+            if ($('admin-total-reviews')) $('admin-total-reviews').textContent = totalReviews;
+            if ($('admin-active-today')) $('admin-active-today').textContent = activeToday;
+            if ($('admin-new-week')) $('admin-new-week').textContent = newWeek;
+        }
+
+        window.deleteUser = function(id) {
+            if (confirm('Удалить пользователя?')) {
+                const idx = userSystem.users.findIndex(u => u.id === id);
+                if (idx !== -1) {
+                    userSystem.reviews = userSystem.reviews.filter(r => r.userId !== id);
+                    userSystem.saveReviews();
+                    userSystem.users.splice(idx, 1);
+                    userSystem.saveUsers();
+                    showNotification('Пользователь удален', 'success');
+                    loadAdminUsers();
+                }
+            }
+        };
+
+        // --- Профиль ---
+        function loadProfileData() {
+            if (!userSystem.currentUser) return;
+            const u = userSystem.currentUser;
+            $('profile-avatar').textContent = u.firstName[0] + u.lastName[0];
+            $('profile-name').textContent = `${u.firstName} ${u.lastName} (@${u.username})`;
+            $('profile-email').textContent = u.email;
+            $('profile-firstname').value = u.firstName;
+            $('profile-lastname').value = u.lastName;
+            $('profile-username').value = u.username;
+            $('profile-email').value = u.email;
+            $('profile-phone').value = u.phone;
+            $('profile-birthdate').value = u.birthdate;
+            $('stat-tournaments').textContent = u.stats.tournaments;
+            $('stat-hours').textContent = u.stats.hours;
+            $('stat-reviews').textContent = u.stats.reviews;
+            $('stat-joined').textContent = new Date(u.joined).getFullYear();
+        }
+
+        // --- VK новости ---
+        async function loadVKNews() {
+            const container = $('news-container');
+            if (!container) return;
+            container.innerHTML = '<div class="news-loading">Загрузка новостей...</div>';
+            try {
+                const result = await vkIntegration.loadNews();
+                if (result.success) displayVKNews(result.posts);
+                else throw new Error(result.error);
+            } catch(e) {
+                container.innerHTML = `<div class="news-error">Ошибка: ${e.message}</div>`;
+            }
+        }
+
+        function displayVKNews(posts) {
+            const container = $('news-container');
+            if (!container) return;
+            container.innerHTML = '';
+            if (!posts || posts.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:var(--text-secondary);">Новостей нет</p>';
+                return;
+            }
+            posts.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'news-post';
+                const date = new Date(p.date * 1000).toLocaleDateString('ru-RU');
+                let imgHtml = '';
+                if (p.attachments && p.attachments.type === 'photo' && p.attachments.photo) {
+                    const url = p.attachments.photo.sizes.find(s => s.type === 'm')?.url;
+                    if (url) imgHtml = `<img src="${url}" class="news-image" alt="image" onerror="this.style.display='none'">`;
+                }
+                div.innerHTML = `
+                    <div class="news-post-header">
+                        <span class="news-post-date">${date}</span>
+                        <span>❤️ ${p.likes?.count || 0} 💬 ${p.comments?.count || 0}</span>
+                    </div>
+                    <div class="news-text">${p.text}</div>
+                    ${imgHtml}
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // --- VK админка ---
+        function initVKIntegration() {
+            $('vk-group-id').value = vkIntegration.settings.groupId;
+            $('vk-access-token').value = vkIntegration.settings.accessToken;
+            $('vk-api-version').value = vkIntegration.settings.apiVersion;
+            $('vk-auto-publish').checked = vkIntegration.settings.autoPublish;
+            $('vk-publish-events').checked = vkIntegration.settings.publishEvents;
+            updateVKStats();
+
+            $('vk-settings-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                vkIntegration.settings.groupId = $('vk-group-id').value;
+                vkIntegration.settings.accessToken = $('vk-access-token').value;
+                vkIntegration.settings.apiVersion = $('vk-api-version').value;
+                vkIntegration.settings.autoPublish = $('vk-auto-publish').checked;
+                vkIntegration.settings.publishEvents = $('vk-publish-events').checked;
+                vkIntegration.saveSettings();
+                showNotification('Настройки VK сохранены', 'success');
+            });
+
+            $('vk-test-connection').addEventListener('click', async function() {
+                const btn = this;
+                btn.textContent = 'Проверка...';
+                btn.disabled = true;
+                const result = await vkIntegration.testConnection();
+                btn.textContent = 'Проверить';
+                btn.disabled = false;
+                if (result.success) showNotification('Подключение успешно!', 'success');
+                else showNotification('Ошибка: ' + result.error, 'error');
+            });
+
+            $('vk-post-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const text = $('vk-post-text').value;
+                if (!text.trim()) { showNotification('Введите текст', 'error'); return; }
+                const postData = {
+                    text: text,
+                    image: $('vk-post-image').value,
+                    link: $('vk-post-link').value
+                };
+                const result = await vkIntegration.publishPost(postData);
+                if (result.success) {
+                    showNotification('Пост опубликован!', 'success');
+                    this.reset();
+                    $('vk-preview').style.display = 'none';
+                    updateVKStats();
+                    loadVKStats();
+                } else {
+                    showNotification('Ошибка: ' + result.error, 'error');
+                }
+            });
+
+            $('vk-preview-btn').addEventListener('click', function() {
+                const text = $('vk-post-text').value;
+                const image = $('vk-post-image').value;
+                const link = $('vk-post-link').value;
+                const linkTitle = $('vk-post-link-title').value;
+                const preview = $('vk-preview-content');
+                const section = $('vk-preview');
+                let html = '';
+                if (text) html += `<div class="vk-preview-text">${text.replace(/\n/g,'<br>')}</div>`;
+                if (image) html += `<img src="${image}" class="vk-preview-image" onerror="this.style.display='none'">`;
+                if (link && linkTitle) html += `<a href="${link}" class="vk-preview-link" target="_blank">${linkTitle}</a>`;
+                if (html) { preview.innerHTML = html; section.style.display = 'block'; }
+                else { section.style.display = 'none'; showNotification('Заполните текст', 'error'); }
+            });
+
+            $('vk-schedule-btn').addEventListener('click', async function() {
+                const text = $('vk-post-text').value;
+                const schedule = $('vk-post-schedule').value;
+                if (!text.trim()) { showNotification('Введите текст', 'error'); return; }
+                if (!schedule) { showNotification('Выберите дату', 'error'); return; }
+                const postData = {
+                    text: text,
+                    image: $('vk-post-image').value,
+                    link: $('vk-post-link').value,
+                    publishDate: schedule
+                };
+                const result = await vkIntegration.publishPost(postData);
+                if (result.success) {
+                    showNotification('Пост запланирован!', 'success');
+                    this.closest('form').reset();
+                    $('vk-preview').style.display = 'none';
+                    updateVKStats();
+                    loadVKStats();
+                } else {
+                    showNotification('Ошибка: ' + result.error, 'error');
+                }
+            });
+
+            // Вкладки в VK модалке
+            document.querySelectorAll('#vk-modal .admin-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.dataset.tab;
+                    document.querySelectorAll('#vk-modal .admin-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll('#vk-modal .admin-content').forEach(c => c.classList.remove('active'));
+                    document.getElementById(tabName+'-tab').classList.add('active');
+                    if (tabName === 'vk-stats') loadVKStats();
                 });
             });
 
-            // Обновляем количество подписчиков (имитация)
-            const membersSpan = document.getElementById('membersCount');
-            if (membersSpan) {
-                const base = 1250;
-                const variation = Math.floor(Math.random() * 50) - 25;
-                membersSpan.textContent = base + variation;
+            $('open-vk-modal').addEventListener('click', function() {
+                vkModal.classList.add('active');
+            });
+
+            $('refresh-news')?.addEventListener('click', loadVKNews);
+        }
+
+        async function loadVKStats() {
+            const stats = await vkIntegration.getGroupStats();
+            $('vk-subscribers').textContent = formatMoney(stats.subscribers);
+            $('vk-posts-count').textContent = formatMoney(stats.postsCount);
+            const engagement = stats.subscribers > 0 ? Math.min(100, Math.floor((stats.subscribers * 0.1) / 100 * 100)) : 0;
+            $('vk-engagement').textContent = engagement + '%';
+            $('vk-reach').textContent = formatMoney(Math.floor(stats.subscribers * 1.5));
+            const container = $('vk-recent-posts');
+            container.innerHTML = '';
+            if (stats.recentPosts.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:var(--text-secondary);">Нет постов</p>';
+                return;
+            }
+            stats.recentPosts.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'vk-post-item';
+                div.innerHTML = `
+                    <div class="vk-post-date">${new Date(p.publishDate).toLocaleDateString()} • ${p.status === 'scheduled' ? 'Запланирован' : 'Опубликован'}</div>
+                    <div class="vk-post-text">${p.text ? p.text.substring(0,100)+'...' : 'Пост'}</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function updateVKStats() {
+            const stats = vkIntegration.getVKStats();
+            $('vk-stats-posts').textContent = stats.published;
+            $('vk-stats-scheduled').textContent = stats.scheduled;
+            $('vk-stats-failed').textContent = stats.failed;
+            $('vk-stats-last').textContent = stats.lastPost ? new Date(stats.lastPost).toLocaleDateString() : '-';
+        }
+
+        // --- Анимация счетчиков ---
+        function animateCounter(el, target, duration=1500) {
+            let start = 0;
+            const step = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += step;
+                if (start >= target) { el.textContent = target; clearInterval(timer); }
+                else el.textContent = Math.floor(start);
+            }, 16);
+        }
+
+        // --- Переключение страниц ---
+        function switchPage(pageName) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const page = document.getElementById(pageName + '-page');
+            if (page) page.classList.add('active');
+            // Закрываем мобильное меню
+            navMobile.classList.remove('open');
+            if (pageName === 'profile' && userSystem.isLoggedIn()) loadProfileData();
+            else if (pageName === 'admin' && userSystem.isAdmin()) loadAdminUsers();
+            else if (pageName === 'balance' && userSystem.isLoggedIn()) {
+                const bal = $('balance-amount');
+                if (bal) bal.textContent = formatMoney(userSystem.currentUser.balance);
+            } else if (pageName === 'news') loadVKNews();
+            if (pageName === 'main') {
+                setTimeout(() => {
+                    document.querySelectorAll('.stat').forEach(stat => {
+                        const val = stat.querySelector('.stat-value');
+                        const target = parseInt(stat.dataset.value);
+                        animateCounter(val, target);
+                    });
+                }, 400);
+            }
+            window.scrollTo(0, 0);
+        }
+
+        // --- Система подтверждения ---
+        class ConfirmationSystem {
+            constructor() {
+                this.modal = confirmationModal;
+                this.code = '';
+                this.method = 'email';
+                this.target = '';
+                this.userData = null;
+                this.timer = null;
+                this.timeLeft = 60;
+                this.initEvents();
             }
 
-            // Автоматическая загрузка при первом открытии
-            // (уже загружено в конструкторе)
+            initEvents() {
+                const inputs = document.querySelectorAll('.confirmation-code-input');
+                inputs.forEach((input, idx) => {
+                    input.addEventListener('input', function(e) {
+                        const val = e.target.value;
+                        if (!/^\d?$/.test(val)) { this.value = ''; return; }
+                        if (val) {
+                            this.classList.add('filled');
+                            if (idx < 5) {
+                                const next = document.querySelector(`.confirmation-code-input[data-index="${idx+1}"]`);
+                                if (next) next.focus();
+                            }
+                        } else {
+                            this.classList.remove('filled');
+                            if (idx > 0 && e.inputType === 'deleteContentBackward') {
+                                const prev = document.querySelector(`.confirmation-code-input[data-index="${idx-1}"]`);
+                                if (prev) prev.focus();
+                            }
+                        }
+                        // Автопроверка
+                        const all = document.querySelectorAll('.confirmation-code-input');
+                        let filled = true, code = '';
+                        all.forEach(inp => { if (!inp.value) filled = false; code += inp.value; });
+                        if (filled && code.length === 6) {
+                            setTimeout(() => {
+                                const success = this.verifyCode(code);
+                                if (success) {
+                                    setTimeout(() => {
+                                        this.modal.classList.remove('active');
+                                        updateAuthUI();
+                                        switchPage('main');
+                                    }, 3000);
+                                }
+                            }, 500);
+                        }
+                    });
+                    input.addEventListener('keydown', function(e) {
+                        if (e.key === 'Backspace' && !this.value && idx > 0) {
+                            e.preventDefault();
+                            const prev = document.querySelector(`.confirmation-code-input[data-index="${idx-1}"]`);
+                            if (prev) { prev.value = ''; prev.classList.remove('filled'); prev.focus(); }
+                        }
+                        if (e.key === 'ArrowLeft' && idx > 0) {
+                            e.preventDefault();
+                            document.querySelector(`.confirmation-code-input[data-index="${idx-1}"]`)?.focus();
+                        }
+                        if (e.key === 'ArrowRight' && idx < 5) {
+                            e.preventDefault();
+                            document.querySelector(`.confirmation-code-input[data-index="${idx+1}"]`)?.focus();
+                        }
+                    });
+                    input.addEventListener('paste', function(e) {
+                        e.preventDefault();
+                        const data = e.clipboardData.getData('text').trim();
+                        if (/^\d{6}$/.test(data)) {
+                            document.querySelectorAll('.confirmation-code-input').forEach((el, i) => {
+                                el.value = data[i];
+                                el.classList.add('filled');
+                            });
+                            document.querySelector('.confirmation-code-input[data-index="5"]').focus();
+                        }
+                    });
+                });
+
+                $('verify-code-btn').addEventListener('click', function() {
+                    const inputs = document.querySelectorAll('.confirmation-code-input');
+                    let code = '';
+                    inputs.forEach(inp => code += inp.value);
+                    const success = this.verifyCode(code);
+                    if (success) {
+                        setTimeout(() => {
+                            this.modal.classList.remove('active');
+                            updateAuthUI();
+                            switchPage('main');
+                        }, 3000);
+                    }
+                });
+
+                $('resend-code-btn').addEventListener('click', () => this.resendCode());
+                $('confirmation-continue-btn').addEventListener('click', function() {
+                    confirmationModal.classList.remove('active');
+                    updateAuthUI();
+                    switchPage('main');
+                });
+
+                // Закрытие модалки
+                this.modal.querySelector('.modal-close').addEventListener('click', function() {
+                    confirmationModal.classList.remove('active');
+                    if (userSystem.currentUser && !userSystem.isConfirmed()) {
+                        showNotification('Завершите подтверждение', 'error');
+                    }
+                });
+            }
+
+            showConfirmation(userData, confData) {
+                this.userData = userData;
+                this.method = confData.method;
+                this.target = confData.target;
+                this.code = confData.code;
+                this.updateUI();
+                this.resetTimer();
+                this.modal.classList.add('active');
+                setTimeout(() => document.querySelector('.confirmation-code-input[data-index="0"]')?.focus(), 200);
+            }
+
+            updateUI() {
+                const icon = $('confirmation-badge-icon');
+                const text = $('confirmation-badge-text');
+                if (this.method === 'email') { icon.textContent = '📧'; text.textContent = 'Подтверждение по Email'; }
+                else { icon.textContent = '📱'; text.textContent = 'Подтверждение по SMS'; }
+                $('confirmation-target').textContent = this.target;
+                $('demo-confirmation-code').textContent = this.code;
+                document.querySelectorAll('.confirmation-code-input').forEach(inp => { inp.value = ''; inp.classList.remove('filled'); });
+                $('confirmation-success').style.display = 'none';
+                $('confirmation-error').classList.remove('show');
+                document.getElementById('confirmation-inputs-container').style.display = 'flex';
+                document.getElementById('confirmation-actions').style.display = 'flex';
+            }
+
+            resetTimer() {
+                clearInterval(this.timer);
+                this.timeLeft = 60;
+                this.updateTimerDisplay();
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    this.updateTimerDisplay();
+                    if (this.timeLeft <= 0) {
+                        clearInterval(this.timer);
+                        $('resend-code-btn').disabled = false;
+                        $('resend-code-btn').textContent = 'Отправить новый код';
+                    }
+                }, 1000);
+                $('resend-code-btn').disabled = true;
+                $('resend-code-btn').textContent = 'Отправить повторно';
+            }
+
+            updateTimerDisplay() {
+                const timerEl = $('timer-count');
+                const container = $('confirmation-timer');
+                timerEl.textContent = this.timeLeft;
+                if (this.timeLeft <= 10) container.classList.add('expired');
+                else container.classList.remove('expired');
+            }
+
+            verifyCode(enteredCode) {
+                const result = userSystem.verifyConfirmationCode(this.target, enteredCode);
+                if (result.success) {
+                    userSystem.confirmUser(this.userData.id);
+                    const loginResult = userSystem.login(this.userData.email, this.userData.password);
+                    if (loginResult.success) {
+                        document.getElementById('confirmation-inputs-container').style.display = 'none';
+                        document.getElementById('confirmation-actions').style.display = 'none';
+                        $('confirmation-success').style.display = 'block';
+                        clearInterval(this.timer);
+                        showNotification('Аккаунт подтвержден!', 'success');
+                        updateAuthUI();
+                        return true;
+                    }
+                } else {
+                    this.showError(result.message);
+                    return false;
+                }
+            }
+
+            showError(msg) {
+                const err = $('confirmation-error');
+                err.textContent = msg;
+                err.classList.add('show');
+                setTimeout(() => err.classList.remove('show'), 4000);
+            }
+
+            resendCode() {
+                const result = userSystem.resendConfirmationCode(
+                    this.userData.email,
+                    this.userData.phone,
+                    this.method
+                );
+                if (result.success) {
+                    this.code = result.code;
+                    this.updateUI();
+                    this.resetTimer();
+                    showNotification('Новый код отправлен', 'success');
+                }
+            }
+        }
+
+        const confirmationSystem = new ConfirmationSystem();
+
+        // --- События ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // Прелоадер
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    loadingProgress.style.width = '100%';
+                    setTimeout(() => {
+                        preloader.classList.add('hidden');
+                        updateAuthUI();
+                        initMasks();
+                        initVKIntegration();
+                        // Анимация статистики на главной
+                        setTimeout(() => {
+                            document.querySelectorAll('.stat').forEach(stat => {
+                                const val = stat.querySelector('.stat-value');
+                                const target = parseInt(stat.dataset.value);
+                                animateCounter(val, target);
+                            });
+                        }, 400);
+                    }, 600);
+                }
+                loadingProgress.style.width = progress + '%';
+            }, 200);
+
+            // --- Гамбургер ---
+            burgerBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navMobile.classList.toggle('open');
+            });
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.nav-mobile') && !e.target.closest('.burger-btn')) {
+                    navMobile.classList.remove('open');
+                }
+            });
+
+            // --- Навигация по меню ---
+            document.querySelectorAll('.nav-mobile a[data-page]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.dataset.page;
+                    if (page === 'admin' && !userSystem.isAdmin()) {
+                        showNotification('Нет прав', 'error');
+                        return;
+                    }
+                    if ((page === 'profile' || page === 'balance') && !userSystem.isLoggedIn()) {
+                        showNotification('Войдите в систему', 'error');
+                        return;
+                    }
+                    switchPage(page);
+                });
+            });
+
+            // --- Кнопки входа/регистрации ---
+            loginBtn.addEventListener('click', e => { e.preventDefault(); loginModal.classList.add('active'); });
+            registerBtn.addEventListener('click', e => { e.preventDefault(); registerModal.classList.add('active'); });
+            registerMainBtn.addEventListener('click', function() {
+                if (userSystem.isLoggedIn()) {
+                    showNotification('Вы уже авторизованы', 'error');
+                } else {
+                    registerModal.classList.add('active');
+                }
+            });
+            $('login-cancel-btn')?.addEventListener('click', () => loginModal.classList.remove('active'));
+            $('reg-cancel-btn')?.addEventListener('click', () => registerModal.classList.remove('active'));
+
+            // --- Закрытие модалок ---
+            document.querySelectorAll('.modal-close').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.modal').classList.remove('active');
+                });
+            });
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) e.target.classList.remove('active');
+            });
+
+            // --- Форма входа ---
+            $('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = $('login-email').value;
+                const pass = $('login-password').value;
+                const result = userSystem.login(email, pass);
+                if (result.success) {
+                    if (result.requiresConfirmation) {
+                        showNotification('Аккаунт требует подтверждения', 'error');
+                        const user = userSystem.users.find(u => u.email === email);
+                        if (user) {
+                            const conf = userSystem.resendConfirmationCode(user.email, user.phone, user.confirmationMethod);
+                            if (conf.success) confirmationSystem.showConfirmation(user, conf);
+                        }
+                    } else {
+                        showNotification('Добро пожаловать!', 'success');
+                        loginModal.classList.remove('active');
+                        updateAuthUI();
+                        this.reset();
+                    }
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            });
+
+            // --- Форма регистрации ---
+            $('registration-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const method = $('confirmation-method').value;
+                const agreed = $('confirmation-agreement').checked;
+                const userData = {
+                    firstName: $('reg-firstname').value,
+                    lastName: $('reg-lastname').value,
+                    username: $('reg-username').value,
+                    email: $('reg-email').value,
+                    password: $('reg-password').value,
+                    phone: $('reg-phone').value,
+                    birthdate: $('reg-birthdate').value,
+                    confirmationMethod: method,
+                    confirmationAgreed: agreed
+                };
+                const confirmPass = $('reg-confirm-password').value;
+                if (userData.password !== confirmPass) {
+                    showNotification('Пароли не совпадают', 'error');
+                    return;
+                }
+                if (!agreed) {
+                    showNotification('Согласие обязательно', 'error');
+                    return;
+                }
+                const result = userSystem.register(userData);
+                if (result.success) {
+                    showNotification('Регистрация успешна! Подтвердите аккаунт.', 'success');
+                    confirmationSystem.showConfirmation(result.user, result.confirmation);
+                    registerModal.classList.remove('active');
+                    this.reset();
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            });
+
+            // --- Выбор метода подтверждения ---
+            document.querySelectorAll('.confirmation-method').forEach(el => {
+                el.addEventListener('click', function() {
+                    document.querySelectorAll('.confirmation-method').forEach(m => m.classList.remove('selected'));
+                    this.classList.add('selected');
+                    $('confirmation-method').value = this.dataset.method;
+                });
+            });
+
+            // --- Профиль ---
+            $('profile-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (!userSystem.currentUser) return;
+                const data = {
+                    firstName: $('profile-firstname').value,
+                    lastName: $('profile-lastname').value,
+                    username: $('profile-username').value,
+                    email: $('profile-email').value,
+                    phone: $('profile-phone').value,
+                    birthdate: $('profile-birthdate').value
+                };
+                const result = userSystem.updateUser(userSystem.currentUser.id, data);
+                if (result.success) {
+                    showNotification('Профиль обновлен', 'success');
+                    loadProfileData();
+                    updateAuthUI();
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            });
+
+            // --- Покупка ---
+            document.querySelectorAll('.buy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (!userSystem.isLoggedIn()) {
+                        showNotification('Войдите в систему', 'error');
+                        return;
+                    }
+                    if (!userSystem.isConfirmed()) {
+                        showNotification('Подтвердите аккаунт', 'error');
+                        return;
+                    }
+                    const product = this.dataset.product;
+                    const price = parseInt(this.dataset.price);
+                    if (userSystem.currentUser.balance < price) {
+                        showNotification('Недостаточно средств', 'error');
+                        return;
+                    }
+                    $('purchase-product-name').textContent = product;
+                    $('purchase-product-price').textContent = formatMoney(price) + ' ₽';
+                    $('purchase-total-amount').textContent = formatMoney(price) + ' ₽';
+                    const today = new Date().toISOString().split('T')[0];
+                    $('purchase-date').min = today;
+                    $('purchase-date').value = today;
+                    const now = new Date();
+                    now.setHours(now.getHours()+1);
+                    $('purchase-time').value = now.toTimeString().slice(0,5);
+                    document.querySelectorAll('.zone-option').forEach(o => o.classList.remove('selected'));
+                    $('purchase-form').reset();
+                    $('purchase-confirmation').classList.remove('active');
+                    $('purchase-form').dataset.product = product;
+                    $('purchase-form').dataset.price = price;
+                    purchaseModal.classList.add('active');
+                });
+            });
+
+            // Выбор зоны
+            document.querySelectorAll('.zone-option').forEach(opt => {
+                opt.addEventListener('click', function() {
+                    document.querySelectorAll('.zone-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    $('purchase-form').dataset.zone = this.dataset.zone;
+                });
+            });
+
+            $('purchase-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (!userSystem.currentUser) return;
+                const product = this.dataset.product;
+                const price = parseInt(this.dataset.price);
+                const date = $('purchase-date').value;
+                const time = $('purchase-time').value;
+                const zone = this.dataset.zone;
+                const comment = $('purchase-comment').value;
+                if (!zone) { showNotification('Выберите зону', 'error'); return; }
+                const result = userSystem.deductBalance(userSystem.currentUser.id, price);
+                if (result.success) {
+                    const purchaseData = { product, price, date, time, zone, comment };
+                    userSystem.addPurchase(userSystem.currentUser.id, purchaseData);
+                    const details = $('confirmation-details');
+                    details.innerHTML = `
+                        <div class="confirmation-item"><span>Товар:</span><span>${product}</span></div>
+                        <div class="confirmation-item"><span>Сумма:</span><span>${formatMoney(price)} ₽</span></div>
+                        <div class="confirmation-item"><span>Дата:</span><span>${date}</span></div>
+                        <div class="confirmation-item"><span>Время:</span><span>${time}</span></div>
+                        <div class="confirmation-item"><span>Зона:</span><span>${zone}</span></div>
+                        <div class="confirmation-item"><span>Новый баланс:</span><span>${formatMoney(result.newBalance)} ₽</span></div>
+                    `;
+                    $('purchase-confirmation').classList.add('active');
+                    updateAuthUI();
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            });
+
+            $('purchase-close-btn').addEventListener('click', () => purchaseModal.classList.remove('active'));
+            $('purchase-cancel-btn').addEventListener('click', () => purchaseModal.classList.remove('active'));
+
+            // --- Участие в турнирах ---
+            document.querySelectorAll('.register-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (!userSystem.isLoggedIn()) {
+                        showNotification('Войдите в систему', 'error');
+                        return;
+                    }
+                    showNotification('Заявка отправлена!', 'success');
+                });
+            });
+
+            // --- Выход ---
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                logoutConfirmModal.classList.add('active');
+            });
+            $('logout-cancel-btn').addEventListener('click', () => logoutConfirmModal.classList.remove('active'));
+            $('logout-confirm-btn').addEventListener('click', function() {
+                userSystem.logout();
+                updateAuthUI();
+                showNotification('Вы вышли', 'success');
+                switchPage('main');
+                logoutConfirmModal.classList.remove('active');
+            });
+
+            // --- Пополнение баланса ---
+            document.querySelectorAll('.payment-method').forEach(m => {
+                m.addEventListener('click', function() {
+                    const method = this.dataset.method;
+                    document.querySelectorAll('.payment-form').forEach(f => f.style.display = 'none');
+                    const form = document.getElementById(method + '-payment-form');
+                    if (form) form.style.display = 'block';
+                });
+            });
+
+            // Обработчики форм пополнения (аналогичны ПК-версии)
+            $('card-payment-form-content').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const amount = parseMoney($('card-amount').value);
+                if (!amount || amount <= 0) { showNotification('Введите сумму', 'error'); return; }
+                if (userSystem.currentUser.balance + amount > userSystem.MAX_BALANCE) {
+                    showNotification(`Превышен максимум (${formatMoney(userSystem.MAX_BALANCE)} ₽)`, 'error');
+                    return;
+                }
+                const result = userSystem.addBalance(userSystem.currentUser.id, amount);
+                if (result.success) {
+                    showNotification(`Пополнено на ${formatMoney(amount)} ₽`, 'success');
+                    updateAuthUI();
+                    this.reset();
+                    $('card-payment-amount').textContent = '1 000';
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            });
+            $('qiwi-payment-form-content').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const amount = parseMoney($('qiwi-amount').value);
+                if (!amount || amount <= 0) { showNotification('Введите сумму', 'error'); return; }
+                if (userSystem.currentUser.balance + amount > userSystem.MAX_BALANCE) {
+                    showNotification(`Превышен максимум (${formatMoney(userSystem.MAX_BALANCE)} ₽)`, 'error');
+                    return;
+                }
+                const result = userSystem.addBalance(userSystem.currentUser.id, amount);
+                if (result.success) {
+                    showNotification(`Пополнено на ${formatMoney(amount)} ₽ через QIWI`, 'success');
+                    updateAuthUI();
+                    this.reset();
+                    $('qiwi-payment-amount').textContent = '1 000';
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            });
+            $('yoomoney-payment-form-content').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const amount = parseMoney($('yoomoney-amount').value);
+                if (!amount || amount <= 0) { showNotification('Введите сумму', 'error'); return; }
+                if (userSystem.currentUser.balance + amount > userSystem.MAX_BALANCE) {
+                    showNotification(`Превышен максимум (${formatMoney(userSystem.MAX_BALANCE)} ₽)`, 'error');
+                    return;
+                }
+                const result = userSystem.addBalance(userSystem.currentUser.id, amount);
+                if (result.success) {
+                    showNotification(`Пополнено на ${formatMoney(amount)} ₽ через ЮMoney`, 'success');
+                    updateAuthUI();
+                    this.reset();
+                    $('yoomoney-payment-amount').textContent = '1 000';
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            });
+            $('crypto-payment-form-content').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const amount = parseMoney($('crypto-amount').value);
+                if (!amount || amount <= 0) { showNotification('Введите сумму', 'error'); return; }
+                if (userSystem.currentUser.balance + amount > userSystem.MAX_BALANCE) {
+                    showNotification(`Превышен максимум (${formatMoney(userSystem.MAX_BALANCE)} ₽)`, 'error');
+                    return;
+                }
+                const address = document.querySelector('#crypto-payment-form .form-control');
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(address.textContent)
+                        .then(() => showNotification('Адрес скопирован!', 'success'))
+                        .catch(() => showNotification('Адрес: ' + address.textContent, 'success'));
+                } else {
+                    showNotification('Адрес: ' + address.textContent, 'success');
+                }
+                showNotification(`После подтверждения транзакции на ${formatMoney(amount)} ₽ баланс пополнится.`, 'success');
+            });
+
+            // --- Админ табы ---
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.dataset.tab;
+                    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll('.admin-content').forEach(c => c.classList.remove('active'));
+                    document.getElementById(tabName + '-tab').classList.add('active');
+                    if (tabName === 'users') loadAdminUsers();
+                    else if (tabName === 'reviews') loadReviews();
+                    else if (tabName === 'vk') updateVKStats();
+                });
+            });
+
+            // --- Клик по сетке ---
+            document.querySelectorAll('.grid-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const page = this.dataset.page;
+                    switchPage(page);
+                });
+            });
+
+            // --- Логотип ---
+            $('home-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                switchPage('main');
+            });
+
+            // --- Общий клик по навигационным ссылкам (для data-page) ---
+            document.querySelectorAll('[data-page]').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    const page = this.dataset.page;
+                    if (page) {
+                        e.preventDefault();
+                        if (page === 'admin' && !userSystem.isAdmin()) {
+                            showNotification('Нет прав', 'error');
+                            return;
+                        }
+                        if ((page === 'profile' || page === 'balance') && !userSystem.isLoggedIn()) {
+                            showNotification('Войдите в систему', 'error');
+                            return;
+                        }
+                        switchPage(page);
+                    }
+                });
+            });
+
+            // --- Объединенный клик по аватару баланса ---
+            userAvatarBalance.addEventListener('click', function() {
+                if (userSystem.isLoggedIn()) switchPage('balance');
+            });
         });
     </script>
 </body>
